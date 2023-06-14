@@ -1,2 +1,1 @@
-# Rakuichi-Rakuza
-This Is Live Rakuichi Rakuza Nft Market Place
+# TANAKA_NFT_MARKETPLACE

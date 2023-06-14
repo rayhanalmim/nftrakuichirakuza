@@ -1,0 +1,197 @@
+import React from "react";
+import { Table } from "antd";
+import Pagination from "./PaginationSec";
+import PaginationSec from "./PaginationSec";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+const Level1 = () => {
+  const navigate = useNavigate();
+  const TableData = [
+    {
+      id: 1,
+      imgUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      username: " Molly Sanders",
+      useramount: " 000004",
+      amount: " $20,000",
+      date: " Sept 28, 2019",
+      duedate: "  Due in 3 days",
+      status: "Success",
+      path: "/",
+    },
+    {
+      id: 2,
+      imgUrl:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      username: "Michael Roberts",
+      useramount: " 000004",
+      amount: " $20,000",
+      date: " Sept 28, 2019",
+      duedate: "  Due in 3 days",
+      status: "Success",
+      path: "/",
+    },
+    {
+      id: 3,
+      imgUrl:
+        "https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      username: " Devin Childs",
+      useramount: " 000004",
+      amount: " $20,000",
+      date: " Sept 28, 2019",
+      duedate: "  Due in 3 days",
+      status: "Success",
+      path: "/",
+    },
+    {
+      id: 4,
+      imgUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      username: " Molly Sanders",
+      useramount: " 000004",
+      amount: " $20,000",
+      date: " Sept 28, 2019",
+      duedate: "  Due in 3 days",
+      status: "Success",
+      path: "/",
+    },
+    {
+      id: 5,
+      imgUrl:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      username: "Michael Roberts",
+      useramount: " 000004",
+      amount: " $20,000",
+      date: " Sept 28, 2019",
+      duedate: "  Due in 3 days",
+      status: "Success",
+      path: "/",
+    },
+    {
+      id: 6,
+      imgUrl:
+        "https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      username: " Devin Childs",
+      useramount: " 000004",
+      amount: " $20,000",
+      date: " Sept 28, 2019",
+      duedate: "  Due in 3 days",
+      status: "Success",
+      path: "/",
+    },
+  ];
+
+  return (
+    <div>
+      <div>
+        <div className="px-5 py-[2rem] max-w-[300px] w-full rounded  bg-[#1C96E8] shadow text-white my-[3rem] mx-5">
+          <h3 className="text-2xl font-semibold text-white">Level 1 Earning</h3>
+          <p className="py-2 text-lg">6545646</p>
+        </div>
+        <div className="px-4 sm:px-8  md:mt-[6rem] mt-[3rem] mx-5 ">
+          <div className="mt-5">
+            <div className="-mx-4 sm:-mx-8 overflow-x-auto">
+              <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+                <table className="min-w-full leading-normal">
+                  <thead>
+                    <tr>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
+                        Referral Name
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
+                        Amount
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
+                        Referral Date
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
+                        Status
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {TableData.map((data, index) => {
+                      return (
+                        <>
+                          <tr>
+                            <td
+                              className="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                              href=""
+                            >
+                              <div className="flex">
+                                <div className="flex-shrink-0 w-10 h-10">
+                                  <Link to="/users/userpage">
+                                    <img
+                                      className="w-full h-full rounded-full"
+                                      src={data.imgUrl}
+                                      onClick={navigate("/users/userpage")}
+                                      alt=""
+                                    />
+                                  </Link>
+                                </div>
+                                <div className="ml-3">
+                                  <p className="text-gray-900 whitespace-no-wrap ">
+                                    {data.username}
+                                  </p>
+                                  <p className="text-gray-600 whitespace-no-wrap ">
+                                    {data.useramount}
+                                  </p>
+                                </div>
+                              </div>
+                            </td>
+
+                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                              <p className="text-gray-900 whitespace-no-wrap">
+                                {data.amount}
+                              </p>
+                              <p className="text-gray-600 whitespace-no-wrap">
+                                USD
+                              </p>
+                            </td>
+                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                              <p className="text-gray-900 whitespace-no-wrap">
+                                {data.date}
+                              </p>
+                            </td>
+                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                              <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                <span
+                                  aria-hidden
+                                  className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                                ></span>
+                                <span className="relative">{data.status}</span>
+                              </span>
+                            </td>
+                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
+                              {/* <button
+                        type="button"
+                        className="inline-block text-gray-500 hover:text-gray-700"
+                      >
+                        <svg
+                          className="inline-block h-6 w-6 fill-current"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
+                        </svg>
+                      </button> */}
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <PaginationSec />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Level1;

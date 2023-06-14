@@ -1,0 +1,19 @@
+import React from 'react'
+import {Menu} from "antd";
+const MLMBody = ({ topics, selectedKey, changeSelectedKey }) => {
+    const styledTopics = [];
+    topics.forEach((topic, index) =>
+      styledTopics.push(
+        <Menu.Item key={index} onClick={changeSelectedKey}>
+          {topic}
+        </Menu.Item>
+      )
+    );
+  return (
+    <div>  <Menu mode="inline" selectedKeys={[selectedKey]}>
+    {styledTopics}
+  </Menu></div>
+  )
+}
+
+export default MLMBody
