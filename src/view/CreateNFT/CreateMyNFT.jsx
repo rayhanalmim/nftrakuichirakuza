@@ -64,8 +64,10 @@ const CreateMyNFT = () => {
 
   const { uploadOnIpfs, downloadJSONOnIpfs } = useStorage();
   const { t } = useTranslation();
+  
   const [searchData, { loading: searchload, error: searchError }] =
     useLazyQuery(SearchCollection);
+
   const [expand, setExpand] = useState(false);
   const [previewURL, setPreviewURL] = useState(null);
 
