@@ -64,7 +64,7 @@ const CreateMyNFT = () => {
 
   const { uploadOnIpfs, downloadJSONOnIpfs } = useStorage();
   const { t } = useTranslation();
-  
+
   const [searchData, { loading: searchload, error: searchError }] =
     useLazyQuery(SearchCollection);
 
@@ -75,8 +75,7 @@ const CreateMyNFT = () => {
   const [collectionAddress, setCollectionAddress] = useState("");
   const [fetchUserCollection] = useLazyQuery(getUserCollection);
   const { activate, deactivate, active, account, chainId } = useWeb3React();
-  
-  
+
   const [activeIndex, setActiveIndex] = useState("");
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
@@ -86,6 +85,32 @@ const CreateMyNFT = () => {
     skip: !account,
   });
   const [previewPrice, setPreviewPrice] = useState(null);
+  const [yenAmount, setYenAmount] = useState("");
+
+  // const API_URL = `https://www.binance.com/bapi/asset/v1/public/asset-service/product/currency`;
+  const ETH_API_URL =
+    "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd";
+  const BSC_API_URL =
+    "https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd";
+  const convertMaticToYen = async (price) => {
+    console.log(price);
+    console.log("----------------chain id ");
+    console.log(chainId);
+
+    if (chainId == 1) {
+      const ETH_RESPONSE = await fetch(ETH_API_URL);
+      const ethData = await ETH_RESPONSE.json();
+      console.log(ethData, "<=======");
+      const convertedAmount = price * ethData["ethereum"].usd;
+      setYenAmount(convertedAmount);
+    }
+    if (chainId == 56) {
+      const BSC_RESPONSE = await fetch(BSC_API_URL);
+      const bscData = await BSC_RESPONSE.json();
+      const convertedAmount = price * bscData["binancecoin"].usd;
+      setYenAmount(convertedAmount);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -98,7 +123,7 @@ const CreateMyNFT = () => {
         },
       })
         .then((res) => {
-          console.log(res.data,"<======= users collection");
+          console.log(res.data, "<======= users collection");
         })
         .catch((err) => {
           console.log(err);
@@ -397,11 +422,17 @@ const CreateMyNFT = () => {
                           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="inline-full-name"
                           type="number"
-                          onChange={(e) => setPreviewPrice(e.target.value)}
+                          onChange={(e) => {
+                            setPreviewPrice(e.target.value);
+                            convertMaticToYen(e.target.value);
+                          }}
                           placeholder={t("Enter price for single nft")}
                           required={true}
                         />
                       </div>
+                      $ {yenAmount}
+                      <br />
+                      {t("Fees are the responsibility of the purchaser.")}
                     </Form.Item>
                   </>
 
@@ -497,7 +528,7 @@ const CreateMyNFT = () => {
                             searchData({
                               variables: {
                                 key: e.target.value,
-                                blockchain: "eth"     
+                                blockchain: "eth",
                               },
                             })
                               .then((res) => {
@@ -751,7 +782,9 @@ const CreateMyNFT = () => {
                                   >
                                     <Input placeholder={t("サイズ")} />
                                   </Form.Item>
-                                  <MinusCircleOutlined onClick={() => remove(name)}/>
+                                  <MinusCircleOutlined
+                                    onClick={() => remove(name)}
+                                  />
                                 </Space>
                               ))}
                               <Form.Item>
@@ -777,12 +810,15 @@ const CreateMyNFT = () => {
                         {t("Description (Optional)")}
                       </h2>
 
-                      <TextArea rows={4} class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      <TextArea
+                        rows={4}
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="inline-full-name"
                         type="text"
                         placeholder={t(
                           "Purchasing you'll be able to get the real T-Shirt"
-                        )} />
+                        )}
+                      />
                       {/* <Input
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="inline-full-name"
@@ -837,9 +873,9 @@ const CreateMyNFT = () => {
 };
 
 export default CreateMyNFT;
-const PreviewNFTCard = ({ imageurl, onRemove, name, price,chainid }) => {
+const PreviewNFTCard = ({ imageurl, onRemove, name, price, chainid }) => {
   console.log(imageurl, "imageurl");
-  console.log(chainid,"<=============== chain id")
+  console.log(chainid, "<=============== chain id");
   return (
     <>
       <div className="w-full max-w-[300px] mx-auto px-3 py-4 border rounded-xl bg-white mb-4">
@@ -857,7 +893,9 @@ const PreviewNFTCard = ({ imageurl, onRemove, name, price,chainid }) => {
         <div>
           <div className="flex justify-between py-1">
             <p className="text-sm font-black text-black">{name} </p>
-            <p className="text-sm font-black text-black">{price} {chainid===1?"ETH":chainid===56?"BNB":null}</p>
+            <p className="text-sm font-black text-black">
+              {price} {chainid === 1 ? "ETH" : chainid === 56 ? "BNB" : null}
+            </p>
           </div>
           <div className="w-full px-2 py-3 text-black bg-no-repeat bg-cover bg-cyan rounded-xl hover:bg-button-img hover:bg-no-repeat hover:bg-cover hover:text-white ">
             Place a Bid

@@ -90,9 +90,6 @@ const CreateNFT = () => {
       const convertedAmount = price * ethData["ethereum"].usd;
       setYenAmount(convertedAmount);
     }
-
-
-
     if(chainId == 56)
     {
       const BSC_RESPONSE = await fetch(BSC_API_URL);
@@ -100,12 +97,6 @@ const CreateNFT = () => {
       const convertedAmount = price * bscData["binancecoin"].usd;
       setYenAmount(convertedAmount);
     }
-
-
-
-
-
-   
   };
 
   useEffect(() => {

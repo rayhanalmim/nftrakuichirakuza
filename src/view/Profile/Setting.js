@@ -351,17 +351,20 @@ const Setting = () => {
                         <h2 className="font-bold capitalize text-xl ">
                           {t("short bio")}
                         </h2>
-                        <input
-                          className="bg-gray-200 h-[105px] appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="inline-full-name"
-                          type="text"
-                          placeholder={`${
-                            loading ? "Demo" : data?.signIn?.about_details
-                          }`}
-                          onChange={(e) => {
-                            setBio(e.target.value);
-                            
-                          }}
+                        {/* <input
+                         
+                        /> */}
+                        <textarea
+ className="bg-gray-200 h-[105px] appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+ id="inline-full-name"
+ type="text"
+ placeholder={`${
+   loading ? "Demo" : data?.signIn?.about_details
+ }`}
+ onChange={(e) => {
+   setBio(e.target.value);
+   
+ }}
                         />
                       </div>
 

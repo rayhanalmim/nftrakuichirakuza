@@ -42,7 +42,7 @@ const CollectionDetails = () => {
         <div className="relative  ">
           <img
             src={process.env.PUBLIC_URL + "/assets/tanakaCover.png"}
-            className=" relative max-w-[1500px] w-full h-[500px] mx-auto "
+            className="object-cover relative max-w-[1500px] w-full h-[500px] mx-auto "
           />
           <img
             src={
