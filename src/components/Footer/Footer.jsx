@@ -90,7 +90,7 @@ const Footer = () => {
           <a href="#" className="text-[#AFAFAF] text-lg">
             Copyrighted By 
             <span className="text-[#BF6654] font-black">
-            AQUA Co., Ltd.|
+             &nbsp;AQUA Co., Ltd.&nbsp;
              </span> 
             | All Right Reserved!
           </a>

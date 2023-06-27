@@ -51,7 +51,7 @@ const CreateNFT = () => {
 
   const [createLoad, setCreateLoad] = useState(true);
   const [unlockableContent, setUnloackableContent] = useState(false);
-  const [lazyMint, setLazyMint] = useState(true);
+  const [lazyMint, setLazyMint] = useState(false);
   const [isMarketPlaceMint, setMarketplaceMint] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -149,7 +149,7 @@ const CreateNFT = () => {
     setPreviewURL(null);
   };
   const handleSubmit = (values) => {
-    console.log(values);
+    
     let description = values.description;
     let name = values.name;
     let royalties = values.royalties;

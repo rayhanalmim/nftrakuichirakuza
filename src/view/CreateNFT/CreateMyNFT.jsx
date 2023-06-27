@@ -47,7 +47,7 @@ const CreateMyNFT = () => {
   const [createLoad, setCreateLoad] = useState(true);
   const [unlockableContent, setUnloackableContent] = useState(false);
   const [collectionLength, setCollectionLength] = useState(1);
-  const [lazyMint, setLazyMint] = useState(true);
+  const [lazyMint, setLazyMint] = useState(false);
   const [isMarketPlaceMint, setMarketplaceMint] = useState(false);
   const [suggestionData, setSuggestionData] = useState([]);
   const { mintNFT, lazyMintNFT } = useNFT();
@@ -259,7 +259,7 @@ const CreateMyNFT = () => {
               charity
             )
               .then(async (res) => {
-                console.log();
+                console.log(res);
                 let metadata = await downloadJSONOnIpfs(uri);
                 createItem({
                   variables: {

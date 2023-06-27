@@ -826,7 +826,7 @@ const NFTPage = () => {
                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                     }
                     alt=""
-                    className="w-full  mx-auto max-h-[400px]"
+                    className="w-full object-contain  mx-auto max-h-[400px]"
                   />
                   {/* <img
                     src={

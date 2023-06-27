@@ -22,17 +22,19 @@ function useNFT() {
     charityCut
   ) => {
     console.log(
+      metadata,
       collectionAddress,
       charityAddress,
       charityCut,
       royaltyAddress,
-      royaltyCut
+      royaltyCut,
+      "<=========== metadata"
     );
     return getErc721Contract(
       !collectionAddress ? ChainsInfo[chainId].NFT_ADDRESS : collectionAddress,
       library.provider
     )
-      .methods.mintTo(account, metadata)
+      .methods.mintTo("0x0Aa22B76E4C4445b7b44a8c5dB946F0db28FE749", metadata,account,0,account,0)
       .send({ from: account });
   };
   const rewardClaim = (voucher) => {
