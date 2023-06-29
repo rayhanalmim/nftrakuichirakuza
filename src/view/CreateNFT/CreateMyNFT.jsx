@@ -53,6 +53,9 @@ const CreateMyNFT = () => {
   const { mintNFT, lazyMintNFT } = useNFT();
   const [createItem] = useMutation(itemCreateMutation);
 
+  const [charityWalletAddress,setCharityWalletAddress]=useState();
+  const [priceInstance,setPrice]=useState();
+
   const [auction, setAuction] = useState("");
 
   const [counter, setCounter] = useState("buyer");
@@ -172,9 +175,11 @@ const CreateMyNFT = () => {
     let royalties = values.royalties;
     let charity = values.charity;
     let royaltyWalletAddress = values.royaltyWalletAddress;
-    let charityWallet = values.charityWallet;
-    let price = values.price;
-    console.log(royalties, charity, charityWallet, royaltyWalletAddress);
+    // let charityWallet = values.charityWallet;
+    // let price = values.price;
+    let charityWallet = charityWalletAddress;
+    let price = priceInstance;
+    
     let imageFormObj = new FormData();
     imageFormObj.append("image", file);
 
@@ -186,6 +191,7 @@ const CreateMyNFT = () => {
       properties: {},
     };
     try {
+      console.log(royalties,"<===== royalties", charity,"<===== charity", charityWallet,"<===== charityWallet", royaltyWalletAddress,"<===== royaltyWalletAddress");
       if (active) {
         setLoading(true);
         uploadOnIpfs(metadata).then(async (uri) => {
@@ -251,11 +257,13 @@ const CreateMyNFT = () => {
                 setLoading(false);
               });
           } else {
+            
             mintNFT(
               uri,
+              collectionAddress,
               royaltyWalletAddress,
-              charityWallet,
               royalties,
+              charityWallet,
               charity
             )
               .then(async (res) => {
@@ -293,6 +301,178 @@ const CreateMyNFT = () => {
       message.error("error");
     }
   };
+
+  const handleLazyMint = (values)=>{
+    console.log(values);
+    let description = values.description;
+    let name = values.name;
+    let royalties = values.royalties;
+    let charity = values.charity;
+    let royaltyWalletAddress = values.royaltyWalletAddress;
+    // let charityWallet = values.charityWallet;
+    // let price = values.price;
+    let charityWallet = charityWalletAddress;
+    let price = priceInstance;
+    
+    let imageFormObj = new FormData();
+    imageFormObj.append("image", file);
+
+    const metadata = {
+      name: name,
+      description: description,
+      image: imageFormObj.get("image"),
+      creator: account,
+      properties: {},
+    };
+    try {
+      if (active) {
+        setLoading(true);
+        uploadOnIpfs(metadata).then(async (uri) => {
+          console.log(uri);
+          const data = await downloadJSONOnIpfs(uri);
+            console.log("in this");
+            signCreate(
+              account,
+              account,
+              "100",
+              account,
+              uri,
+              new Web3().utils.toWei(price.toString(), "ether"),
+              ChainsInfo[chainId].NATIVE_TOKEN_ADDRESS,
+              parseInt(new Date().getTime() / 1000).toString(),
+              parseInt(
+                new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getTime() / 1000
+              ).toString(),
+              "100",
+              account,
+              "100",
+
+              collectionAddress
+            )
+              .then(async (res) => {
+                console.log(res, "voucher created");
+                let metadata = await downloadJSONOnIpfs(uri);
+                createItem({
+                  variables: {
+                    collectionAddress:
+                      collectionAddress != ""
+                        ? collectionAddress
+                        : ChainsInfo[chainId].NFT_ADDRESS,
+                    tokenId:
+                      1000 +
+                      Math.floor(
+                        Math.random() * (new Date().getTime() / 1000)
+                      ).toString(),
+                    metadata: JSON.stringify(metadata),
+                    voucher: JSON.stringify(res.tuple),
+                    isLazyMint: true,
+                    blockchain: ChainsInfo[chainId].CHAIN_NAME.toLowerCase(),
+                    name: name,
+                    price: parseFloat(price),
+                    signer: res.signer,
+                    owner: account,
+                  },
+                })
+                  .then((res) => {
+                    setLoading(false);
+                    Swal.fire("Success", "NFT Minted Successfully", "success");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setLoading(false);
+                  });
+                setLoading(false);
+              })
+
+              .catch((err) => {
+                console.log(err);
+                setLoading(false);
+              });
+          
+        });
+      } else {
+        Swal.fire("Error", "Please Connect Wallet", "error");
+      }
+    } catch (error) {
+      console.log(error);
+      message.error("error");
+    }
+  }
+
+  const handleSimpleMint = (values)=>{
+    console.log(values);
+    let description = values.description;
+    let name = values.name;
+    let royalties = values.royalties;
+    let charity = values.charity;
+    let royaltyWalletAddress = values.royaltyWalletAddress;
+    // let charityWallet = values.charityWallet;
+    // let price = values.price;
+    let charityWallet = charityWalletAddress;
+    let price = priceInstance;
+    
+    let imageFormObj = new FormData();
+    imageFormObj.append("image", file);
+
+    const metadata = {
+      name: name,
+      description: description,
+      image: imageFormObj.get("image"),
+      creator: account,
+      properties: {},
+    };
+    try {
+      console.log(royalties,"<===== royalties", charity,"<===== charity", charityWallet,"<===== charityWallet", royaltyWalletAddress,"<===== royaltyWalletAddress");
+      if (active) {
+        setLoading(true);
+        uploadOnIpfs(metadata).then(async (uri) => {
+          console.log(uri);
+          const data = await downloadJSONOnIpfs(uri);
+       
+            
+            mintNFT(
+              uri,
+              collectionAddress,
+              royaltyWalletAddress,
+              royalties,
+              charityWallet,
+              charity
+            )
+              .then(async (res) => {
+                console.log(res);
+                let metadata = await downloadJSONOnIpfs(uri);
+                createItem({
+                  variables: {
+                    collectionAddress: ChainsInfo[chainId].NFT_ADDRESS,
+                    tokenId: res.events.TokensMinted.returnValues.tokenIdMinted,
+                    metadata: JSON.stringify(metadata),
+                    blockchain: ChainsInfo[chainId].CHAIN_NAME.toLowerCase(),
+                    name: name,
+                  },
+                })
+                  .then((res) => {
+                    setLoading(false);
+                    Swal.fire("Success", "NFT Minted Successfully", "success");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setLoading(false);
+                  });
+                setLoading(false);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+        });
+      } else {
+        Swal.fire("Error", "Please Connect Wallet", "error");
+      }
+    } catch (error) {
+      console.log(error);
+      message.error("error");
+    }
+  }
+
   const removeUpload = (file, fileList) => {
     setFile(null);
     setPreviewURL(null);
@@ -382,7 +562,7 @@ const CreateMyNFT = () => {
                 </div>
                 <Form
                   onFinish={(values) => {
-                    handleSubmit(values);
+                    lazyMint===true?handleLazyMint(values):handleSimpleMint(values)
                   }}
                 >
                   <div className="pt-5 pb-5">
@@ -424,6 +604,7 @@ const CreateMyNFT = () => {
                           type="number"
                           onChange={(e) => {
                             setPreviewPrice(e.target.value);
+                            setPrice(e.target.value)
                             convertMaticToYen(e.target.value);
                           }}
                           placeholder={t("Enter price for single nft")}
@@ -515,6 +696,8 @@ const CreateMyNFT = () => {
                         id="inline-full-name"
                         type="text"
                         placeholder={t("Charity Wallet Address")}
+                        onChange={(e)=>setCharityWalletAddress(e.target.value)}
+
                       />
                     </div>
                     <div className="pt-5 pb-5">
@@ -829,12 +1012,20 @@ const CreateMyNFT = () => {
                       /> */}
                     </div>
                   </Form.Item>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-start gap-5">
                     <Button
                       className="px-3 py-2 my-6 text-center text-black capitalize border rounded-lg"
+                      onClick={()=>setLazyMint(false)}
+                      htmlType="submit"
+                      >
+                      {t("Mint")}
+                    </Button>
+                    <Button
+                      className="px-3 py-2 my-6 text-center text-black capitalize border rounded-lg"
+                      onClick={()=>setLazyMint(true)}
                       htmlType="submit"
                     >
-                      {t("Create item")}
+                      {t("Lazy Mint")}
                     </Button>
                   </div>
                 </Form>

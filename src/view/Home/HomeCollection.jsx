@@ -105,10 +105,10 @@ const HomeCollection = () => {
                             <div className="flex flex-row-reverse flex-wrap text-justify justify-between   md:flex-nowrap items-center gap-[20px] md:gap-[10px] my-3 md:my-2  hover:bg-cyan hover:rounded-lg hover:px-0">
                            
                               <div className="justify-center">
-                                <img
+                                {/* <img
                                   src={process.env.PUBLIC_URL + data.collectImg}
                                   alt=""
-                                />
+                                /> */}
                                 <h2 className="font-bold capitalize w-[100px]  text-sm">
                                   {data.collectionName}
                                 </h2>

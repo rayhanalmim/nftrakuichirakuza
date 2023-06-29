@@ -37,9 +37,9 @@ const Setting = () => {
   });
 
   console.log(data)
-  const [displayname, setDisplayname] = useState(data.signIn.displayName);
-  const [username, setUsername] = useState(data.signIn.username);
-  const [about_details, setBio] = useState(data.signIn.about_details);
+  const [displayname, setDisplayname] = useState(signIn.displayName);
+  const [username, setUsername] = useState(signIn.username);
+  const [about_details, setBio] = useState(signIn.about_details);
   const [profileimage, setProfileImage] = useState(false);
   const [coverimage, setCoverimage] = useState(false);
   const [updateProfile] = useMutation(updateUser);
@@ -63,7 +63,7 @@ const Setting = () => {
               let NoImageData = {
                 displayName: displayname,
                 username: username,
-                about_details: about_details,
+                aboutDetails: about_details,
                 websiteUrl: e.target[5].value,
                 wallet: account,
               };

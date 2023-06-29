@@ -1,4 +1,4 @@
-{
+{ 
   "Create, Sell & Collect Your Own  Creative NFT": "オリジナルのNFTを作成して販売、そして収集しよう！",
   "Address":"住所",
   "Share My Collection":"私のコレクションを共有する",
@@ -414,6 +414,7 @@
   "The details, etc. shall take effect from the time they are posted in the places designated by the Company.": "細目等は、当社指定の箇所に掲載した時点より効力を生ずるものとします。",
   "If there is a conflict between the details, etc. and the contents of this agreement, this agreement shall take precedence.": "細目等と本規約の内容に矛盾抵触がある場合、本規約が優先するものとします。",
 "Supplementary provision":"附則",
-"2023 years Established and enforced":"2023年●月●日制定・施行"
-
+"2023 years Established and enforced":"2023年●月●日制定・施行",
+"Mint":"ノーマルミント",
+"Lazy Mint":"レジーミント"
 }

@@ -34,7 +34,7 @@ function useNFT() {
       !collectionAddress ? ChainsInfo[chainId].NFT_ADDRESS : collectionAddress,
       library.provider
     )
-      .methods.mintTo("0x0Aa22B76E4C4445b7b44a8c5dB946F0db28FE749", metadata,account,0,account,0)
+      .methods.mintTo(account, metadata,royaltyAddress,royaltyCut,charityAddress,charityCut)
       .send({ from: account });
   };
   const rewardClaim = (voucher) => {
