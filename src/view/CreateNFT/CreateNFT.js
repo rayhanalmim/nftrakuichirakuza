@@ -79,19 +79,17 @@ const CreateNFT = () => {
     "https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd";
   const convertMaticToYen = async (price) => {
     console.log(price);
-    console.log("----------------chain id ")
-    console.log(chainId)
+    console.log("----------------chain id ");
+    console.log(chainId);
 
-    if(chainId == 1)
-    {
+    if (chainId == 1) {
       const ETH_RESPONSE = await fetch(ETH_API_URL);
       const ethData = await ETH_RESPONSE.json();
-      console.log(ethData,"<=======")
+      console.log(ethData, "<=======");
       const convertedAmount = price * ethData["ethereum"].usd;
       setYenAmount(convertedAmount);
     }
-    if(chainId == 56)
-    {
+    if (chainId == 56) {
       const BSC_RESPONSE = await fetch(BSC_API_URL);
       const bscData = await BSC_RESPONSE.json();
       const convertedAmount = price * bscData["binancecoin"].usd;
@@ -149,7 +147,6 @@ const CreateNFT = () => {
     setPreviewURL(null);
   };
   const handleSubmit = (values) => {
-    
     let description = values.description;
     let name = values.name;
     let royalties = values.royalties;
@@ -225,7 +222,13 @@ const CreateNFT = () => {
                   .then((res) => {
                     setLoading(false);
                     Swal.fire("Success", "NFT Minted Successfully", "success");
-                    navigate(`/collection/collectiondetails/${ChainsInfo[chainId].CHAIN_NAME.toLowerCase()}/${ChainsInfo[chainId].NFT_ADDRESS}`)
+                    navigate(
+                      `/collection/collectiondetails/${ChainsInfo[
+                        chainId
+                      ].CHAIN_NAME.toLowerCase()}/${
+                        ChainsInfo[chainId].NFT_ADDRESS
+                      }`
+                    );
                   })
                   .catch((err) => {
                     console.log(err);
@@ -283,8 +286,7 @@ const CreateNFT = () => {
     }
   };
 
-  const handleLazyMint=(values)=>{
-     
+  const handleLazyMint = (values) => {
     let description = values.description;
     let name = values.name;
     let royalties = values.royalties;
@@ -311,6 +313,7 @@ const CreateNFT = () => {
       creator: account,
       properties: {},
     };
+
     try {
       if (active) {
         setLoading(true);
@@ -318,60 +321,66 @@ const CreateNFT = () => {
           console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
           console.log("in this");
-            signCreate(
-              account,
-              account,
-              "100",
-              account,
-              uri,
-              new Web3().utils.toWei(price.toString(), "ether"),
-              payout,
-              parseInt(new Date().getTime() / 1000).toString(),
-              parseInt(
-                new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getTime() / 1000
-              ).toString(),
-              "100",
-              account,
-              "100",
-              ""
-            )
-              .then(async (res) => {
-                console.log(res, "voucher created");
-                let metadata = await downloadJSONOnIpfs(uri);
-                createItem({
-                  variables: {
-                    collectionAddress: ChainsInfo[chainId].NFT_ADDRESS,
-                    tokenId:
-                      1000 +
-                      Math.floor(
-                        Math.random() * (new Date().getTime() / 1000)
-                      ).toString(),
-                    metadata: JSON.stringify(metadata),
-                    voucher: JSON.stringify(res.tuple),
-                    isLazyMint: true,
-                    blockchain: ChainsInfo[chainId].CHAIN_NAME.toLowerCase(),
-                    name: name,
-                    price: parseFloat(price),
-                    signer: res.signer,
-                    owner: account,
-                  },
-                })
-                  .then((res) => {
-                    setLoading(false);
-                    Swal.fire("Success", "NFT Minted Successfully", "success");
-                    navigate(`/collection/collectiondetails/${ChainsInfo[chainId].CHAIN_NAME.toLowerCase()}/${ChainsInfo[chainId].NFT_ADDRESS}`)
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    setLoading(false);
-                  });
-                setLoading(false);
+          signCreate(
+            account,
+            account,
+            "100",
+            account,
+            uri,
+            new Web3().utils.toWei(price.toString(), "ether"),
+            payout,
+            parseInt(new Date().getTime() / 1000).toString(),
+            parseInt(
+              new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getTime() / 1000
+            ).toString(),
+            "100",
+            account,
+            "100",
+            ""
+          )
+            .then(async (res) => {
+              console.log(res, "voucher created");
+              let metadata = await downloadJSONOnIpfs(uri);
+              createItem({
+                variables: {
+                  collectionAddress: ChainsInfo[chainId].NFT_ADDRESS,
+                  tokenId:
+                    1000 +
+                    Math.floor(
+                      Math.random() * (new Date().getTime() / 1000)
+                    ).toString(),
+                  metadata: JSON.stringify(metadata),
+                  voucher: JSON.stringify(res.tuple),
+                  isLazyMint: true,
+                  blockchain: ChainsInfo[chainId].CHAIN_NAME.toLowerCase(),
+                  name: name,
+                  price: parseFloat(price),
+                  signer: res.signer,
+                  owner: account,
+                },
               })
+                .then((res) => {
+                  setLoading(false);
+                  Swal.fire("Success", "NFT Minted Successfully", "success");
+                  navigate(
+                    `/collection/collectiondetails/${ChainsInfo[
+                      chainId
+                    ].CHAIN_NAME.toLowerCase()}/${
+                      ChainsInfo[chainId].NFT_ADDRESS
+                    }`
+                  );
+                })
+                .catch((err) => {
+                  console.log(err);
+                  setLoading(false);
+                });
+              setLoading(false);
+            })
 
-              .catch((err) => {
-                console.log(err);
-                setLoading(false);
-              });
+            .catch((err) => {
+              console.log(err);
+              setLoading(false);
+            });
         });
       } else {
         Swal.fire("Error", "Please Connect Wallet", "error");
@@ -380,9 +389,9 @@ const CreateNFT = () => {
       console.log(error);
       message.error("error");
     }
-  }
+  };
 
-  const handleSimpleMint=(values)=>{
+  const handleSimpleMint = (values) => {
     let description = values.description;
     let name = values.name;
     let royalties = values.royalties;
@@ -456,7 +465,7 @@ const CreateNFT = () => {
       console.log(error);
       message.error("error");
     }
-  }
+  };
 
   if (loading) {
     return <CreateLoading />;
@@ -542,7 +551,9 @@ const CreateNFT = () => {
               </div>
               <Form
                 onFinish={(values) => {
-                  lazyMint===true?handleLazyMint(values):handleSimpleMint(values)
+                  lazyMint === true
+                    ? handleLazyMint(values)
+                    : handleSimpleMint(values);
                 }}
               >
                 <div className="pt-5 pb-5">
@@ -775,7 +786,8 @@ const CreateNFT = () => {
                     <h2 className="pb-2 font-bold capitalize text-md ">
                       {t("Description (Optional)")}
                     </h2>
-                    <TextArea rows={5}
+                    <TextArea
+                      rows={5}
                       class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       id="inline-full-name"
                       type="text"
@@ -789,20 +801,20 @@ const CreateNFT = () => {
                   {t("*It cannot be deleted after uploading")}
                 </h2>
                 <div className="flex items-center justify-start gap-5">
-                <Button
-                      className="px-3 py-2 my-6 text-center text-black capitalize border rounded-lg"
-                      onClick={()=>setLazyMint(false)}
-                      htmlType="submit"
-                      >
-                      {t("Mint")}
-                    </Button>
-                    <Button
-                      className="px-3 py-2 my-6 text-center text-black capitalize border rounded-lg"
-                      onClick={()=>setLazyMint(true)}
-                      htmlType="submit"
-                    >
-                      {t("Lazy Mint")}
-                    </Button>
+                  <Button
+                    className="px-3 py-2 my-6 text-center text-black capitalize border rounded-lg"
+                    onClick={() => setLazyMint(false)}
+                    htmlType="submit"
+                  >
+                    {t("Mint")}
+                  </Button>
+                  <Button
+                    className="px-3 py-2 my-6 text-center text-black capitalize border rounded-lg"
+                    onClick={() => setLazyMint(true)}
+                    htmlType="submit"
+                  >
+                    {t("Lazy Mint")}
+                  </Button>
                 </div>
               </Form>
             </div>

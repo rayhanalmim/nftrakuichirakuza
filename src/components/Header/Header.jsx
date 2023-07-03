@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 
 export default function Example({ menu }) {
   const { t } = useTranslation();
+  const [isShow,setIsShow]=useState(true);
   const navigation = [
     // { name: "Collections", current: true },
     // { name: "About", to: "/about", href: "/login", current: false },
@@ -71,8 +72,12 @@ export default function Example({ menu }) {
 
               <div className="hidden md:block max-w-[400px] w-full">
                 <SearchComponent
+                isShow={isShow
+                }
+                setIsShow={setIsShow}
                   placeholder={t("Search Items")}
                   onChange={(e) => {
+                      setIsShow(true)
                     searchData({
                       variables: {
                         key: e.target.value,
@@ -174,7 +179,7 @@ export default function Example({ menu }) {
   );
 }
 
-export const SearchComponent = ({ placeholder, onChange, suggestions }) => {
+export const SearchComponent = ({ placeholder, onChange, suggestions ,isShow,setIsShow }) => {
   const navigate = useNavigate();
   console.log("suggestions", suggestions);
   return (
@@ -202,14 +207,16 @@ export const SearchComponent = ({ placeholder, onChange, suggestions }) => {
             className="w-full py-3 pl-12 pr-4 text-red-500 border rounded-md outline-none  placeholder-red"
             style={{ background: "rgba(0, 0, 0, 0.1)" }}
           />
-          <ul
+          {
+            isShow? <ul
             className={
               suggestions?.length > 0
                 ? `bg-white border-[1px] w-full rounded-lg shadow-lg p-4 absolute max-h-[300px] overflow-y-auto`
                 : "hidden"
             }
           >
-            {suggestions?.map((item, key) => {
+            
+            { suggestions?.map((item, key) => {
               return (
                 <li
                   key={item}
@@ -220,13 +227,15 @@ export const SearchComponent = ({ placeholder, onChange, suggestions }) => {
                       navigate(
                         `/collection/collectiondetails/${item.blockchain}/${item.collectionAddress}`
                       );
-                    } else {
+                    } else {  
                       navigate(
                         `/nft/nftpage/${item.blockchain}/${item.collectionAddress}/${item.token_id}`
                       );
                     }
+                    setIsShow(false);
                     return;
-                  }}
+                  }
+                }
                 >
                   {item.name === "" || item.collectionName
                     ? item.collectionName
@@ -234,7 +243,9 @@ export const SearchComponent = ({ placeholder, onChange, suggestions }) => {
                 </li>
               );
             })}
-          </ul>
+          </ul> :null
+          }
+          
         </div>
       </form>
     </>
