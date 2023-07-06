@@ -316,6 +316,10 @@ const CreateMyNFT = () => {
     
     let imageFormObj = new FormData();
     imageFormObj.append("image", file);
+      if (!file) {
+      Swal.fire("Error", "Please upload an image", "error");
+      return; // Exit the function immediately
+    }
 
     const metadata = {
       name: name,
@@ -330,7 +334,7 @@ const CreateMyNFT = () => {
         uploadOnIpfs(metadata).then(async (uri) => {
           console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
-            console.log("in this");
+            console.log(data,"in this");
             signCreate(
               account,
               account,
@@ -413,6 +417,10 @@ const CreateMyNFT = () => {
     
     let imageFormObj = new FormData();
     imageFormObj.append("image", file);
+      if (!file) {
+      Swal.fire("Error", "Please upload an image", "error");
+      return; // Exit the function immediately
+    }
 
     const metadata = {
       name: name,

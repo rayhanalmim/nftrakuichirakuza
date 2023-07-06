@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 const Level2 = ({ level2Data }) => {
   const { t } = useTranslation();
-  console.log(level2Data);
+
   const navigate = useNavigate();
 
   return (

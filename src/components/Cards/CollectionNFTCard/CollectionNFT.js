@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 function NFTCollectionCard({ blockchain, collection, data }) {
   console.log(data, "in this");
   let metadata = JSON.parse(data?.metadata);
-  console.log(metadata);
   return (
     <div className="w-full max-w-[300px] mx-auto px-3 py-4 border rounded-xl bg-white mb-4">
       <div className="rounded-xl">
@@ -26,10 +25,13 @@ function NFTCollectionCard({ blockchain, collection, data }) {
           className="rounded-xl w-[250px] h-[200px] object-contain"
           src={
             metadata?.image?.includes("http")
-              ? metadata.image
+              ? metadata.image.replace(
+                  "https://ipfs.thirdwebcdn.com/ipfs/",
+                  "https://ipfs.thirdwebstorage.com/ipfs/"
+                )
               : metadata?.image?.replace(
-                  "ipfs://",
-                  "https://gateway.ipfscdn.io/ipfs/"
+                  "https://ipfs.thirdwebcdn.com/ipfs/",
+                  "https://ipfs.thirdwebstorage.com/ipfs/"
                 )
           }
         />

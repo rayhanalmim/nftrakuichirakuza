@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const Level1 = ({ level1Data }) => {
   const navigate = useNavigate();
+  console.log(level1Data);
   const { t } = useTranslation();
   return (
     <div className="bg-cyan">

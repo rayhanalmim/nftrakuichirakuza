@@ -239,7 +239,8 @@ const NFTPage = () => {
                       updateLazyItemNFT({
                         variables: {
                           collectionAddress: collection,
-                          tokenId: res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
+                          tokenId:
+                            res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
                           blockchain: blockchain,
                           isLazyMint: false,
                           lazyTokenId: tokenId,
@@ -254,7 +255,8 @@ const NFTPage = () => {
                             variables: {
                               blockchain: blockchain,
                               collectionAddress: collection,
-                              tokenId: res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
+                              tokenId:
+                                res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
                             },
                           },
                         ],
@@ -296,7 +298,8 @@ const NFTPage = () => {
             updateLazyItemNFT({
               variables: {
                 collectionAddress: collection,
-                tokenId: res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
+                tokenId:
+                  res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
                 blockchain: blockchain,
                 isLazyMint: false,
                 lazyTokenId: tokenId,
@@ -311,7 +314,8 @@ const NFTPage = () => {
                   variables: {
                     blockchain: blockchain,
                     collectionAddress: collection,
-                    tokenId: res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
+                    tokenId:
+                      res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
                   },
                 },
               ],
@@ -352,7 +356,8 @@ const NFTPage = () => {
                 blockchain: blockchain,
                 price: parseFloat(price),
                 isMarketplace: true,
-                listingId: res?.events?.ListingAdded?.returnValues?.listingId.toString(),
+                listingId:
+                  res?.events?.ListingAdded?.returnValues?.listingId.toString(),
                 owner: owner,
               },
               refetchQueries: [
@@ -401,7 +406,8 @@ const NFTPage = () => {
                     blockchain: blockchain,
                     price: parseFloat(price),
                     isMarketplace: true,
-                    listingId: res?.events?.ListingAdded?.returnValues?.listingId?.toString(),
+                    listingId:
+                      res?.events?.ListingAdded?.returnValues?.listingId?.toString(),
                   },
                   refetchQueries: [
                     {
@@ -510,7 +516,8 @@ const NFTPage = () => {
                     blockchain: blockchain,
                     price: parseFloat(price),
                     isMarketplace: true,
-                    listingId: res?.events?.ListingAdded?.returnValues?.listingId?.toString(),
+                    listingId:
+                      res?.events?.ListingAdded?.returnValues?.listingId?.toString(),
                   },
                   refetchQueries: [
                     {
@@ -674,7 +681,9 @@ const NFTPage = () => {
                 <h4 className="text-lg  font-bold capitalize">{blockchain}</h4>
               </div>
               <div className="flex  gap-[40px] justify-between  items-center">
-                <h4 className="capitalize  text-lg">{t("View On Block Explorer")}</h4>
+                <h4 className="capitalize  text-lg">
+                  {t("View On Block Explorer")}
+                </h4>
                 <a
                   className="capitalize  text-lg"
                   href={
@@ -818,11 +827,14 @@ const NFTPage = () => {
                     src={
                       lazyMetadata && lazyMetadata?.image.includes("ipfs")
                         ? lazyMetadata?.image.replace(
-                            "ipfs://",
-                            "https://gateway.ipfscdn.io/ipfs/"
+                            "https://ipfs.thirdwebcdn.com/ipfs/",
+                            "https://ipfs.thirdwebstorage.com/ipfs/"
                           )
                         : lazyMetadata?.image.includes("http")
-                        ? lazyMetadata?.image
+                        ? lazyMetadata?.image.replace(
+                            "https://ipfs.thirdwebcdn.com/ipfs/",
+                            "https://ipfs.thirdwebstorage.com/ipfs/"
+                          )
                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                     }
                     alt=""
@@ -854,7 +866,7 @@ const NFTPage = () => {
                       src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDBweCIgaGVpZ2h0PSI0MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSIgaWQ9IjUyNDUwMTg1MDE2MSI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9InJnYigyMzgsIDI1NSwgMCkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0icmdiKDAsIDIzOCwgMjU1KSIgb2Zmc2V0PSIxMDAlIj48L3N0b3A+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8ZyBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIGZpbGw9InVybCgjNTI0NTAxODUwMTYxKSIgeD0iMCIgeT0iMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIj48L3JlY3Q+CiAgPC9nPgo8L3N2Zz4="
                     />
                     <h5 className="text-grey">
-                     {t("Owned By")} <br />
+                      {t("Owned By")} <br />
                       <span className="text-blue">
                         {data?.ItemPageQuery?.lazyMinting ? (
                           truncateAddress(data?.ItemPageQuery?.owner)

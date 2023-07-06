@@ -110,7 +110,9 @@ export default function Example({ menu }) {
                           : "text-[#000]  px-2 py-2 rounded-md md:text-lg text-sm "
                       }
                     >
+                      <Disclosure.Button>
                       {item.name}
+                      </Disclosure.Button>
                     </NavLink>
                   ))}
                   <select
@@ -181,7 +183,7 @@ export default function Example({ menu }) {
 
 export const SearchComponent = ({ placeholder, onChange, suggestions ,isShow,setIsShow }) => {
   const navigate = useNavigate();
-  console.log("suggestions", suggestions);
+  // console.log("suggestions", suggestions);
   return (
     <>
       <form className="relative px-2 search-sec">

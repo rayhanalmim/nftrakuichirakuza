@@ -306,6 +306,11 @@ const CreateNFT = () => {
     let imageFormObj = new FormData();
     imageFormObj.append("image", file);
 
+    if (!file) {
+      Swal.fire("Error", "Please upload an image", "error");
+      return; // Exit the function immediately
+    }
+
     const metadata = {
       name: name,
       description: description,
@@ -410,6 +415,11 @@ const CreateNFT = () => {
     );
     let imageFormObj = new FormData();
     imageFormObj.append("image", file);
+
+    if (!file) {
+      Swal.fire("Error", "Please upload an image", "error");
+      return; // Exit the function immediately
+    }
 
     const metadata = {
       name: name,
