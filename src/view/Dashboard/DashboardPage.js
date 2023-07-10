@@ -170,6 +170,24 @@ const DashboardPage = ({ level1Data }) => {
       icon: "/assets/icon.png",
     },
   ];
+
+
+  const dateConvert = (refdate) =>{
+    console.log(refdate)
+    var Rdate = new Date(refdate*1);
+
+    console.log(Rdate)
+    const day = Rdate.getDate(); 
+    const month = Rdate.getMonth() + 1; 
+    const year = Rdate.getFullYear(); 
+    const formattedDate = `${day}-${month}-${year}`;
+
+    console.log(formattedDate)
+
+    return formattedDate;
+  }
+
+
   return (
     <div>
       {withdraw ? (
@@ -370,9 +388,9 @@ const DashboardPage = ({ level1Data }) => {
                                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
                                         {t("Referral URL")}
                                       </th>
-                                      {/* <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
+                                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
                                         {t("Referral Date")}
-                                      </th> */}
+                                      </th>
                                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
                                         {t("Status")}
                                       </th>
@@ -407,11 +425,24 @@ const DashboardPage = ({ level1Data }) => {
                                                   </div>
                                                 </div>
                                               </td>
+
+                                          
+
+
                                               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <p className="text-gray-900 whitespace-no-wrap">
                                                   {truncateAddress(
                                                     item?.referral_url
                                                   )}
+                                                </p>
+                                              </td>
+
+
+                                              <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                <p className="text-gray-900 whitespace-no-wrap">
+                                                  { 
+                                                  dateConvert(item?.createdAt)
+                                                  }
                                                 </p>
                                               </td>
 

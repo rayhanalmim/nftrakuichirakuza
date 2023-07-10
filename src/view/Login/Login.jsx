@@ -18,7 +18,7 @@ const Login = () => {
 
   const { state: ContextState, login } = useContext(AuthContext);
   const { isLoginPending, isLoggedIn, loginError } = ContextState;
-  const [state, setState] = useSetState(initialState);
+  const [state, setState] = useSetState();
   const { account, active } = useWeb3React();
   const { t } = useTranslation();
   useEffect(() => {

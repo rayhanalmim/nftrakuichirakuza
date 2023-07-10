@@ -19,16 +19,19 @@ export const refInfo = gql`
         avatar_url
         displayName
         referral_url
+        createdAt
       }
       level2User {
         avatar_url
         displayName
         referral_url
+        createdAt
       }
       level3User {
         avatar_url
         displayName
         referral_url
+        createdAt
       }
       parentRef {
         avatar_url
