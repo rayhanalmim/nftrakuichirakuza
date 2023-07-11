@@ -194,7 +194,7 @@ const DashboardPage = ({ level1Data }) => {
         <Reward />
       ) : (
         <>
-          <div className="bg-cyan">
+          <div className="bg-cyan"> 
             <div className="mx-auto max-w-[1500px] w-full px-2 ">
               <div className="py-[50px]">
                 <h3 className="text-2xl font-bold">
@@ -412,7 +412,7 @@ const DashboardPage = ({ level1Data }) => {
                                                     <a href="/users/userpage">
                                                       <img
                                                         className="w-full h-full rounded-full"
-                                                        src={item.avatar_url}
+                                                        src={item?.avatar_url}
                                                         alt
                                                       />
                                                     </a>
@@ -427,8 +427,6 @@ const DashboardPage = ({ level1Data }) => {
                                               </td>
 
                                           
-
-
                                               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <p className="text-gray-900 whitespace-no-wrap">
                                                   {truncateAddress(
