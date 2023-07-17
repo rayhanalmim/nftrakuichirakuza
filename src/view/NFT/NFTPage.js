@@ -1,5 +1,5 @@
 import { Dropdown, Space } from "antd";
-import { useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import React, { useState } from "react";
 import { RiArrowUpDownFill } from "react-icons/ri";
 import NotDetails from "../../components/404Page/NoDetails";
@@ -7,14 +7,13 @@ import { BsFillGrid3X2GapFill } from "react-icons/bs";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { DatePicker } from "antd";
 import { useTranslation } from "react-i18next";
-
+import { MdClose } from "react-icons/md";
 import {
   AiFillHeart,
   AiOutlineEye,
   AiOutlineFileText,
   AiFillRedEnvelope,
 } from "react-icons/ai";
-
 import { MdLocalOffer } from "react-icons/md";
 import { BsListNested } from "react-icons/bs";
 import { BiTransfer } from "react-icons/bi";
@@ -43,6 +42,25 @@ import {
   getErc20Contract,
   getErc721Contract,
 } from "../../utils/contractHelper";
+
+import {
+  TwitterShareButton,
+  FacebookShareButton,
+  PinterestShareButton,
+  HatenaShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  PinterestIcon,
+  HatenaIcon,
+  LineShareButton,
+  LineIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+} from "react-share";
+
+import facebook from "../../images/facebook.svg";
+import twitter from "../../images/twitter.svg";
+import pinterest from "../../images/pinterest.svg";
 const NFTPage = () => {
   const { t } = useTranslation();
   const { RangePicker } = DatePicker;
@@ -50,6 +68,7 @@ const NFTPage = () => {
   const [icon, setIcon] = useState("");
   const { blockchain, collection, tokenId } = useParams();
   const { active, chainId, account } = useWeb3React();
+
   const {
     OwnerOfToken,
     putOnSale,
@@ -81,6 +100,8 @@ const NFTPage = () => {
   const [updateItemSale] = useMutation(updateItem);
   const [updateLazyItemNFT] = useMutation(updateLazyItem);
   const [updateRewardsData] = useLazyQuery(updateRewards);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   const { loading, error, data } = useQuery(itemPageQuery, {
     variables: {
@@ -89,6 +110,7 @@ const NFTPage = () => {
       tokenId: tokenId,
     },
   });
+
   const refinfo = useQuery(getRewardsUser, {
     skip: !account,
     variables: {
@@ -96,7 +118,6 @@ const NFTPage = () => {
     },
   });
   let DataRef = refinfo?.data?.getRefInformation?.parentRef;
-  console.log(DataRef);
   let tokenMetadata =
     !loading && !error ? data?.ItemPageQuery?.nft?.tokenMetadata : null;
   let metadata =
@@ -114,11 +135,8 @@ const NFTPage = () => {
         ? ""
         : JSON.parse(data?.ItemPageQuery?.nft?.voucher)
       : "";
-  console.log(voucher && voucher[5], "Voucher");
   useEffect(() => {
     if (active) {
-      console.log(typeof localStorage.getItem("loggedIn"));
-
       let dataToken = JSON.parse(localStorage.getItem("loggedIn"));
       if (
         localStorage.getItem("loggedIn") == "false" ||
@@ -192,254 +210,272 @@ const NFTPage = () => {
     console.log(`Difference in seconds: ${seconds}`);
   };
   const SaleNFT = async (price) => {
-    if (data?.ItemPageQuery?.lazyMinting) {
-      if (voucher && voucher[6] == ChainsInfo[chainId].OVE_COIN) {
-        console.log("in this");
-        getErc20Contract(ChainsInfo[chainId].OVE_COIN, library.provider)
-          .methods.balanceOf(account)
-          .call()
-          .then((res) => {
-            console.log(res, voucher[5], "Ove Balance");
-            if (res == 0) {
-              Swal.fire(
-                "Insufficient Fund",
-                "Wallet Don't Have OVE",
-                "warning"
-              );
-              return false;
-            } else if (parseInt(res) < parseInt(voucher[5])) {
-              Swal.fire(
-                "Insufficient Fund",
-                "Wallet Don't Have Enough OVEs for transaction",
-                "warning"
-              );
-              return false;
-            } else {
-              return getErc20Contract(
-                ChainsInfo[chainId].OVE_COIN,
-                library.provider
-              )
-                .methods.approve(ChainsInfo[chainId].NFT_ADDRESS, voucher[5])
-                .send({
-                  from: account,
-                })
-                .then((res) => {
-                  console.log(voucher, signer);
-                  setBuyLoad(true);
-                  getErc721Contract(
-                    ChainsInfo[chainId].NFT_ADDRESS,
-                    library.provider
-                  )
-                    .methods.mintWithSignature(voucher, signer)
-                    .send({
-                      from: account,
-                    })
-                    .then((res) => {
-                      console.log(res);
-                      updateLazyItemNFT({
-                        variables: {
-                          collectionAddress: collection,
-                          tokenId:
-                            res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
-                          blockchain: blockchain,
-                          isLazyMint: false,
-                          lazyTokenId: tokenId,
-                          price: parseFloat(0),
-                          isMarketplace: false,
-                          listingId: "",
-                          owner: account,
-                        },
-                        refetchQueries: [
-                          {
-                            query: itemPageQuery,
-                            variables: {
-                              blockchain: blockchain,
-                              collectionAddress: collection,
-                              tokenId:
-                                res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
-                            },
-                          },
-                        ],
+    function getChainIdFromName(chainName) {
+      const chain = Object.values(ChainsInfo).find(
+        (info) => info.CHAIN_NAME.toLowerCase() === chainName.toLowerCase()
+      );
+      if (chain) {
+        return chain.CHAIN_ID;
+      }
+      return null; // Chain name not found
+    }
+    const chainName = data ? data.ItemPageQuery.nft.blockchain : null;
+    const id = getChainIdFromName(chainName);
+    console.log(id);
+
+    if (chainId != id) {
+      alert("Connected to wrong network");
+    } else {
+      if (data?.ItemPageQuery?.lazyMinting) {
+        if (voucher && voucher[6] == ChainsInfo[chainId].OVE_COIN) {
+          console.log("in this");
+          getErc20Contract(ChainsInfo[chainId].OVE_COIN, library.provider)
+            .methods.balanceOf(account)
+            .call()
+            .then((res) => {
+              console.log(res, voucher[5], "Ove Balance");
+              if (res == 0) {
+                Swal.fire(
+                  "Insufficient Fund",
+                  "Wallet Don't Have OVE",
+                  "warning"
+                );
+                return false;
+              } else if (parseInt(res) < parseInt(voucher[5])) {
+                Swal.fire(
+                  "Insufficient Fund",
+                  "Wallet Don't Have Enough OVEs for transaction",
+                  "warning"
+                );
+                return false;
+              } else {
+                return getErc20Contract(
+                  ChainsInfo[chainId].OVE_COIN,
+                  library.provider
+                )
+                  .methods.approve(ChainsInfo[chainId].NFT_ADDRESS, voucher[5])
+                  .send({
+                    from: account,
+                  })
+                  .then((res) => {
+                    console.log(voucher, signer);
+                    setBuyLoad(true);
+                    getErc721Contract(
+                      ChainsInfo[chainId].NFT_ADDRESS,
+                      library.provider
+                    )
+                      .methods.mintWithSignature(voucher, signer)
+                      .send({
+                        from: account,
                       })
-                        .then((res) => {
-                          console.log("nft response", res);
-                          navigate(
-                            `/nft/nftpage/polygon/${collection}/${res.data?.updateLazyItem?.token_id}`
-                          );
-                          setBuyLoad(false);
+                      .then((res) => {
+                        console.log(res);
+                        updateLazyItemNFT({
+                          variables: {
+                            collectionAddress: collection,
+                            tokenId:
+                              res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
+                            blockchain: blockchain,
+                            isLazyMint: false,
+                            lazyTokenId: tokenId,
+                            price: parseFloat(0),
+                            isMarketplace: false,
+                            listingId: "",
+                            owner: account,
+                          },
+                          refetchQueries: [
+                            {
+                              query: itemPageQuery,
+                              variables: {
+                                blockchain: blockchain,
+                                collectionAddress: collection,
+                                tokenId:
+                                  res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
+                              },
+                            },
+                          ],
                         })
-                        .catch((err) => {
-                          console.log(err);
-                          setBuyLoad(false);
-                        });
+                          .then((res) => {
+                            console.log("nft response", res);
+                            navigate(
+                              `/nft/nftpage/polygon/${collection}/${res.data?.updateLazyItem?.token_id}`
+                            );
+                            setBuyLoad(false);
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                            setBuyLoad(false);
+                          });
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          lazyMintNFT(
+            data?.ItemPageQuery?.nft?.voucher,
+            data?.ItemPageQuery?.nft?.signer
+          )
+            .then((res) => {
+              setBuyLoad(true);
+              console.log(
+                res?.events?.TokensMintedWithSignature.returnValues
+                  ?.tokenIdMinted
+              );
+              updateLazyItemNFT({
+                variables: {
+                  collectionAddress: collection,
+                  tokenId:
+                    res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
+                  blockchain: blockchain,
+                  isLazyMint: false,
+                  lazyTokenId: tokenId,
+                  price: parseFloat(0),
+                  isMarketplace: false,
+                  listingId: "",
+                  owner: account,
+                },
+                refetchQueries: [
+                  {
+                    query: itemPageQuery,
+                    variables: {
+                      blockchain: blockchain,
+                      collectionAddress: collection,
+                      tokenId:
+                        res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
+                    },
+                  },
+                ],
+              })
+                .then((res) => {
+                  console.log("nft response", res);
+                  navigate(
+                    `/nft/nftpage/polygon/${collection}/${res.data?.updateLazyItem?.token_id}`
+                  );
+                  setBuyLoad(false);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  setBuyLoad(false);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      } else {
+        if (await checkApproval(collection)) {
+          setBuyLoad(true);
+          putOnSale(
+            collection,
+            tokenId,
+            parseInt(new Date(time).getTime() / 1000),
+            diffrence,
+            new Web3().utils.toWei(price.toString(), "ether"),
+            "100"
+          )
+            .then(async (res) => {
+              console.log(res?.events?.ListingAdded?.returnValues?.listingId);
+              updateItemSale({
+                variables: {
+                  collectionAddress: collection,
+                  tokenId: tokenId,
+                  blockchain: blockchain,
+                  price: parseFloat(price),
+                  isMarketplace: true,
+                  listingId:
+                    res?.events?.ListingAdded?.returnValues?.listingId.toString(),
+                  owner: owner,
+                },
+                refetchQueries: [
+                  {
+                    query: itemPageQuery,
+                    variables: {
+                      blockchain: blockchain,
+                      collectionAddress: collection,
+                      tokenId: tokenId,
+                    },
+                  },
+                ],
+              })
+                .then((res) => {
+                  console.log(res);
+
+                  setBuyLoad(false);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  setBuyLoad(false);
+                });
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+              setBuyLoad(false);
+            });
+        } else {
+          setBuyLoad(true);
+          approveMarketplace(tokenId, collection)
+            .then((res) => {
+              putOnSale(
+                collection,
+                tokenId,
+                parseInt(new Date(time).getTime() / 1000),
+                diffrence,
+                new Web3().utils.toWei(price.toString(), "ether"),
+                "100"
+              )
+                .then(async (res) => {
+                  updateItemSale({
+                    variables: {
+                      collectionAddress: collection,
+                      tokenId: tokenId,
+                      blockchain: blockchain,
+                      price: parseFloat(price),
+                      isMarketplace: true,
+                      listingId:
+                        res?.events?.ListingAdded?.returnValues?.listingId?.toString(),
+                    },
+                    refetchQueries: [
+                      {
+                        query: itemPageQuery,
+                        variables: {
+                          blockchain: blockchain,
+                          collectionAddress: collection,
+                          tokenId: tokenId,
+                        },
+                      },
+                    ],
+                  })
+                    .then((res) => {
+                      setBuyLoad(false);
+                      console.log(res);
                     })
                     .catch((err) => {
+                      setBuyLoad(false);
                       console.log(err);
                     });
                 })
                 .catch((err) => {
+                  setBuyLoad(false);
                   console.log(err);
                 });
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        lazyMintNFT(
-          data?.ItemPageQuery?.nft?.voucher,
-          data?.ItemPageQuery?.nft?.signer
-        )
-          .then((res) => {
-            setBuyLoad(true);
-            console.log(
-              res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted
-            );
-            updateLazyItemNFT({
-              variables: {
-                collectionAddress: collection,
-                tokenId:
-                  res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
-                blockchain: blockchain,
-                isLazyMint: false,
-                lazyTokenId: tokenId,
-                price: parseFloat(0),
-                isMarketplace: false,
-                listingId: "",
-                owner: account,
-              },
-              refetchQueries: [
-                {
-                  query: itemPageQuery,
-                  variables: {
-                    blockchain: blockchain,
-                    collectionAddress: collection,
-                    tokenId:
-                      res?.events?.TokensMintedWithSignature.returnValues?.tokenIdMinted.toString(),
-                  },
-                },
-              ],
             })
-              .then((res) => {
-                console.log("nft response", res);
-                navigate(
-                  `/nft/nftpage/polygon/${collection}/${res.data?.updateLazyItem?.token_id}`
-                );
-                setBuyLoad(false);
-              })
-              .catch((err) => {
-                console.log(err);
-                setBuyLoad(false);
-              });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    } else {
-      if (await checkApproval(collection)) {
-        setBuyLoad(true);
-        putOnSale(
-          collection,
-          tokenId,
-          parseInt(new Date(time).getTime() / 1000),
-          diffrence,
-          new Web3().utils.toWei(price.toString(), "ether"),
-          "100"
-        )
-          .then(async (res) => {
-            console.log(res?.events?.ListingAdded?.returnValues?.listingId);
-            updateItemSale({
-              variables: {
-                collectionAddress: collection,
-                tokenId: tokenId,
-                blockchain: blockchain,
-                price: parseFloat(price),
-                isMarketplace: true,
-                listingId:
-                  res?.events?.ListingAdded?.returnValues?.listingId.toString(),
-                owner: owner,
-              },
-              refetchQueries: [
-                {
-                  query: itemPageQuery,
-                  variables: {
-                    blockchain: blockchain,
-                    collectionAddress: collection,
-                    tokenId: tokenId,
-                  },
-                },
-              ],
+            .catch((err) => {
+              console.log(err);
             })
-              .then((res) => {
-                console.log(res);
-
-                setBuyLoad(false);
-              })
-              .catch((err) => {
-                console.log(err);
-                setBuyLoad(false);
-              });
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-            setBuyLoad(false);
-          });
-      } else {
-        setBuyLoad(true);
-        approveMarketplace(tokenId, collection)
-          .then((res) => {
-            putOnSale(
-              collection,
-              tokenId,
-              parseInt(new Date(time).getTime() / 1000),
-              diffrence,
-              new Web3().utils.toWei(price.toString(), "ether"),
-              "100"
-            )
-              .then(async (res) => {
-                updateItemSale({
-                  variables: {
-                    collectionAddress: collection,
-                    tokenId: tokenId,
-                    blockchain: blockchain,
-                    price: parseFloat(price),
-                    isMarketplace: true,
-                    listingId:
-                      res?.events?.ListingAdded?.returnValues?.listingId?.toString(),
-                  },
-                  refetchQueries: [
-                    {
-                      query: itemPageQuery,
-                      variables: {
-                        blockchain: blockchain,
-                        collectionAddress: collection,
-                        tokenId: tokenId,
-                      },
-                    },
-                  ],
-                })
-                  .then((res) => {
-                    setBuyLoad(false);
-                    console.log(res);
-                  })
-                  .catch((err) => {
-                    setBuyLoad(false);
-                    console.log(err);
-                  });
-              })
-              .catch((err) => {
-                setBuyLoad(false);
-                console.log(err);
-              });
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       }
     }
   };
@@ -795,6 +831,20 @@ const NFTPage = () => {
     }
   };
 
+  const openImageViewer = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
+
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
+
+  const currentUrl = window.location.href;
+
+  useEffect(() => {}, []);
+
   if (buyLoad || loading) {
     return <PageLoading />;
   }
@@ -839,17 +889,29 @@ const NFTPage = () => {
                     }
                     alt=""
                     className="w-full object-contain  mx-auto max-h-[400px]"
+                    onClick={() => openImageViewer(0)}
                   />
-                  {/* <img
-                    src={
-                    lazyMetadata?.image
-                       
-                    }
-                    alt=""
-                    className="w-full  mx-auto max-h-[400px]"
-                  /> */}
                 </>
               }
+              {isViewerOpen && (
+                <img
+                  className=" absolute w-full bg-black h-full top-0 left-0  object-contain"
+                  onClick={() => setIsViewerOpen(false)}
+                  src={
+                    lazyMetadata && lazyMetadata?.image.includes("ipfs")
+                      ? lazyMetadata?.image.replace(
+                          "https://ipfs.thirdwebcdn.com/ipfs/",
+                          "https://ipfs.thirdwebstorage.com/ipfs/"
+                        )
+                      : lazyMetadata?.image.includes("http")
+                      ? lazyMetadata?.image.replace(
+                          "https://ipfs.thirdwebcdn.com/ipfs/",
+                          "https://ipfs.thirdwebstorage.com/ipfs/"
+                        )
+                      : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+                  }
+                />
+              )}
             </div>
             <div className=" flex-1">
               <h6 className="text-darkblue text-2xl font-bold">
@@ -1066,6 +1128,41 @@ const NFTPage = () => {
                       </p>
                     </>
                   )}
+                </div>
+                <div className="mt-10 flex item-center justify-start gap-5">
+                  <FacebookShareButton url={currentUrl}>
+                    <FacebookIcon size={40} round />
+                  </FacebookShareButton>
+
+                  <TwitterShareButton url={currentUrl}>
+                    <TwitterIcon size={40} round />
+                  </TwitterShareButton>
+
+                  <PinterestShareButton
+                    media={
+                      lazyMetadata && lazyMetadata?.image.includes("ipfs")
+                        ? lazyMetadata?.image.replace(
+                            "https://ipfs.thirdwebcdn.com/ipfs/",
+                            "https://ipfs.thirdwebstorage.com/ipfs/"
+                          )
+                        : null
+                    }
+                    url={currentUrl}
+                  >
+                    <PinterestIcon size={40} round />
+                  </PinterestShareButton>
+
+                  <HatenaShareButton url={currentUrl}>
+                    <HatenaIcon round size={40} />
+                  </HatenaShareButton>
+
+                  <LineShareButton url={currentUrl}>
+                    <LineIcon round size={40} />
+                  </LineShareButton>
+
+                  <WhatsappShareButton url={currentUrl}>
+                    <WhatsappIcon round size={40} />
+                  </WhatsappShareButton>
                 </div>
               </div>
             </div>

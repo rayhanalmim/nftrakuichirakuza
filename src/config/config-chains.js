@@ -8,14 +8,15 @@ export const ChainsInfo = {
     CURRENCY_SYMBOL: "ETH",
     NFT_MARKETPLACE_ADDRESS: "0xB7C470715697D20FE56c6a651294E3aaC67FF9d8",
     // NFT_ADDRESS: "0x36c63b29B25518e234b5E17ad67C6b65d98371BE",
-    NFT_ADDRESS: "0x8E7bdcF106311dbc52164bD9263b103141AD19aF",//set by harsh
+    NFT_ADDRESS: "0x8E7bdcF106311dbc52164bD9263b103141AD19aF", //set by harsh
     IS_MAIN_NET: true,
     CHAIN_ID: "5",
     BLOCK_EXPLORER_URL: "https://goerli.etherscan.io/address/",
     NATIVE_TOKEN_ADDRESS: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
     WITHDRAWAL_CONTRACT_ADDRESS: "0x75f62E870f79BB13d27a800ECC4DF0Cb7F67CD6f",
     LOGO_URL: "assets/Vector.png",
-    RPC_PROVIDER_URL:"https://goerli.infura.io/v3/9c48d1f781404552b1a017d597f6bee1",
+    RPC_PROVIDER_URL:
+      "https://goerli.infura.io/v3/9c48d1f781404552b1a017d597f6bee1",
   },
   80001: {
     NETWORK_NAME: "Polygon",
@@ -27,7 +28,7 @@ export const ChainsInfo = {
     NFT_MARKETPLACE_ADDRESS: "0xc407b583845f7b2538DDDAf64477788B6FD02b7E",
     WITHDRAWAL_CONTRACT_ADDRESS: "0x75f62E870f79BB13d27a800ECC4DF0Cb7F67CD6f",
     NFT_ADDRESS: "0x3015460932Cc445bD226E439Ce82282304F2c58F", // "0x8a4cb97448C8f3679e6F41cDDF6861035562cceB",
-    // NFT_ADDRESS: "0x2aC2c3e348Fb0600b93e79c61EeC457E48964d3B", 
+    // NFT_ADDRESS: "0x2aC2c3e348Fb0600b93e79c61EeC457E48964d3B",
     IS_MAIN_NET: false,
     BUSD_ADDRESS: "0x5D77c4391593D8935D58cb2Bd84D2CFB5B5735A7",
     NATIVE_TOKEN_ADDRESS: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
@@ -43,7 +44,7 @@ export const ChainsInfo = {
     LAZY_MINT: "BNB",
     NFT_MARKETPLACE_ADDRESS: "0x921983FeCa29C78a8D984340687633ceF4Eb4Ce1",
     WITHDRAWAL_CONTRACT_ADDRESS: "0x75f62E870f79BB13d27a800ECC4DF0Cb7F67CD6f",
-    // NFT_ADDRESS: "0xBeb11feBaC17D25EcA6Da467029dA3Bf0532cf76",   
+    // NFT_ADDRESS: "0xBeb11feBaC17D25EcA6Da467029dA3Bf0532cf76",
     NFT_ADDRESS: "0x2aC2c3e348Fb0600b93e79c61EeC457E48964d3B",
     BUSD_ADDRESS: "0x7eD262B3552f58E12Edb98BFF8aEE7C3D040dcC6",
     NATIVE_TOKEN_ADDRESS: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
@@ -73,7 +74,7 @@ export const ChainsInfo = {
     RPC_PROVIDER_URL:
       "https://goerli.infura.io/v3/9c48d1f781404552b1a017d597f6bee1",
   },
-   1: {
+  1: {
     NETWORK_NAME: "Ethereum",
     CHAIN_NAME: "Ethereum",
     CURRENCY_SYMBOL: "ETH",
@@ -86,7 +87,6 @@ export const ChainsInfo = {
     LOGO_URL: "assets/Vector.png",
     CHAIN_ID: "1",
     BLOCK_EXPLORER_URL: "https://etherscan.io/address/",
-    RPC_PROVIDER_URL:
-      "https://eth.llamarpc.com",
+    RPC_PROVIDER_URL: "https://eth.llamarpc.com",
   },
 };
