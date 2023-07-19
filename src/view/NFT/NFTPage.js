@@ -1138,20 +1138,6 @@ const NFTPage = () => {
                     <TwitterIcon size={40} round />
                   </TwitterShareButton>
 
-                  <PinterestShareButton
-                    media={
-                      lazyMetadata && lazyMetadata?.image.includes("ipfs")
-                        ? lazyMetadata?.image.replace(
-                            "https://ipfs.thirdwebcdn.com/ipfs/",
-                            "https://ipfs.thirdwebstorage.com/ipfs/"
-                          )
-                        : null
-                    }
-                    url={currentUrl}
-                  >
-                    <PinterestIcon size={40} round />
-                  </PinterestShareButton>
-
                   <HatenaShareButton url={currentUrl}>
                     <HatenaIcon round size={40} />
                   </HatenaShareButton>
@@ -1159,10 +1145,6 @@ const NFTPage = () => {
                   <LineShareButton url={currentUrl}>
                     <LineIcon round size={40} />
                   </LineShareButton>
-
-                  <WhatsappShareButton url={currentUrl}>
-                    <WhatsappIcon round size={40} />
-                  </WhatsappShareButton>
                 </div>
               </div>
             </div>

@@ -18,6 +18,7 @@ export default function Example({ menu }) {
   const navigation = [
     // { name: "Collections", current: true },
     // { name: "About", to: "/about", href: "/login", current: false },
+    { name: t("Home"), to: "/", href: "/", current: false },
     {
       name: t("Explore"),
       to: "/explore/collection",
@@ -36,6 +37,7 @@ export default function Example({ menu }) {
   ];
 
   const [suggestionData, setSuggestionData] = useState([]);
+  const [resNav,setResNav]=useState(false);
   const [searchData, { loading, error }] = useLazyQuery(getSearchData);
 
   useEffect(() => {
@@ -47,11 +49,10 @@ export default function Example({ menu }) {
     i18next.changeLanguage(lang == "" ? "Japan" : lang);
   };
   return (
-    <Disclosure
-      as="nav"
-      className="shadow md:px-[20px] px-0 sticky top-0 bg-white z-[1000]"
+    <>
+    <div
+      className="shadow  flex item-center md:px-[20px] px-0 h-[98px] sticky top-0 bg-white z-[1000]"
     >
-      {({ open }) => (
         <>
           <div className="mx-auto max-w-[1500px] w-full px-2 ">
             <div className="relative flex items-center justify-between ">
@@ -70,11 +71,12 @@ export default function Example({ menu }) {
                 </Link>
               </div>
 
-              <div className="hidden md:block max-w-[400px] w-full">
+              <div className="hidden xl:block max-w-[400px] w-full">
                 <SearchComponent
                 isShow={isShow
                 }
                 setIsShow={setIsShow}
+                setResNav={setResNav}
                   placeholder={t("Search Items")}
                   onChange={(e) => {
                       setIsShow(true)
@@ -110,9 +112,9 @@ export default function Example({ menu }) {
                           : "text-[#000]  px-2 py-2 rounded-md md:text-lg text-sm "
                       }
                     >
-                      <Disclosure.Button>
+                      <button>
                       {item.name}
-                      </Disclosure.Button>
+                      </button>
                     </NavLink>
                   ))}
                   <select
@@ -127,30 +129,38 @@ export default function Example({ menu }) {
                   <ConnectWallet />
                 </div>
               </div>
-              <div className="  absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div className="xl:hidden block">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
-                    {open ? (
-                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                    ) : (
-                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                    )}
-                  </Disclosure.Button>
+                    {!resNav ? (
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" onClick={()=>setResNav(true)} />
+                      ) : (
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" onClick={()=>setResNav(false)} />
+                      )}
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <Disclosure.Panel className="xl:hidden block">
-            <div className="space-y-1 px-2 pt-2 pb-3">
+          {/* <div className="xl:hidden block">
+            
+          </div> */}
+        </>
+    </div>
+    {
+      resNav?
+      <div className="bg-white h-auto sticky top-[98px] w-full z-[101]">
+        <div className="space-y-1 px-2 pt-2 pb-3">
               <div className="lg:hidden block">
                 <SearchComponent placeholder={"items"} />
               </div>
               <div className="flex flex-col">
                 {navigation.map((item) => (
                   <NavLink
+                  onClick={()=>setResNav(false)}
                     key={item.name}
                     to={item.to}
                     className={({ isActive }) =>
@@ -167,21 +177,21 @@ export default function Example({ menu }) {
               <select
                 name="Langauage"
                 id="cars"
-                onChange={(e) => handleClick(e.target.value)}
+                onChange={(e) =>{ handleClick(e.target.value);setResNav(false)}}
               >
                 <option value="japan">日本</option>
                 <option value="en">English</option>
               </select>
               <ConnectWallet />
             </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+      </div>
+      :null
+    }
+    </>
   );
 }
 
-export const SearchComponent = ({ placeholder, onChange, suggestions ,isShow,setIsShow }) => {
+export const SearchComponent = ({ placeholder, onChange, suggestions ,isShow,setIsShow ,setResNav}) => {
   const navigate = useNavigate();
   // console.log("suggestions", suggestions);
   return (
@@ -235,6 +245,7 @@ export const SearchComponent = ({ placeholder, onChange, suggestions ,isShow,set
                       );
                     }
                     setIsShow(false);
+                    setResNav(false)
                     return;
                   }
                 }
