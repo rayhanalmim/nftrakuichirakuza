@@ -100,8 +100,7 @@ const CollectionDetails = () => {
                   </h4>
                   <h4 className="text-sm  font-bold uppercase">
                     <CopyToClipboard
-                      text={`http://localhost:3000/collection/collectiondetails/${blockchain}/${collectionAddress}`}
-                    >
+                      text={`http://localhost:3000/collection/collectiondetails/${blockchain}/${collectionAddress}`}>
                       <button
                         onClick={() => setCopied(!copied)}
                         className="capitalize text-sm border bg-white p-3 rounded-lg px-5"

@@ -178,12 +178,17 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                 <div className="flex-1">
                   <div className=" bg-collection-img bg-no-repeat bg-cover pt-3 px-3 max-h-[700px] overflow-y-scroll">
                     <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow  ">
+
+                    
                       {!data
-                        ? FakeData.map((item, key) => (
-                            <Link to="/nft/nftpage">
-                              <NFTCard key={key} data={item} />
-                            </Link>
-                          ))
+                        ?
+                        //  FakeData.map((item, key) => (
+                        //     <Link to="/nft/nftpage">
+                        //       <NFTCard key={key} data={item} />
+                        //     </Link>
+                        //   ))
+                          <h1> No Data available
+                          </h1> 
                         : null}
                       {buyNow
                         ? data?.map((item, key) => {
