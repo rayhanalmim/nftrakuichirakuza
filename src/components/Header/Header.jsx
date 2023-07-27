@@ -183,6 +183,8 @@ export default function Example({ menu }) {
                 <div className="lg:hidden block">
                   <SearchComponent placeholder={"items"} />
                 </div>
+        <br/>
+                <ConnectWallet />
                 <div className="flex flex-col">
                   {navigation.map((item) => (
                     <NavLink
@@ -199,7 +201,6 @@ export default function Example({ menu }) {
                     </NavLink>
                   ))}
                 </div>
-
                 <select
                   name="Langauage"
                   id="cars"
@@ -211,7 +212,8 @@ export default function Example({ menu }) {
                   <option value="japan">日本</option>
                   <option value="en">English</option>
                 </select>
-                <ConnectWallet />
+              
+                {/* <ConnectWallet /> */}
               </div>
             </div>
           

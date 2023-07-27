@@ -188,7 +188,7 @@ const CreateCollection = () => {
             />
             <p>{t("Token name cannot be changed in future")}</p>
           </div>
-          <div className="pt-3 pb-3">
+          {/* <div className="pt-3 pb-3">
             <h2 className="font-bold capitalize text-lg ">
               {t("Symbol(required)")}
             </h2>
@@ -200,7 +200,7 @@ const CreateCollection = () => {
               name="symbol"
               required
             />
-          </div>
+          </div> */}
           <div className="pt-3 pb-3">
             <h2 className="font-bold capitalize text-lg ">
               {t("Description (optional)")}
@@ -214,7 +214,7 @@ const CreateCollection = () => {
               required
             />
           </div>
-          <div className="pt-3 pb-3">
+          {/* <div className="pt-3 pb-3">
             <h2 className="font-bold capitalize text-lg ">{t("short url")}</h2>
             <input
               className="bg-gray-200 appearance-none border-2 placeholder-grey-50 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -224,7 +224,7 @@ const CreateCollection = () => {
               name="url"
               required
             />
-          </div>
+          </div> */}
 
 
           <div className="pt-3 pb-3">
