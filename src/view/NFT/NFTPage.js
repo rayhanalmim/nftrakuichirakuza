@@ -894,23 +894,25 @@ const NFTPage = () => {
                 </>
               }
               {isViewerOpen && (
-                <img
-                  className=" absolute w-full bg-black h-full top-0 left-0  object-contain"
-                  onClick={() => setIsViewerOpen(false)}
-                  src={
-                    lazyMetadata && lazyMetadata?.image.includes("ipfs")
-                      ? lazyMetadata?.image.replace(
-                          "https://ipfs.thirdwebcdn.com/ipfs/",
-                          "https://ipfs.thirdwebstorage.com/ipfs/"
-                        )
-                      : lazyMetadata?.image.includes("http")
-                      ? lazyMetadata?.image.replace(
-                          "https://ipfs.thirdwebcdn.com/ipfs/",
-                          "https://ipfs.thirdwebstorage.com/ipfs/"
-                        )
-                      : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-                  }
-                />
+                <div className="absolute w-full bg-black h-full top-14 left-0  flex item-center justify-center">
+                  <img
+                    className="w-[90%]  object-contain"
+                    onClick={() => setIsViewerOpen(false)}
+                    src={
+                      lazyMetadata && lazyMetadata?.image.includes("ipfs")
+                        ? lazyMetadata?.image.replace(
+                            "https://ipfs.thirdwebcdn.com/ipfs/",
+                            "https://ipfs.thirdwebstorage.com/ipfs/"
+                          )
+                        : lazyMetadata?.image.includes("http")
+                        ? lazyMetadata?.image.replace(
+                            "https://ipfs.thirdwebcdn.com/ipfs/",
+                            "https://ipfs.thirdwebstorage.com/ipfs/"
+                          )
+                        : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+                    }
+                  />
+                </div>
               )}
             </div>
             <div className=" flex-1">
