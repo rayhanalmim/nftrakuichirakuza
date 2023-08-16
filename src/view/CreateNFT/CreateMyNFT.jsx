@@ -290,15 +290,18 @@ const CreateMyNFT = () => {
               })
               .catch((err) => {
                 console.log(err);
+                setLoading(false);
               });
           }
         });
       } else {
         Swal.fire("Error", "Please Connect Wallet", "error");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
       message.error("error");
+      setLoading(false);
     }
   };
 
@@ -396,10 +399,12 @@ const CreateMyNFT = () => {
         });
       } else {
         Swal.fire("Error", "Please Connect Wallet", "error");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
       message.error("error");
+      setLoading(false);
     }
   }
 
@@ -470,13 +475,16 @@ const CreateMyNFT = () => {
               })
               .catch((err) => {
                 console.log(err);
+                setLoading(false);
               });
         });
       } else {
         Swal.fire("Error", "Please Connect Wallet", "error");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
       message.error("error");
     }
   }

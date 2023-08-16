@@ -850,11 +850,11 @@ const NFTPage = () => {
   }
 
   return (
-    <div>
+    <div className="relative">
       {error ? (
         <NotDetails />
       ) : (
-        <div className="max-w-[1500px] mx-auto w-full ">
+        <div className="max-w-[1500px] mx-auto">
           {console.log(owner)}
           {/* {console.log(
             owner,
@@ -869,7 +869,7 @@ const NFTPage = () => {
             ),
             listingData?.startTime
           )} */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5 h-[500px] w-full sticky top-[100px] bg-white">
             <div className="flex-1">
               {
                 <>
@@ -894,9 +894,12 @@ const NFTPage = () => {
                 </>
               }
               {isViewerOpen && (
-                <div className="absolute w-full bg-black h-full top-14 left-0  flex item-center justify-center">
+                <div
+                  onClick={() => setIsViewerOpen(false)}
+                  className="absolute bg-black h-[100vh] w-full top-0 left-0 flex item-center justify-center"
+                >
                   <img
-                    className="w-[90%]  object-contain"
+                    className="w-[90%] h-full object-contain"
                     onClick={() => setIsViewerOpen(false)}
                     src={
                       lazyMetadata && lazyMetadata?.image.includes("ipfs")
