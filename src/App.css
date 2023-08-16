@@ -46,6 +46,40 @@ html::-webkit-scrollbar-thumb {
 
 
 
+.news-feed {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.ticker-row {
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+}
+
+.ticker-content {
+  display: inline-block;
+  animation: ticker-animation 30s linear infinite;
+}
+
+.ticker-content p {
+  display: inline;
+  margin-right: 20px;
+}
+
+@keyframes ticker-animation {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+
 
 /* p {
   margin-bottom: 1rem !important;

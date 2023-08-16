@@ -67,6 +67,19 @@ export default function Example({ menu }) {
 
   return (
     <>
+    
+
+              <div class="news-feed">
+                  <div class="ticker-row">
+                    <div class="ticker-content">
+                      日頃より楽市楽座をご利用いただき、誠にありがとうございます。
+              現在システムメンテナンスのため、一部機能がご利用頂く事が出来ません。
+              不便をお掛けいたしますが、ご理解いただきますようお願い申し上げます。
+                     
+                    </div>
+                  </div>
+                </div>
+
       <div className="shadow  flex item-center md:px-[20px] px-0 h-[98px] sticky top-0 bg-white z-[1000]">
         <>
           <div className="mx-auto max-w-[1500px] w-full px-2 ">

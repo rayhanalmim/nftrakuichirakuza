@@ -63,9 +63,7 @@ export const useAuth = () => {
     }
     }
 
-   
 
-    
   };
   const logout = async () => {
     localStorage.setItem("walletConnect", JSON.stringify({ isConnect: false }));

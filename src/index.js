@@ -1,11 +1,9 @@
-import React, { Suspense } from "react";
+import React, { Suspense,useDeferredValue  } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-
 import { Web3ReactProvider } from "@web3-react/core";
 import "react-toastify/dist/ReactToastify.css";
 import { ethers } from "ethers";
-
 import {
   ApolloClient,
   ApolloLink,
@@ -17,6 +15,8 @@ import App from "./App";
 import "./i18n";
 import "./index.css";
 import { ContextProvider } from "./view/Login/context/Auth.context";
+// import { ThirdwebProvider } from "@thirdweb-dev/react";
+
 
 function getLibrary(provider) {
   const library = new ethers.providers.Web3Provider(provider);
@@ -33,6 +33,7 @@ export const client = new ApolloClient({
   link: ApolloLink.from([httpLink]),
 });
 ReactDOM.render(
+ 
   <Web3ReactProvider getLibrary={getLibrary}>
     <Suspense fallback="...loading">
       <ApolloProvider client={client}>
@@ -43,7 +44,8 @@ ReactDOM.render(
         </ContextProvider>
       </ApolloProvider>
     </Suspense>
-    
-  </Web3ReactProvider>,
+  </Web3ReactProvider>
+
+  ,
   document.getElementById("root")
 );
