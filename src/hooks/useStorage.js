@@ -1,14 +1,21 @@
 import { ThirdwebStorage } from "@thirdweb-dev/storage";
 
+import { useStorageUpload } from "@thirdweb-dev/react";
+
+
 const storage = new ThirdwebStorage();
 
+
 function useStorage() {
+  const { mutateAsync: upload } = useStorageUpload();
   const uploadOnIpfs = async (metadata) => {
-    const uri = await storage.upload(metadata);
-    console.log(uri, "URI from hook<============");
-    return uri;
+     var dataarray = [];
+     dataarray.push(metadata);
+     const uris = await upload({ data: dataarray });
+     return uris[0];
   };
   const downloadJSONOnIpfs = async (uri) => {
+    console.log("Rahil download")
     const data = await storage.downloadJSON(uri);
     console.log(data, "from hook second function");
     return data;
