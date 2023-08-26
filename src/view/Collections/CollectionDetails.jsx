@@ -49,7 +49,7 @@ const CollectionDetails = () => {
               data && data?.getCollectionNft?.logo.includes("ipfs")
                 ? data?.getCollectionNft?.logo.replace(
                     "ipfs://",
-                    "https://gateway.ipfscdn.io/ipfs/"
+                    "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                   )
                 : data?.getCollectionNft?.logo.includes("http")
                 ? data?.getCollectionNft?.logo

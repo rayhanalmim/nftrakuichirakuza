@@ -126,6 +126,7 @@ const NFTPage = () => {
       : null;
   let lazyMetadata =
     !loading && !error ? JSON.parse(data?.ItemPageQuery?.nft?.metadata) : null;
+    console.log(lazyMetadata)
   let activity = !loading && !error ? data?.itemPageQuery?.event : null;
   let nftData = !loading && !error ? data?.ItemPageQuery?.nft : null;
   let signer = !loading && !error ? data?.ItemPageQuery?.nft?.signer : "";
@@ -878,12 +879,12 @@ const NFTPage = () => {
                       lazyMetadata && lazyMetadata?.image.includes("ipfs")
                         ? lazyMetadata?.image.replace(
                             "https://ipfs.thirdwebcdn.com/ipfs/",
-                            "https://ipfs.thirdwebstorage.com/ipfs/"
+                            "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                           )
                         : lazyMetadata?.image.includes("http")
                         ? lazyMetadata?.image.replace(
                             "https://ipfs.thirdwebcdn.com/ipfs/",
-                            "https://ipfs.thirdwebstorage.com/ipfs/"
+                            "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                           )
                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                     }
@@ -905,12 +906,12 @@ const NFTPage = () => {
                       lazyMetadata && lazyMetadata?.image.includes("ipfs")
                         ? lazyMetadata?.image.replace(
                             "https://ipfs.thirdwebcdn.com/ipfs/",
-                            "https://ipfs.thirdwebstorage.com/ipfs/"
+                            "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                           )
                         : lazyMetadata?.image.includes("http")
                         ? lazyMetadata?.image.replace(
                             "https://ipfs.thirdwebcdn.com/ipfs/",
-                            "https://ipfs.thirdwebstorage.com/ipfs/"
+                            "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                           )
                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                     }

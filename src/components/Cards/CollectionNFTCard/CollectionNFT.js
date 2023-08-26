@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 function NFTCollectionCard({ blockchain, collection, data }) {
   console.log(data, "in this");
   let metadata = JSON.parse(data?.metadata);
+  console.log("-------------------")
+  console.log(metadata)
   return (
     <div className="w-full max-w-[300px] mx-auto px-3 py-4 border rounded-xl bg-white mb-4">
       <div className="rounded-xl">
@@ -14,7 +16,7 @@ function NFTCollectionCard({ blockchain, collection, data }) {
             metadata && metadata?.image.includes("ipfs")
               ? metadata.image.replace(
                   "ipfs://",
-                  "https://gateway.ipfscdn.io/ipfs/"
+                  "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                 )
               : metadata?.image?.includes("https")
               ? metadata?.image:metadata.image
@@ -26,13 +28,13 @@ function NFTCollectionCard({ blockchain, collection, data }) {
             className="rounded-xl w-[250px] h-[200px] object-contain cursor-pointer "
             src={
               metadata?.image?.includes("http")
-                ? metadata.image.replace(
+                ? metadata?.image?.replace(
                     "https://ipfs.thirdwebcdn.com/ipfs/",
-                    "https://ipfs.thirdwebstorage.com/ipfs/"
+                    "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                   )
                 : metadata?.image?.replace(
                     "https://ipfs.thirdwebcdn.com/ipfs/",
-                    "https://ipfs.thirdwebstorage.com/ipfs/"
+                    "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                   )
             }
           />

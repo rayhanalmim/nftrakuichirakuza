@@ -102,7 +102,7 @@ const CreatorSection = ({ heading, userData }) => {
                             data?.bg_image?.includes("ipfs")
                               ? data?.bg_image?.replace(
                                   "ipfs://",
-                                  "https://gateway.ipfscdn.io/ipfs/"
+                                  "https://ipfs.io/ipfs"
                                 )
                               : data?.bg_image
                           }
@@ -117,7 +117,7 @@ const CreatorSection = ({ heading, userData }) => {
                               data?.avatar_url?.includes("ipfs")
                                 ? data?.avatar_url?.replace(
                                     "ipfs://",
-                                    "https://gateway.ipfscdn.io/ipfs/"
+                                    "https://ipfs.io/ipfs"
                                   )
                                 : data?.avatar_url
                             }

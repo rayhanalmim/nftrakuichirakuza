@@ -15,7 +15,7 @@ function useStorage() {
      return uris[0];
   };
   const downloadJSONOnIpfs = async (uri) => {
-    console.log("Rahil download")
+    console.log("=====>",uri)
     const data = await storage.downloadJSON(uri);
     console.log(data, "from hook second function");
     return data;

@@ -239,7 +239,7 @@ const Setting = () => {
                       data?.signIn?.bg_image?.includes("ipfs")
                         ? data?.signIn?.bg_image?.replace(
                             "ipfs://",
-                            "https://gateway.ipfscdn.io/ipfs/"
+                            "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                           )
                         : data?.signIn?.bg_image
                     }
@@ -270,7 +270,7 @@ const Setting = () => {
                       data?.signIn?.avatar_url?.includes("ipfs")
                         ? data?.signIn?.avatar_url?.replace(
                             "ipfs://",
-                            "https://gateway.ipfscdn.io/ipfs/"
+                            "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                           )
                         : data?.signIn?.avatar_url
                     }

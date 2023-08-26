@@ -13,6 +13,9 @@ const HomeCollection = () => {
     const ovrflwhid = {overflow:"hidden"}
 
     useEffect(() => {
+     
+      console.log(data);
+
       const checkIsMobile = () => {
         setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
       };
@@ -21,6 +24,8 @@ const HomeCollection = () => {
   
       // Add an event listener to recheck if the user changes the viewport
       window.addEventListener('resize', checkIsMobile);
+
+      console.log("=========================>=============================>", "Version V1234567890")
   
       // Clean up the event listener when the component unmounts
       return () => {
@@ -134,7 +139,7 @@ const HomeCollection = () => {
                                     data.logo.includes("ipfs")
                                       ? data.logo.replace(
                                           "ipfs://",
-                                          "https://gateway.ipfscdn.io/ipfs/"
+                                          "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                                         )
                                       : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                                   }
@@ -233,7 +238,7 @@ const HomeCollection = () => {
                                     data.logo.includes("ipfs")
                                       ? data.logo.replace(
                                           "ipfs://",
-                                          "https://gateway.ipfscdn.io/ipfs/"
+                                          "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
                                         )
                                       : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                                   }

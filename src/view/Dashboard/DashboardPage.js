@@ -219,7 +219,7 @@ const DashboardPage = ({ level1Data }) => {
                                 className="w-[80px] h-[80px] rounded-full"
                                 src={item.avatar_url.includes("ipfs") ? item.avatar_url.replace(
                                   "ipfs://",
-                                  "https://gateway.ipfscdn.io/ipfs/"
+                                  "https://ipfs.io/ipfs"
                                 ):item.avatar_url
                               }
                                 alt=""
