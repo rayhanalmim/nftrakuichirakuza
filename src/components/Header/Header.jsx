@@ -67,9 +67,14 @@ export default function Example({ menu }) {
 
   return (
     <>
-    
 
-              <div class="news-feed">
+    
+    {/* ------------------------------------------------------------ */}
+                      {/* Under maintainance Tag */}
+    {/* ------------------------------------------------------------ */}
+
+
+              {/* <div class="news-feed">
                   <div class="ticker-row">
                     <div class="ticker-content">
                       日頃より楽市楽座をご利用いただき、誠にありがとうございます。
@@ -78,7 +83,7 @@ export default function Example({ menu }) {
                      
                     </div>
                   </div>
-                </div>
+                </div> */}
 
       <div className="shadow  flex item-center md:px-[20px] px-0 h-[98px] sticky top-0 bg-white z-[1000]">
         <>

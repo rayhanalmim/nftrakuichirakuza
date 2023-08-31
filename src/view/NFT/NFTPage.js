@@ -137,6 +137,13 @@ const NFTPage = () => {
         : JSON.parse(data?.ItemPageQuery?.nft?.voucher)
       : "";
   useEffect(() => {
+    
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    
+
     if (active) {
       let dataToken = JSON.parse(localStorage.getItem("loggedIn"));
       if (
@@ -870,7 +877,7 @@ const NFTPage = () => {
             ),
             listingData?.startTime
           )} */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5 h-[500px] w-full sticky top-[100px] bg-white">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5 h-[500px] w-full  top-[100px] bg-white">
             <div className="flex-1">
               {
                 <>
