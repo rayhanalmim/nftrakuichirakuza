@@ -24,13 +24,27 @@ function NFTCollectionCard({ blockchain, collection, data }) {
           
         /> */}
         <Link to={`/nft/nftpage/${blockchain}/${collection}/${data.token_id}`}>
-          <img
+          {/* <img
             className="rounded-xl w-[250px] h-[200px] object-contain cursor-pointer "
             src={
-              metadata?.image?.includes("http")
+              metadata?.image?.includes("https")
                 ? metadata?.image?.replace(
                     "https://ipfs.thirdwebcdn.com/ipfs/",
                     "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                  )
+                : metadata?.image?.replace(
+                    "https://ipfs.thirdwebcdn.com/ipfs/",
+                    "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                  )
+            }
+          /> */}
+          <img
+            className="rounded-xl w-[250px] h-[200px] object-contain cursor-pointer "
+            src={
+              metadata?.image?.includes("ipfs.thirdwebstorage.com")
+                ? metadata?.image?.replace(
+                    "ipfs.thirdwebstorage.com",
+                    "ipfs.cf-ipfs.com"
                   )
                 : metadata?.image?.replace(
                     "https://ipfs.thirdwebcdn.com/ipfs/",

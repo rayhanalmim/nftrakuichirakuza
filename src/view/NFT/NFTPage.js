@@ -883,10 +883,10 @@ const NFTPage = () => {
                 <>
                   <img
                     src={
-                      lazyMetadata && lazyMetadata?.image.includes("ipfs")
+                      lazyMetadata && lazyMetadata?.image.includes("ipfs.thirdwebstorage.com")
                         ? lazyMetadata?.image.replace(
-                            "https://ipfs.thirdwebcdn.com/ipfs/",
-                            "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                            "ipfs.thirdwebstorage.com",
+                            "ipfs.cf-ipfs.com"
                           )
                         : lazyMetadata?.image.includes("http")
                         ? lazyMetadata?.image.replace(
@@ -895,6 +895,19 @@ const NFTPage = () => {
                           )
                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                     }
+                    // src={
+                    //   lazyMetadata && lazyMetadata?.image.includes("ipfs")
+                    //     ? lazyMetadata?.image.replace(
+                    //         "https://ipfs.thirdwebcdn.com/ipfs/",
+                    //         "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                    //       )
+                    //     : lazyMetadata?.image.includes("http")
+                    //     ? lazyMetadata?.image.replace(
+                    //         "https://ipfs.thirdwebcdn.com/ipfs/",
+                    //         "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                    //       )
+                    //     : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+                    // }
                     alt=""
                     className="w-full object-contain  mx-auto max-h-[400px]"
                     onClick={() => openImageViewer(0)}
@@ -910,10 +923,10 @@ const NFTPage = () => {
                     className="w-[90%] h-full object-contain"
                     onClick={() => setIsViewerOpen(false)}
                     src={
-                      lazyMetadata && lazyMetadata?.image.includes("ipfs")
+                      lazyMetadata && lazyMetadata?.image.includes("ipfs.thirdwebstorage.com")
                         ? lazyMetadata?.image.replace(
-                            "https://ipfs.thirdwebcdn.com/ipfs/",
-                            "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                            "ipfs.thirdwebstorage.com",
+                            "ipfs.cf-ipfs.com"
                           )
                         : lazyMetadata?.image.includes("http")
                         ? lazyMetadata?.image.replace(
@@ -922,6 +935,19 @@ const NFTPage = () => {
                           )
                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                     }
+                    // src={
+                    //   lazyMetadata && lazyMetadata?.image.includes("ipfs")
+                    //     ? lazyMetadata?.image.replace(
+                    //         "https://ipfs.thirdwebcdn.com/ipfs/",
+                    //         "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                    //       )
+                    //     : lazyMetadata?.image.includes("http")
+                    //     ? lazyMetadata?.image.replace(
+                    //         "https://ipfs.thirdwebcdn.com/ipfs/",
+                    //         "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                    //       )
+                    //     : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+                    // }
                   />
                 </div>
               )}
