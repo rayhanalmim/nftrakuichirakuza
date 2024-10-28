@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 export default function TermsConditions() {
-
   const { t } = useTranslation();
   useEffect(() => {
     // 👇️ scroll to top on page load
@@ -10,720 +9,880 @@ export default function TermsConditions() {
   return (
     <div className="max-w-[1200px] mx-auto m-2">
       <h1 className="text-3xl font-bold pt-2 text-center m-3">
-        {" "}
-        {t("Rakuichi Rakuza Terms of Use")}
+        楽市楽座利用規約
       </h1>
-    
-      
-      <b>1. {t("The Purpose")}</b>
-        
-      <p style={{marginLeft:"20px"}}>1.	{t(`These terms of use (hereinafter referred to as the 'Terms') are governed by the NFT marketplace ' Rakuichi Rakuza ' ( hereinafter referred to as the 'Service') operated by Aqua Co., Ltd. ( hereinafter referred to as the 'Company'). Applies to users ( as defined in Article 2 ) who use The user shall use this service after agreeing to this agreement.`)}</p>
 
-      <p style={{marginLeft:"20px"}}>2.	{t(`This agreement sets forth the terms of use for this service. All users who have registered for this service shall be able to use this service according to the conditions set forth in this agreement according to the conditions such as age and usage environment in accordance with this agreement.`)}</p>
-
-      <p style={{marginLeft:"20px"}}>3.	{t(`By agreeing to the Terms of Use, the Agreement (as defined in Article 2) will be established between the User and the Company.`)}</p>
-
-
-
-      <br/>
-      <b>1. {t("Defination")}</b>
-
-<p>{t("The following terms used in these Terms have the meanings set forth in the following items.")}</p>
-      <p style={{marginLeft:"20px"}}>1.{t('Agreement: Refers to the contract for the use of the Service, which is concluded between the Company and the User on the terms of this Agreement.')}</p>
-      <p style={{marginLeft:"20px"}}>2.{t('Target Data: Refers to data (excluding crypto assets) that can be recorded and issued as NFT in this service and that the user has the right to own, use, etc. In addition, the standards, etc. of the target data that can be used on this service shall be specified separately by the Company, and shall include, but not be limited to, data such as illustrations, videos, music, and 3D models.')}</p>
-      <p style={{marginLeft:"20px"}}>3.{t('Refers to a non-substitutable digital token (Non-Fungible-Token) to which unique information is assigned among those recorded and issued on the blockchain for part or all of the target data .')}</p>
-      <p style={{marginLeft:"20px"}}>4.{t('User: Any person who uses the Service.')}</p>
-      <p style={{marginLeft:"20px"}}>5.{t('Seller: Refers to a user who sells NFTs on this service.')}</p>
-      <p style={{marginLeft:"20px"}}>6.{t('Primary distribution exhibitor: Refers to a user who has created and exhibited an NFT based on the provisions of Article 10, Paragraph 1 on this service .')}</p>
-      <p style={{marginLeft:"20px"}}>7.{t('Secondary distribution exhibitor: Refers to a user who exhibits NFT purchased within this service based on the provisions of Article 10, Paragraph 1 .')}</p>
-      <p style={{marginLeft:"20px"}}>8.{t('Refers to a user who purchases NFT on this service .')}</p>
-      <p style={{marginLeft:"20px"}}>9.{t('Communication Device: refers to a smartphone, tablet device or computer device.')}</p>
-      <p style={{marginLeft:"20px"}}>10.{t('External NFT Marketplace: Refers to OpenSea ( https://opensea.io/ja ), Rarible ( https://rarible.com/ ), and other NFT marketplaces separately designated by the Company .')}</p>
-
-
-
-      <br/>
-      <b>1. {t("Changes to these Terms")}</b>
-      <p>{t('If any of the following items apply, the Company may change these Terms at any time based on the provisions of Article 548-4 of the Civil Code. The revised Terms shall apply to this Agreement after the Terms have been revised.')}</p>
-  <p>{t('the change of this agreement conforms to the general interests of users')}</p>
-  <p>{t('When the change of this agreement does not contradict the purpose of the contract and is reasonable in light of the necessity of the change, the appropriateness of the content after the change, the content and other circumstances related to the change')}</p>
-  <p>{t('In the event that the Terms are amended, the Company shall determine the effective date of the amended Terms and notify the User of the content of the amended Terms and the effective date at least two weeks prior to the effective date. , display on the website of this service, or other methods designated by our company .')}</p>
-  <p>{t('Notwithstanding the provisions of the preceding two paragraphs, if the user uses this service after the notification of the change of this agreement in the preceding paragraph, or if the user does not take the procedure for cancellation within the period specified by our company, the user You agree to the changes to these Terms.')}</p>
-
-
-
-
-
-  <br/>
-      <b>1. {t("Handling of personal information")}</b>
-  <p>{t(`shall be handled in accordance with the " Privacy Policy " [ link  ] separately established by the Company .`)}</p>
-
-
-
-
-  <br/>
-      <b>1. {t("Contents of this service")}</b>
-  <p>{t('Users can use the following functions on this service.')}</p>
-  <ol>
-    <li>{t('create and list NFTs by the method specified by our company')}</li>
-    <li>{t('Platform functions related to NFT trading between users')}</li>
-    <li>{t('Other functions incidental to the preceding items')}</li>
-  </ol>
-
-
-
-  <br/>
-      <b>1. {t("User registration, etc.")}</b>
-  <p>{t('this agreement , the user shall enter the user information specified by the Company (hereinafter referred to as "user information") and register an account for the Service in accordance with the procedures stipulated by the Company. .')}</p>
-  <p>{t('The user shall register all true and accurate information regarding his/her own user information, and in the event of any change in the registered user information based on the preceding paragraph, the user shall be obliged to immediately carry out procedures for changing the user information. shall be')}</p>
-  <p>{t('We may refuse user registration at our discretion.')}</p>
-  <p>{t('Users shall not be allowed to use, lend, transfer, sell or pledge accounts on this service to third parties .')}</p>
-  <p>{t('The user shall manage the content registered in this service at the user\'s own responsibility to prevent unauthorized use by a third party. The Company shall not be held responsible for any damage caused to the User due to the use of the information registered under Paragraph 1 by a third party.')}</p>
-  <p>{t('If this service is used based on the information registered in the account based on paragraph 1, we will treat it as if the person identified by the account has used this service. The person identified by the account that caused the use shall be responsible for the consequences of such use.')}</p>
-  <p>{t('When using this service, it may be necessary to use an external NFT marketplace , a smart contract system designated by us, a digital asset , and a storage function for cryptocurrencies (hereinafter collectively referred to as "external services"). Thank you . In addition, since the external service is provided by a business operator other than the Company, the user must agree to the terms of use and privacy policy, etc. (hereinafter collectively referred to as the "terms of use of the external service, etc.") related to the external service. In addition, you must use this service in accordance with the provisions of the external service terms of use. In addition, users shall use external services at their own responsibility and shall not be responsible for any damage caused to users in connection with the use of external services  .')}</p>
-
-
-
-
-  <br/>
-  <b>1.{t('network fee')}</b>
-  <ol>
-    <li>{t('When using this service , a fee separately specified by the Company will be incurred. In addition, if Ethereum or other network fees occur in connection with the use of this service , the user shall bear them. Upon purchase, the purchaser is responsible for network fees .')}</li>
-    <li>{t('We are not responsible for any increase in network fees, transaction delays or transaction failures.')}</li>
-  </ol>
-
-
-
-
-  <br/>
-  <b>1.{t('service fee')}</b>
-  <p>{t('the purchaser purchases an NFT exhibited pursuant to the provisions of Article 10, the purchaser shall be obligated to pay the service fee for this service separately determined by the Company to the  Company . In addition, the fees incurred when using external services shall be confirmed in the terms of use of external services  .')}</p>
-
-
-
-  <br/>
-  <b>1.{t('royalty')}</b>
-  <p>1. {t("when exhibiting NFTs pursuant to the provisions of Article 10, the primary distribution exhibitor can set the royalty rate within the range separately specified by the Company.")}</p>
-      <p>2. {t("The royalty stipulated in the preceding paragraph shall be incurred each time the exhibited NFT is resold, and the secondary distribution exhibitor who resells the NFT shall be obliged to pay the royalty.")}</p>
-      <p>3. {t("The royalty payment stipulated in paragraph 1 is calculated based on the royalty rate set in paragraph 1 for the resale value of the NFT each time the NFT is resold, and the primary distribution is performed by the method designated by the Company. shall be paid to the seller.")}</p>
-
-
-
-
-    
-
-      <br/>
-  <b>1.{t('Issuance and Listing of NFTs')}</b>
-      <p>1. {t("Users can create and hold NFTs on this service by the method specified by our company. In addition, the GAS fee for NFT creation shall be borne by the user.")}</p>
-      <p>2. {t("Users can exhibit NFTs created based on target data on this service and NFTs purchased within this service by the method specified by our company.")}</p>
-      <p>3. {t("When exhibiting NFTs stipulated in the preceding paragraph, the exhibitor shall provide the selling price, the purchase currency separately designated by the Company, the information of the target data (including but not limited to name, URL, description, etc.), wallet Including address, royalty rate, selection of simultaneous listing to sales method (this service or this service and external NFT marketplace). Other transaction information specified by the Company must be set.")}</p>
-      <p>4. {t("When exhibiting NFTs, the exhibitor shall not perform any of the acts specified in the following items.")}</p>
-      <ul>
-        <li>{t("(1) Selling NFTs generated by falsification of data, use of unauthorized tools, or other inappropriate methods")}</li>
-        <li>{t("(2) Registering false information in the transaction information specified in the preceding paragraph")}</li>
-        <li>{t("(3) Selling NFTs for the purpose of trading only with specific users")}</li>
-        <li>{t("(4) Selling NFTs in a manner that violates the rules of these Terms, laws and regulations, guidelines, and other public order and morals.")}</li>
-      </ul>
-      <p>5. {t("The exhibitor guarantees that the NFT that exhibits on this service is not a crypto asset, prepaid payment instrument specified in Article 2, Paragraph 5 of the Fund Settlement Act, or electronic record transfer right specified in Article 2, Paragraph 3 of the Financial Instruments and Exchange Act.")}</p>
-      <p>6. {t("If the Company determines that the NFT exhibited by the Seller on the Service does not satisfy the Terms and the standards stipulated by the Company, the Company may refuse to exhibit the NFT without notifying the Seller in advance. In addition, even if the exhibitor suffers damage due to the refusal by the Company, the Company shall not be obligated to compensate the exhibitor for the damage.")}</p>
-      <p>7. {t("The exhibitor shall pay crypto assets equivalent to the selling price (hereinafter referred to as 'sales price') of NFTs exhibited in this service or in this service and external NFT marketplaces through this service (hereinafter referred to as 'listed NFTs'). The sales price will be received by the Company or the External NFT Marketplace on behalf of the Seller from the purchaser or the person who purchased the Exhibited NFT at the External NFT Marketplace.")}</p>
-      <p>8. {t("The Company will purchase the Exhibited NFT in this service or an external NFT marketplace, and the purchaser or the person who purchased the Exhibited NFT in the external NFT marketplace will pay the sales price and the service fee or sales price separately determined by the Company and the external NFT marketplace. In the event that a separately specified fee is paid, the following crypto assets shall be paid to the exhibitor on the separately specified payment date.")}</p>
-      <ul>
-        <li>{t("(1) If the listed NFT is purchased on this service\nSales price")}</li>
-        <li>{t("(2) If the listing NFT is purchased on an external NFT marketplace\nQuantity equivalent to the amount after deducting the fee separately determined by the external NFT marketplace from the sales price")}</li>
-      </ul>
-
-
-
-
-
-      <br/>
-  <b>1.{t('Purchase NFT')}</b>
-      <p>{t("In this service, the purchaser will use the method specified by the Company to pay the sales price and the amount of crypto assets equivalent to the service fee separately specified by the Company (however, both are limited to the crypto assets specified by the exhibitor when listing the NFT.) from your own wallet, you can purchase the listed NFT.")}</p>
-      <p>{t("The purchaser agrees to this agreement, confirms and fully understands the content of this service and the terms and conditions set forth in Article 10, paragraph 10 of the NFT, and then purchases the NFT 3２.")}</p>
-      <p>{t("When purchasing NFT, the purchaser shall not perform the acts specified in the following items.")}</p>
-      <ul>
-        <li>{t("(1) Purchasing NFTs for the purpose of trading only with specific users")}</li>
-        <li>{t("(2) Purchasing an NFT that you have exhibited")}</li>
-      </ul>
-
-
-
-
-
-
-
-
-
-
-
-      <br/>
-  <b>1.{t('NFT sales contract')}</b>
-
-      <p>{t("the Exhibited NFT shall be concluded when the procedure specified by the Company is completed between the exhibitor and the purchaser in this service, and the Company shall not be a party to the contract. In addition, if the procedure specified by the Company is not completed normally due to system failure of this service or external service, etc., the sales contract may not be concluded, and the user agrees in advance shall be")}</p>
-      <p>{t("The exhibitor shall promptly transfer the exhibit NFT to the purchaser's wallet after the sales contract for the exhibit NFT is concluded. In addition, the GAS fee for the transfer of the exhibition NFT will be borne by the [exhibitor /buyer].")}</p>
-      <p>{t("After the sales contract for the Exhibit NFT is concluded, the purchaser shall be able to use the NFT within the scope specified in the following items, and the exhibitor shall grant the purchaser permission for such use.")}</p>
-      <ul>
-        <li>{t("(1) The copyright of the Listed NFT and the Target Data shall belong to the Seller or the licensor to which the Seller is licensed, and shall not belong to the Purchaser.")}</li>
-        <li>{t("(2) The purchaser will publish the fact of acquisition, comment on the work, resell it, and display it online, including this service, regarding the exhibited NFT (including automatic public transmission specified in Article 2, Paragraph 1, 9-4 of the Copyright Act). We shall be able to perform acts similar to these.")}</li>
-        <li>{t("(3) Purchasers may not modify the Listed NFT, use it for commercial purposes, or use it in any other inappropriate way.")}</li>
-        <li>{t("(4) If the Exhibited NFT is resold and the Exhibited NFT is newly owned by a third party (hereinafter referred to as the 'Third Party Purchaser'), the purchaser shall use it as specified in this section. shall not be able to do so. In addition, the third party purchaser shall be able to use within the scope stipulated in this section when the sales contract for the NFT is concluded, and the same shall apply each time resale is performed thereafter.")}</li>
-      </ul>
-      <p>{t("The Company does not guarantee the transfer of the copyright, ownership, or any other legal rights and obligations regarding the NFT and the target data from the exhibitor to the purchaser in the sales contract of the exhibited NFT.")}</p>
-
-
-
-
-
-
-     
-
-
-      <br/>
-  <b>1.{t('Affiliate program')}</b>
-      <p>{t("Users can participate in the affiliate program of this service (hereinafter referred to as 'this affiliate program') by the method specified in each item below.")}</p>
-      <ol>
-        <li>{t("(1) Users will obtain a unique invitation link on the dashboard page within the Service.")}</li>
-        <li>{t("(2) The user shares the invitation link with friends, family members, and others who have not registered for the service (hereinafter referred to as 'invitees').")}</li>
-        <li>{t("(3) If the inviter uses the invitation link to register an account for this service and put up an NFT, a sales contract for the NFT is concluded, and the purchase price is paid (conclusion of a sales contract on an external NFT marketplace and payment.), the introducer will be granted a bonus separately determined by the Company.")}</li>
-      </ol>
-      <p>{t("Notwithstanding the provisions of the preceding paragraph, in the cases set forth in the following items, it is not possible to participate in this affiliate program.")}</p>
-      <ul>
-        <li>{t("(1) If you change the invite link")}</li>
-        <li>{t("(2) If the Company deems the act to be fraudulent or fraudulent")}</li>
-        <li>{t("(3) For commercial use")}</li>
-        <li>{t("(4) When the invitation link is published or distributed on Twitter, Facebook, or any other place accessible by an unspecified number of people")}</li>
-        <li>{t("(5) Other cases deemed inappropriate by the Company")}</li>
-      </ul>
-
-      <br/>
-      <b>{t("Management of User Information and Communication Devices")}</b>
-      <ol>
-        <li>{t("1. The user shall be responsible for the management of user information and communication equipment, and the Company shall not assume any responsibility.")}</li>
-        <li>{t("2. Users shall be responsible for damages caused by inadequate management of user information and communication equipment, errors in use, use by third parties, etc., and the Company shall not assume any responsibility.")}</li>
-        <li>{t("3. If there is a risk that a third party will use the user information or communication device, the user shall immediately notify the Company to that effect and follow the Company's instructions, if any.")}</li>
-      </ol>
-
-
-<br/>
-      <h2>{t("Conditions for providing this service")}</h2>
-      <ol>
-        <li>{t("1. The Company may suspend or change the Service for maintenance, etc., without notifying the User.")}</li>
-        <li>{t("2. Equipment, communication means, etc. necessary to receive the provision of this service shall be provided at the user's expense and responsibility.")}</li>
-      </ol>
-
-
-
-
-      <br/>
-      <b>{t("Intellectual property rights, etc.")}</b>
-      <ol>
-        <li>{t("Regardless of the method or form, the user may use all information and content provided by the Company in this service (hereinafter collectively referred to as 'our content') for private use as stipulated in the Copyright Act. You may not reproduce or use it beyond the scope of.")}</li>
-        <li>{t("Copyrights, patent rights, utility model rights, trademark rights, design rights, and any other intellectual property rights related to our content, and the right to receive registration of these rights (hereinafter collectively referred to as 'intellectual property rights'). belongs to us or our licensors, and not to you. In addition, regardless of the existence or nonexistence of intellectual property rights, users shall not copy, distribute, reprint, transfer, publicly transmit, modify, adapt or otherwise use the content of the Company for secondary purposes.")}</li>
-        <li>{t("the user violating the provisions of this article , the user shall solve the problem at his/her own expense and responsibility, and shall take appropriate measures not to cause any disadvantage, burden or damage to the Company. shall take action.")}</li>
-        <li>{t("the user posts information about NFT on this service (including, but not limited to, transaction information such as explanatory items), regardless of whether or not it is copyrighted, part of the posted content You agree to transfer all copyrights (including the rights stipulated in Articles 27 and 28 of the Copyright Law) that may arise in part or in whole to our company free of charge. In addition, the user agrees that the Company shall have the right to use the content posted by the user without limitation regardless of the purpose.")}</li>
-        <li>{t("The user may impose moral rights (publication rights, including the right to display name and the right to maintain identity.) shall not be exercised.")}</li>
-      </ol>
-
-
-
-
-
-
-
-
-<br/>
-      <b>{t("Prohibited matter")}</b>
-      <ol>
-        <li>{t("The Company prohibits the acts specified in the following items when using this service by the user.")}</li>
-        <ol type="a" style={{ listStyleType: 'decimal', paddingLeft: '20px' }}>
-          <li>{t("Acts that violate these Terms")}</li>
-          <li>{t("Infringement of property or personal rights such as intellectual property rights, patent rights, utility model rights, design rights, trademark rights, copyrights, portrait rights, etc. of the Company, licensors licensed by the Company, or other third parties Acts to do or acts that may infringe these")}</li>
-          <li>{t("Acts that cause or may cause disadvantage or damage to the Company or a third party")}</li>
-          <li>{t("Acts that unfairly damage the honor, rights, or credibility of others, or acts that are likely to do so")}</li>
-          <li>{t("Acts that violate laws, ordinances, etc.")}</li>
-          <li>{t("Acts that violate public order and morals, or acts that may violate public order and morals, or acts that provide information that may violate public order and morals to other users or third parties")}</li>
-          <li>{t("Criminal acts, acts that lead to or encourage criminal acts, or acts that are likely to do so")}</li>
-          <li>{t("Acts of providing information that is contrary to the facts or information that may be contrary to the facts")}</li>
-          <li>{t("Unauthorized access to the Company's system, falsification of program code, intentional falsification of location information, cheating using communication device specifications and other applications, distribution of computer viruses and other acts that interfere with the normal operation of this service. or acts that may")}</li>
-          <li>{t("Acts of using functions and tools that automate macros and operations")}</li>
-          <li>{t("Acts that damage the credibility of this service, or acts that are likely to do so")}</li>
-          <li>{t("Acts that may adversely affect the mental and physical health of young people and their healthy development")}</li>
-          <li>{t("Acts of impersonating a third party and using this service by using another user's account or other methods")}</li>
-          <li>{t("Posts that involve differences in personal thoughts such as politics and religion, or acts related to them")}</li>
-          <li>{t("Business activities other than those permitted by the Company for this service, regardless of whether it is a corporation or an individual")}</li>
-          <li>{t("Posting of information equivalent to obscenity, child pornography, or child abuse, or acts related thereto")}</li>
-          <li>{t("Acts that lead to or may lead to crimes such as fraud, illegal trading of bank accounts and mobile phones")}</li>
-          <li>{t("Acts of causing illegal gambling or gambling, or soliciting participation in illegal gambling or gambling")}</li>
-          <li>{t("Acts related to money laundering, criminal proceeds, acts related to terrorist financing or acts suspected thereof")}</li>
-          <li>{t("Acts that infringe on intellectual property rights related to NFTs issued by the Company")}</li>
-          <li>{t("Other acts that the Company deems inappropriate")}</li>
-        </ol>
-        <li>{t("Judgment of whether or not it falls under the prohibited acts in the preceding paragraph shall be made at the discretion of the Company, and the Company shall not be held accountable for the judgment criteria.")}</li>
-        <li>{t("If the Company determines that the user's conduct falls under any of the items in Paragraph 1, the Company may take any or all of the following measures without prior notice.")}</li>
-        <ol type="a" style={{ listStyleType: 'decimal', paddingLeft: '20px' }}>
-          <li>{t("Restrictions on use of this service")}</li>
-          <li>{t("Withdrawal due to cancellation of this contract")}</li>
-          <li>{t("Other acts that the Company deems necessary")}</li>
-        </ol>
-        <li>{t("The Company shall not be held responsible for any damage caused to the User by the measures in the preceding paragraph.")}</li>
-      </ol>
-
-
-
-      <br/>
-      <b>{t("lift")}</b>
-
-  <ol>
-      <li>{t("If the user falls under any of the following items, our company shall be able to cancel this agreement and withdraw without any notice.")}</li>
-    <li>{t("(1) If the user information contains false information")}</li>
-    <li>{t("(2) If you have been withdrawn from our company in the past")}</li>
-    <li>{t("(3) When the user's heir, etc. informs us that the user has died, or when we can confirm the fact of the user's death")}</li>
-    <li>{t("(4) If a minor uses this service without the consent of a legal representative")}</li>
-    <li>{t("(5) When an adult ward, person under curatorship, or person under assistance uses this service without the consent of the adult guardian, curator, or assistant, etc.")}</li>
-    <li>{t("(6) Anti-social forces, etc. (organized gangs, gang members, those who have not been a gang member for less than 5 years, quasi-members, gang-affiliated companies, corporate racketeers, social movement trolls, political activity trolls, special intelligence If the Company determines that the User belongs to a violent group, etc. or a person equivalent thereto)")}</li>
-    <li>{t("(7) If you do not respond in good faith to our request")}</li>
-    <li>{t("(8) Other cases that the Company deems inappropriate")}</li>
-  </ol>
-
-
-
-
-  <br/>
-      <b>{t("Confidentiality")}</b>
-
-  <p>{t("The User shall not disclose or leak confidential information disclosed by the Company to a third party in connection with the provision of the Service. Confidential information refers to our technical information disclosed in connection with the introduction of this service, regardless of whether it is in writing, electromagnetic data, oral or any other form, or whether there is a confidential indication or explicit indication, or whether the scope is specified. , refers to business or management information.")}</p>
-  <p>{t("The information in each of the following items shall not fall under Confidential Information.")}</p>
-  <ol>
-    <li>{t("(1) Information already in your possession at the time of disclosure")}</li>
-    <li>{t("(2) Information that was already publicly known at the time of disclosure or information that subsequently became publicly known due to reasons not attributable to the user")}</li>
-    <li>{t("(3) Information lawfully obtained from a third party after disclosure")}</li>
-    <li>{t("(4) Information independently developed or created without relying on disclosed confidential information")}</li>
-    <li>{t("(5) Information requested to be disclosed by law or court order")}</li>
-  </ol>
-  <p>{t("In the event of termination of this Agreement due to the termination of this Service, cancellation of this Agreement, or other reasons, the User shall promptly return or dispose of the Confidential Information in accordance with the Company's instructions. In addition, when disposing of confidential information, a method that cannot be reused shall be adopted.")}</p>
-
-
-
-
-
-
-
-
-
-  <br/>
-      <b>{t("Disclaimer")}</b>
-
-
-  <ol style={{ listStyleType: 'decimal', paddingLeft: '20px' }}>
-  <li>{t("We do not guarantee the completeness, accuracy, effectiveness, etc. of the contents of this service .")}</li>
-  <li>{t("When the user uses this service, the user may transition from this service to an affiliated company or external service related to this service. In that case, the user shall use this service and the external service after agreeing to the terms of use of the external service at his/her own responsibility. In addition, we do not guarantee the completeness, accuracy, effectiveness, etc. of the content of the external service.")}</li>
-  <li>{t("Even if the user suffers damage due to the user not changing the user information, the company shall not take any responsibility.")}</li>
-  <li>{t("Users are requested to use this service within the scope of laws and regulations. The Company shall not be held responsible for any violations of Japanese or foreign laws by the User in connection with the use of the Service.")}</li>
-  <li>{t("The Company does not guarantee that the Service will not be interrupted, discontinued or otherwise damaged. In addition, in the cases set forth in the following items , the Company may suspend or change the Service without notifying the User, but in this case the Company shall not assume any responsibility, and the User may object . shall not be stated .")}</li>
-  <p>{t("(1) the Company conducts maintenance, security measures, version management, updates, etc., for the Service;")}</p>
-  <p>{t("(2) When the Company reasonably determines that it is difficult for the Company to provide the Service safely due to unauthorized access to the system necessary for the provision of the Service;")}</p>
-  <p>{t("(3) Earthquakes, tsunamis, typhoons, heavy rains, heavy snowfalls and other natural disasters, wars, terrorism, civil strife, riots, public health emergencies such as infectious diseases, acts of the government or government agencies, labor disputes, power outages, interruption or suspension of telecommunications , if the Company reasonably determines that it has become difficult to provide the Service due to failure or malfunction of telecommunications equipment, transportation accidents, or other force majeure.")}</p>
-  <li>{t("All equipment, communication means, and other environments necessary for receiving the provision of this service shall be provided at the user's expense and responsibility. In addition, all communication costs necessary for using this service shall be borne by the user.")}</li>
-  <li>{t("Even if the user information is stolen due to unexpected unauthorized access, etc., the Company shall not be held responsible for any damages to the user caused by it.")}</li>
-  <li>{t("The Company shall not be liable for any failure to comply with all or part of this Agreement due to acts of God, natural disasters, fires, strikes, embargoes, wars, civil strife, epidemics of infectious diseases, or other force majeure.")}</li>
-  <li>{t("The Company shall not be liable for any increase in network fees stipulated in Article 7 or any other delays or failures of transactions in this blockchain or external services.")}</li>
-  <li>{t("In addition to the provisions of the preceding paragraphs, the Company shall not be liable for any damages suffered by the User unless there is intentional or gross negligence on the part of the Company.")}</li>
-  <li>{t("In the event that a user has trouble with another user (whether inside or outside the service) regarding the use of this service, our company shall not be held responsible for any troubles between users. shall be resolved by the user at their own expense and burden.")}</li>
-</ol>
-
-
-
-<br/>
-      <b>{t("Liability for damages")}</b>
-
-<p>1. {t("the User causes damage to the Company in connection with the violation of these Terms or the use of the Service, the User will compensate the Company for the damage (including lost profits and attorney's fees).")}</p>
-<p>2. {t("Notwithstanding the provisions of these Terms except for the following paragraph, if the Company causes damage to the user due to reasons attributable to the Company, the Company shall be responsible for compensating for the damage only within the scope set forth in each of the following items.")}</p>
-<ol style={{ listStyleType: 'decimal', paddingLeft: '20px' }}>
-  <li>{t("(1) In case of willful misconduct or gross negligence of our company: full amount of the damage")}</li>
-  <li>{t("(2) In the case of slight negligence on the part of the Company: within the scope of actual and direct ordinary damages (excluding special damages, lost profits, indirect damages, and attorneys' fees), with an upper limit of 10,000 yen.")}</li>
-</ol>
-<p>{t("Notwithstanding the preceding paragraph, if the user is a corporation or if an individual uses this service as a business or for the purpose of business, unless there is intentional or gross negligence on the part of the company, We are not responsible for any damages incurred. In addition, when the Company compensates for damage, the maximum amount received as the service usage fee of the user in the most recent one year from the date of occurrence of the damage will be the upper limit.")}</p>
-
-
-
-
-<br/>
-<b>{t("Abolition of this service")}</b>
-<p>1. {t("The Company may terminate the provision of the Service at any time for the convenience of the Company.")}</p>
-<p>2. {t("In the case of the preceding paragraph, unless there is intentional or gross negligence on the part of the Company, the Company shall not assume any responsibility.")}</p>
-
-
-<br/>
-<b>{t("Responding to inquiries")}</b>
-<p>1. {t("We will endeavor to respond to inquiries from users regarding this service, but we will not be obligated to respond unless we are obligated or responsible under the law or this agreement.")}</p>
-<p>2. {t("The Company shall not be obligated to disclose the criteria for whether or not to respond to inquiries from users.")}</p>
-
-
-<br/>
-<b>{t("Survival Clause")}</b>
-<p>{t("The term of validity of this agreement shall be from the time this agreement is established until the user withdraws from this service.")}</p>
-<p>{t("In addition, even after the termination of this agreement, the The provisions of Article 16, Article 17, Clause 4, Article 18, Clauses 3 and 4, and Articles 20 to 30 shall remain in effect, and the provisions of Article 19 shall terminate this Agreement. shall remain in force for the next five years.")}</p>
-
-
-<br/>
-<b>{t("Separability")}</b>
-<p>{t("Even if some of the provisions of these Terms are deemed invalid based on laws and regulations, other provisions of these Terms will remain valid.")}</p>
-<p>{t("Even if a part of the provisions of this agreement is invalid or canceled in relation to a user, this agreement will be valid in relation to other users.")}</p>
-
-
-<br/>
-<b>{t("How to deal with violations")}</b>
-<p>{t("If the User finds any act that violates these Terms, please contact the Company.")}</p>
-<p>{t("The User shall not be able to file an objection regarding the Company's handling of acts that violate these Terms.")}</p>
-
-
-<br/>
-<b>{t("Transfer of Status, etc.")}</b>
-<p>{t("The User may, without prior written or electronic consent of the Company, assign, transfer, set collateral, or No other disposal is possible.")}</p>
-
-
-<br/>
-<b>{t("Governing law")}</b>
-<p>{t("All laws and ordinances of Japan shall apply to the governing law concerning these Terms.")}</p>
-
-
-<br/>
-<b>{t("Jurisdiction")}</b>
-<p>{t("All lawsuits between the user and the Company shall be subject to the exclusive jurisdiction of the Tokyo District Court or the Tokyo Summary Court as the court of first instance, depending on the amount in dispute.")}</p>
-
-
-
-<br/>
-<b>{t("others")}</b>
-<p>{t("The user shall comply with any matters not stipulated in this Agreement, if the Company separately stipulates the details, etc. In this case, the details, etc. shall be integrated with these Terms.")}</p>
-<p>{t("The details, etc. shall take effect from the time they are posted in the places designated by the Company.")}</p>
-<p>{t("If there is a conflict between the details, etc. and the contents of this agreement, this agreement shall take precedence.")}</p>
-
-
-
-<b>{t("Supplementary provision")}</b><br/>
-<b>{t("2023 years Established and enforced")}</b>
-{/* 
-      <p>
-        Article 1 Application
-        <br />
-        The purpose of these Terms of Use is to define the conditions of
-        provision of the Service and the relationship of rights and obligations
-        between the Company and the user with respect to use of the Service, and
-        shall apply to all relationships between the user and the Company with
-        respect to use of the Service.
-        <br />
-        Rules, etc. regarding use of the Service posted on the Company's website
-        by the Company shall constitute a part of this Agreement.
-        <br />
-        In the event of any discrepancy between the contents of this Agreement
-        and the rules and other explanations of the Service outside of this
-        Agreement, the provisions of this Agreement shall take precedence.
-        <br />
-        The User shall use the Service upon agreeing to the terms of this
-        Agreement.
-        <br />
-        Article 2.
-        <br />
-        The User may use the Services to purchase works of art, such as
-        celluloid pictures (hereinafter referred to as &quot;Works, etc.&quot;).
-        (hereinafter referred to as &quot;NFT&quot;) that certifies that the
-        user is the owner of the work, etc., issued based on the ownership of
-        the work, etc. (hereinafter referred to as &quot;Work, etc.&quot;).
-        (hereinafter referred to as &quot;the Company&quot;), which certifies
-        that the Company is the owner of the relevant work, etc. (hereinafter
-        referred to as &quot;the Work, etc.&quot;). The NFTs handled by the
-        Company do not fall under the category of &quot;cryptographic
-        assets&quot; under the Act on the Settlement of Funds.
-        <br />
-        In addition to selling NFTs on the Service to users, the Company may
-        earn commissions determined separately by the Company according to the
-        transaction status of NFTs displayed and purchased by users.
-        <br />
-        Users may purchase NFTs from the Company on the Service, and may list or
-        purchase NFTs among registered users.
-        <br />
-        The Company shall manage and store the original works, etc. owned by the
-        User based on the NFT purchased by the User on the Service.
-        <br />
-        When a user withdraws from the Service, the user may request the
-        delivery of the original works, etc. owned based on NFTs held by the
-        user at the time of withdrawal from the Service. Upon completion of the
-        prescribed procedures, such as deactivation of the NFT, etc., the
-        Company shall deliver the original of the relevant work, etc. to the
-        user.
-        <br />
-        After a user purchases an NFT offered by us or another user on the
-        Service, and payment for the purchase is completed on the Service, the
-        NFT will be reflected in the user's account. At this point, the user who
-        purchased such NFTs shall obtain the right to use them within the scope
-        specified for each NFT.
-        <br />
-        The rights included in the NFTs sold through the Service shall be the
-        rights specified in the Service, and all other rights shall belong to
-        the original creator or other right holders as separately specified.
-        <br />
-        The User may use the images displayed based on the NFT only within the
-        scope of private use. The User may not, without the express permission
-        of the original creator, copy, download, stream, capture, archive,
-        upload, publish, republish, distribute, sell, resell, modify, create
-        derivative works from, distribute, sell, or otherwise use the image data
-        or framed pictures or other benefits beyond personal use, including but
-        not limited to commercial use. The User may not use the Service for any
-        purpose other than personal use.
-        <br />
-        The User may not possess or claim delivery of the original work owned
-        under the purchased NFT while using the Service.
-        <br />
-        (3) While using the Service, users may not sell, transfer, pledge,
-        assign, or pledge the originals of works, etc. owned based on purchased
-        NFTs to third parties outside the Service.
-        <br />
-        Users are solely responsible for their own actions in connection with
-        the sale or purchase of items among themselves. Except in cases where we
-        list an item for sale, we do not conduct the exchange ourselves, are not
-        entrusted to conduct the exchange, and are not involved in any way in
-        the execution of the exchange.
-        <br />
-        In the event that any fraudulent act related to payment or any other
-        violation of the terms and conditions of this service or the usage
-        method, etc. is discovered after the payment for the NFT purchase is
-        completed and the NFT has been sent, the Company may, without prior
-        notice or demand, collect or revoke the NFT sent to you and invalidate
-        your ownership of the NFT.
-        <br />
-        Article 3 Registration
-        <br />
-        Any person who wishes to use the Service (hereinafter referred to as
-        &quot;Applicant&quot;) (hereinafter referred to as the
-        &quot;Applicant&quot;) agrees to abide by these Terms of Use and
-        provides certain information as determined by the Company (hereinafter
-        referred to as the &quot;Registration Items&quot;) to the Company in the
-        manner prescribed by the Company. The Company will determine the
-        registration method and the registration items in accordance with the
-        Company's standards.
-        <br />
-        (2) The Company shall determine whether or not to register the applicant
-        who has applied for registration in accordance with the Company's
-        standards in accordance with Paragraph 1 (hereinafter referred to as the
-        &quot;Registration Applicant&quot;). If the Company approves the
-        registration, the Company will notify the Applicant of such approval or
-        disapproval. The registration of the applicant as a user shall be deemed
-        to have been completed when the Company has given the notice in this
-        section.
-        <br />
-        Upon completion of the registration as stipulated in the preceding
-        paragraph, a service use contract will be established between the
-        registered user and the Company, and the user will be able to use the
-        Service in accordance with these Terms.
-        <br />
-        The Company may refuse registration and re-registration if any of the
-        following items applies to the applicant for registration, and the
-        Company shall not be obligated to disclose any reason for such refusal.
-        <br />
-        01&#65306;When all or part of the registration information provided to
-        the Company is false, erroneous, or omitted.
-        <br />
-        02&#65306;When the applicant is a minor, an adult ward, a person under
-        curatorship, or a person under assistance, and has not obtained the
-        consent of his/her legal representative, guardian, curator, or
-        assistant.
-        <br />
-        03: If you are an anti-social force, etc. (meaning a crime syndicate, a
-        member of a crime syndicate, a right-wing organization, an anti-social
-        force, or any other person equivalent thereto. The same shall apply
-        hereinafter) or is involved in any interaction or involvement with
-        antisocial forces, etc., such as cooperating or being involved in the
-        maintenance, operation, or management of antisocial forces, etc.,
-        through funding or other means.
-        <br />
-        04&#65306;When the Company determines that the applicant has violated a
-        contract with the Company in the past or is related to such violators.
-        <br />
-        05&#65306;If you have been subjected to any of the measures stipulated
-        in Article 10 (Cancellation of Registration, etc.)
-        <br />
-        06&#65306;When we deem that the registration is not appropriate for any
-        other reason.
-        <br />
-        Article 4 Changes in Registered Information
-        <br />
-        In the event of any change in the registered information, the user shall
-        notify the Company of such change without delay in a manner determined
-        by the Company.
+      <h5>第 1 条 （目的）</h5>
+      <p className="ms-4">
+        1.
+        この利用規約（以下「本規約」といいます。）は、アクア株式会社（以下「当社」
+        といいます。）が運営する NFT
+        マーケットプレイス「楽市楽座」（以下「本サービ
+        ス」といいます。）を利用する利用者（第 2
+        条で定義します。）に適用されます。
+        利用者は、本規約に同意の上、本サービスを利用するものとします。
       </p>
-      <p>
-        Article 5 Management of User ID and Password
-        <br />
-        User shall, at its own responsibility, properly manage and store its
-        user ID and password for the Service, and shall not allow any third
-        party to use it, or lend, transfer, transfer, change the name of, sell,
-        or otherwise deal with it.
-        <br />
-        The User shall be responsible for any damages caused by inadequate
-        management of the user ID and password, etc., errors in use, or use by a
-        third party.
-        <br />
-        Article 6 Use of Service
-        <br />
-        The User may use the Service only during the period of valid
-        registration as a User, within the scope of the purpose of this
-        Agreement and without violating this Agreement, and in accordance with
-        the method prescribed by the Company.
-        <br />
-        The preparation (including installation of necessary applications) and
-        maintenance of computers, software and other equipment,
-        telecommunication lines and other telecommunication environment, etc.
-        necessary for the provision of the Service shall be at the expense and
-        responsibility of the User. The User shall be responsible for the
-        preparation (including installation of necessary applications) and
-        maintenance of the computer, software and other equipment,
-        telecommunication lines and other telecommunication environment, etc.
-        necessary to receive the Service at the User's expense and
-        responsibility.
-        <br />
-        User shall, at User's expense and responsibility, take security measures
-        to prevent computer virus infection, unauthorized access, and
-        information leakage, etc., in accordance with User's environment for
-        using the Service.
-        <br />
-        User shall indemnify and hold Company harmless from any damages caused
-        by User's violation of these Terms of Use or in connection with User's
-        use of the Service.
-        <br />
-        Article 7 Exhibits and Purchases
-        <br />
-        Users who list their NFTs on the Service (hereinafter referred to as
-        &quot;Sellers&quot;) (hereinafter referred to as the
-        &quot;Exhibitor&quot;) who lists NFTs in his/her possession on the
-        Service may cancel the listing until an exchange contract is concluded.
-        Once an exchange contract has been concluded, such contract may not be
-        cancelled.
-        <br />
-        Purchases may be made by exchanging the item for cryptographic assets
-        designated by the Seller and the Company.
-        <br />
-        A user who purchases an NFT listed on the Service (hereinafter referred
-        to as &quot;purchaser&quot;) The exchange contract between the Company
-        or the seller and the purchaser for the NFTs and the cryptographic
-        assets designated by the Company will be established when the purchase
-        button is clicked by the user who purchases the NFTs listed on the
-        Service (hereinafter referred to as the &quot;Purchaser&quot;). The
-        purchaser may not cancel the exchange contract after it has been
-        concluded, and may not claim the invalidity or cancellation of the
-        concluded transaction for any reason.
-        <br />
-        When an exchange agreement is concluded, the purchaser shall exchange
-        the cryptographic assets designated by the Company or the Seller for the
-        product, and the balance of the cryptographic assets in the purchaser's
-        cryptographic assets trading account shall be reduced at the time the
-        exchange agreement is concluded.
-        <br />
-        At the time of reflection on the NFT account, the purchaser shall
-        acquire the goods pertaining to such exchange agreement and the seller
-        shall acquire the cryptographic assets less the sales commission for
-        such exchange agreement, and the balance of NFT in the purchaser's NFT
-        account and the balance of cryptographic assets in the seller's
-        cryptographic assets trading account shall be increased.
-        <br />
-        In the event that an exhibitor violates these Terms and Conditions, or
-        in the event that the Company deems that an exhibitor has made an
-        exhibit that does not truly intend to enter into an exchange agreement,
-        or in the event that the Company deems that an exhibit is otherwise
-        inappropriate, the Company may void the exhibit without prior notice to
-        the exhibitor. In the event that an auction becomes invalid, the Company
-        may invalidate the purchase of the relevant auction.
-        <br />
-        The Company does not guarantee the conclusion of an exchange contract
-        between users.
-        <br />
-        Article 8. Commission
-        <br />
-        The seller shall pay to the Company a commission calculated by
-        multiplying the NFT exchange price by a rate determined separately by
-        the Company, in the cryptographic assets designated by the Company at
-        the time the exchange contract is concluded.
+      <p className="ms-4">
+        2.
+        本規約は、本サービスの利用条件を定めています。本サービスに利用者登録した利
+        用者は全て本規約に従い、年齢や利用環境等の条件に応じて、本規約の定める条件
+        に従って本サービスを利用できるものとします。
       </p>
-      <p>
-        Article 9 Prohibited Matters
-        <br />
-        In using the Service, the User shall not engage in any of the following
-        acts or acts that the Company deems to fall under any of the following
-        items.
-        <br />
-        01: Actions that violate laws and regulations or are related to criminal
-        acts
-        <br />
-        02: Fraudulent or threatening acts against the Company, other users of
-        the Service, or other third parties
-        <br />
-        03: Acts that offend public order and morals
-        <br />
-        04: Acts that infringe on the intellectual property rights, portrait
-        rights, privacy rights, honor, or other rights or interests of the
-        Company, other users of the Service, or other third parties.
-        <br />
-        05: Any act of using dishonest means, plans, or techniques, or making
-        false or misleading representations with respect to important matters in
-        connection with the exchange of NFTs, etc.
-        <br />
-        06: An act that constitutes or attempts to constitute a double transfer
-        of NFTs.
-        <br />
-        07: An act of exhibiting or purchasing without truly intending to
-        conclude an exchange contract.
-        <br />
-        08: The following acts committed for the purpose of fluctuating the
-        price of NFTs
-        <br />
-        Dissemination to an unspecified number of persons of facts without
-        reasonable grounds that the actor does not have direct experience of or
-        is not aware of
-        <br />
-        (iii) To commit a fraudulent act by means of which another person is led
-        into a false impression Engaging in words or deeds that gratuitously
-        stir up the gambling spirit of others
-        <br />
-        Using assault or threats.
-        <br />
-        09: Selling, buying, selling, transferring, pledging, or pledging works,
-        etc. to a third party, etc. outside of this service.
-        <br />
-        10: To place an excessive load on the Service's network or system, etc.
-        <br />
-        11: Reverse engineering or other analysis of software or other systems
-        provided by the Company
-        <br />
-        12: Acts that may interfere with the operation of this service
-        <br />
-        13: Unauthorized access to the Company's network or systems, etc.
-        <br />
-        14: Impersonation of a third party
-        <br />
-        15: Use of IDs or passwords of other users of the Service
-        <br />
-        16: Advertisement, advertising, solicitation, or sales activities on the
-        Service that are not authorized in advance by the Company
-        <br />
-        17: Collection of information of other users of the Service
-        <br />
-        18: Acts that cause disadvantage, damage, or discomfort to the Company,
-        other users of the Service, or other third parties.
-        <br />
-        19: Actions that violate the rules regarding the use of the Service
-        posted on the Company's website.
-        <br />
-        20&#65306;Profiteering to antisocial forces, etc.
-        <br />
-        21: Other acts that the Company deems inappropriate.
-        <br />
-        In the event that the Company deems that a user of the Service falls
-        under or is likely to fall under any of the items of the preceding
-        paragraph, the Company may, at its discretion and without prior notice
-        to the user, take measures such as deletion or suspension of the user's
-        NFT account.
-      </p> */}
+      <p className="ms-4">
+        3. 利用者が本規約に同意することにより、当社との間に本契約（第 2
+        条で定義しま す。）が成立します。
+      </p>
+
+      <h5>第 2 条 （定義）</h5>
+      <p className="ms-4">
+        本規約において使用する以下の用語は、以下の各号に定める意味を有します。
+      </p>
+      <ul className="ms-7">
+        <li>
+          (1)
+          「本契約」：本規約を契約条件として当社及び利用者との間で締結される、本
+          サービスの利用契約を指します。
+        </li>
+        <li>
+          (2) 「対象データ」：本サービスにおいて NFT
+          として記録・発行することができ、
+          かつ利用者が保有権・使用権等を有するデータ（暗号資産であるものを除きま
+          す。）を指します。なお、本サービス上で利用できる対象データの規格等は別
+          途当社が指定するものとし、イラスト、動画、音楽、３D モデル等のデータが
+          含まれますがこれらに限らないものとします。
+        </li>
+        <li>
+          (3)
+          「NFT」：対象データの一部又は全部を、ブロックチェーン上で記録・発行し
+          たもののうち固有の情報が割り当てられた代替可能性のないデジタルトークン
+          （Non-Fungible-Token）を指します。
+        </li>{" "}
+        <li>(4) 「利用者」：本サービスを利用する全ての方を指します。</li>{" "}
+        <li>(5) 「出品者」：本サービス上で NFT を出品する利用者を指します。</li>{" "}
+        <li>
+          (6) 「一次流通出品者」：本サービス上において、第 10
+          条第１項の規定に基づき NFT を作成及び出品した利用者を指します。
+        </li>{" "}
+        <li>
+          (7) 「二次流通出品者」：本サービス上において、第 10
+          条第１項の規定に基づき本 サービス内で購入した NFT
+          を出品した利用者を指します。
+        </li>
+        <li>(8) 「購入者」：本サービス上で NFT を購入する利用者を指します。</li>
+        <li>
+          (9)
+          「通信機器」：スマートフォン、タブレット端末又はコンピューター機器を指
+          します。
+        </li>
+        <li>
+          (10)「外部 NFT
+          マーケットプレイス」：OpenSea（https://opensea.io/ja）、
+          Rarible（https://rarible.com/）その他当社が別途指定する NFT
+          マーケットプレ 2 イスを指します。
+        </li>
+      </ul>
+
+      <h5>第 3 条 （本規約の変更）</h5>
+      <p className="ms-4">
+        1. 当社は、以下の各号のいずれかに該当する場合は、民法第 548 条の 4
+        の規定に基づ
+        き本規約を随時変更できるものとします。本規約が変更された後の本契約は、変更後
+        の本規約が適用されるものとします。
+      </p>
+      <ul className="ms-7">
+        <li>(1) 本規約の変更が、利用者の一般の利益に適合するとき</li>
+        <li>
+          (2)
+          本規約の変更が、契約をした目的に反せず、かつ、変更の必要性、変更後の内容
+          の相当性及びその内容その他の変更に係る事情に照らして合理的なものである
+          とき
+        </li>
+      </ul>
+      <p className="ms-4">
+        2.
+        当社は、本規約の変更を行う場合は、変更後の本規約の効力発生時期を定め、効力発
+        生時期の 2
+        週間前までに、変更後の本規約の内容及び効力発生時期を利用者に通知、
+        本サービスのウェブサイト上への表示、その他当社指定の方法により利用者に周知
+        するものとします。
+      </p>
+      <p className="ms-4">
+        3.
+        前二項の規定にかかわらず、前項の本規約の変更の周知後に利用者が本サービスを
+        利用した場合又は当社指定の期間内に利用者が解約の手続をとらなかった場合、当
+        該利用者は本規約の変更に同意したものとします。
+      </p>
+
+      <h5>第 4 条 （個人情報の取り扱い）</h5>
+      <p className="ms-4">
+        本サービスにおける個人情報の取り扱いに関しては、当社が別途定める「プライバシー
+        ポリシー」【https://nftrakuichirakuza.io/privacypolicy】に基づき取り扱うものとしま
+        す。
+      </p>
+
+      <h5>第 5 条 （本サービスの内容）</h5>
+      <p className="ms-4">
+        利用者は、本サービス上で以下の機能を利用することができます。
+      </p>
+      <ul className="ms-7">
+        <li>(1) 当社指定の方法により NFT の作成及び出品を行う機能</li>
+        <li>(2) 利用者間の NFT 売買に関するプラットフォーム機能</li>
+        <li>(3) その他前各号に付随する機能</li>
+      </ul>
+
+      <h5>第 6 条 （利用者登録等）</h5>
+      <ul className="ms-4">
+        <li>
+          1.
+          利用者は、本規約に同意の上当社が定める手続きにより、当社が指定する利用者の
+          情報（以下「利用者情報」といいます。）を入力し、本サービスのアカウント登録
+          を行うものとします。
+        </li>
+        <li>
+          2.
+          利用者は、自己の利用者情報につき全て真正かつ正確な情報を登録するものとし、
+          前項に基づき登録した利用者情報に変更が発生した場合、直ちに、利用者情報の変
+          更手続を行う義務を負うものとします。
+        </li>
+        <li>
+          3. 当社は、当社の裁量により、利用者登録を拒否する場合があります。
+        </li>
+        <li>
+          4.
+          利用者は、本サービス上のアカウントを第三者に対して利用、貸与、譲渡、売買又
+          は質入等をすることはできないものとします。
+        </li>
+        <li>
+          5.
+          利用者は、本サービスに登録した内容が、第三者により不正に利用されないため
+          に、利用者自身の責任において管理しなければならないものとします。当社は、第
+          1
+          項に基づき登録した情報が第三者によって使用されたことによって利用者に生じ
+          た損害について一切の責任を負いません。
+        </li>
+        <li>
+          6. 当社は、第 1
+          項に基づいてアカウント登録された情報に基づいて本サービスの利用
+          があった場合、当該アカウントにより識別された本人が本サービスを利用したもの
+          と扱います。当該利用により生じた結果については、当該利用の原因となったアカ
+          ウントにより識別される本人がその責任を負うものとします。
+        </li>
+        <li>
+          7. 本サービスの利用に当たり、外部 NFT
+          マーケットプレイス並びに当社が指定した
+          スマートコントラクトシステム、デジタルアセット、及び暗号通貨の保管機能（以
+          下総称して「外部サービス」といいます。）の利用が必要となる場合がございま
+          す。なお、外部サービスは、当社以外の事業者により提供されるため、利用者は外
+          部サービスにかかる利用規約及びプライバシーポリシー等（以下総称して「外部サ
+          ービス利用規約等」といいます。）に同意の上、外部サービス利用規約等の定めに
+          従って本サービスを利用しなければなりません。なお、利用者は、自らの責任にお
+          いて外部サービスを利用するものとし、外部サービスの利用に関連して利用者に発
+          生した損害について一切の責任を負いません。
+        </li>
+      </ul>
+
+      <h5>第 7 条 （ネットワーク手数料）</h5>
+      <p className="ms-4">
+        1.
+        本サービスの利用にあたり、当社が別途指定する手数料が発生します。なお、本サー
+        ビスの利用に関連してイーサリアムその他のネットワーク手数料が発生する場合、利
+        用者が負担するものとします。購入にあたっては、購入者がネットワーク手数料を負
+        担します。
+      </p>
+      <p className="ms-4">
+        2.
+        ネットワーク手数料代自体の高騰、トランザクションの遅延やトランザクションの失
+        敗について当社は一切の責任を負いません。
+      </p>
+
+      <h5>第 8 条 （サービス手数料）</h5>
+      <p className="ms-4">
+        購入者は、第 10 条の規定により出品された NFT
+        を購入した場合、当社に対して当社が
+        別途定める本サービスのサービス手数料を支払う義務を負うものとします。なお、外部サ
+        ービスを利用する場合に発生する手数料は外部サービス利用規約等を確認するものとし
+        ます。
+      </p>
+
+      <h5>第 9 条 （ロイヤリティ）</h5>
+      <p className="ms-4">
+        1. 一次流通出品者は、第 10 条の規定により NFT
+        の出品を行う場合、別途当社が指定
+        する範囲内においてロイヤリティ率の設定を行うことができます。
+      </p>
+      <p className="ms-4">
+        2. 前項に定めるロイヤリティは、出品した NFT
+        の再販売が行われる都度発生するもの とし、NFT
+        の再販売を行う二次流通出品者が、当該ロイヤリティの支払義務を負う
+        ものとします。
+      </p>
+      <p className="ms-4">
+        3. 第 1 項に定めるロイヤリティの支払いは、当該 NFT
+        の再販売が行われる都度、当 該 NFT の再販売価額に対して第 1
+        項で設定されたロイヤリティ率に基づき計算さ
+        れ、当社指定の方法により一次流通出品者に対して支払われるものとします。
+      </p>
+
+      <h5>第 10 条 （NFT の発行及び出品）</h5>
+      <ul className="ms-4">
+        <li>
+          1. 利用者は、当社指定の方法により、本サービス上で NFT
+          を作成し、保有すること ができます。なお、NFT 作成にかかる GAS
+          代は利用者において利用者において負 担するものとします。
+        </li>
+        <li>
+          2.
+          利用者は、当社指定の方法により本サービス上で対象データを基に作成した
+          NFT 及び本サービス内で購入した NFT の出品を行うことができます。
+        </li>
+        <li>
+          3. 出品者は、前項に定める NFT
+          の出品にあたり、販売価格、当社が別途指定する購
+          入通貨、対象データの情報（名称、URL、説明事項等を含みますがこれらに限らな
+          いものとします。）、ウォレットアドレス、ロイヤリティ率、販売方式（本サービ
+          ス又は本サービス及び外部 NFT
+          マーケットプレイス）への同時出品の選択を含み
+          ます。）その他の当社が指定した取引情報の設定を行わなければなりません。
+        </li>
+        <li>
+          4. 出品者は、NFT
+          の出品にあたり、以下の各号に定める行為をしてはならないものと します。
+          <ul className="ms-4">
+            <li>
+              (1) データ改ざん、不正なツールの使用その他不適切な方法で生成された
+              NFT を出 品すること
+            </li>
+            <li>(2) 前項に定める取引情報に虚偽の情報の登録を行うこと</li>
+            <li>(3) 特定の利用者のみと取引する目的で NFT を出品すること</li>
+            <li>
+              (4)
+              本規約、法令及びガイドライン等のルールその他公序良俗に反するような方法
+              で NFT の出品を行うこと。
+            </li>
+          </ul>
+        </li>
+        <li>
+          5. 出品者は、本サービス上で出品を行う NFT
+          が資金決済法に定める暗号資産、前払式
+          支払手段、金融商品取引法に定める電子記録移転権利ではないことを保証するもの
+          とします。
+        </li>
+        <li>
+          6. 当社は、出品者が本サービス上で出品を行う NFT
+          に関し、本規約及び当社が定め
+          る基準を満たさないと判断した場合、予め出品者に通知することなく、当該
+          NFT
+          の出品を拒否することができるものとします。なお、当社による拒否に起因して出
+          品者に損害が発生した場合であっても、当社は、出品者に対して損害を賠償する義
+          務を一切負わないものとします。
+        </li>
+        <li>
+          7. 出品者は、本サービスまたは本サービスを通じて本サービスおよび外部
+          NFT マー ケットプレイスにおいて出品した NFT（以下「出品
+          NFT」といいます。）につい
+          て、その販売価格相当の暗号資産（以下「販売代金」といいます。）を、NFT
+          「購入者または外部NFT マーケットプレイスにおいて出品」を購入した者から直接受領す ることに同意します。当社および外部 NFT
+          マーケットプレイスは、出品者に代わ
+          って販売代金を受領することはありません。
+        </li>
+        <li>
+          8. 当社は、本サービス又は外部 NFT マーケットプレイスにおいて出品 NFT
+          が購入さ れ、購入者又は外部 NFT マーケットプレイスにおいて出品 NFT
+          を購入した者から
+          販売代金及び当社が別途定めるサービス手数料又は販売代金及び外部 NFT
+          マーケ
+          ットプレイスが別途定める手数料が支払われた場合、出品者に対して、別途定める
+          支払期日において、以下の暗号資産を支払うものとします。
+        </li>
+        <li className="ms-4">
+          (1) 出品 NFT が本サービス上で購入された場合：即時 販売代金
+        </li>
+        <li className="ms-4">
+          (2) 出品 NFT が外部 NFT マーケットプレイス上で購入された場合：即時
+          販売代金から外部 NFT
+          マーケットプレイスが別途定める手数料を控除した金額 に相当する数量
+        </li>
+      </ul>
+
+      <h5>第 11 条 （NFT の購入）</h5>
+      <p className="ms-4">
+        1.
+        購入者は、本サービスにおいて、当社指定の方法により、販売代金及び別途当社の
+        定めるサービス手数料相当量の暗号資産（ただし、いずれも当該 NFT
+        の出品に際
+        し、出品者が指定した暗号資産に限ります。）を自己の所有するウォレットから移
+        転させることで、出品 NFT の購入を行うことができます。
+      </p>
+      <p className="ms-4">
+        2. 購入者は、本規約に同意の上、本サービスの内容及び NFT に設定された第
+        10 条第 3２項に定める取引条件等を確認し十分に理解したうえで、NFT
+        の購入を行うもの とします。
+      </p>
+      <p className="ms-4">
+        3. 購入者は、NFT
+        の購入にあたり、以下の各号に定める行為をしてはならないものと します。
+      </p>
+      <p className="ms-7">
+        (1) 特定の利用者のみと取引する目的で NFT を購入すること
+      </p>
+      <p className="ms-7">(2) 自己が出品した NFT を購入すること</p>
+
+      <h5>第 12 条 （NFT の売買契約）</h5>
+      <p className="ms-4">
+        1. 出品 NFT
+        の売買契約は、本サービス上、出品者及び購入者との間で当社指定の手
+        続きが完了した時点で成立するものとし、当社は契約の当事者とはなりません。ま
+        た、本サービス又は外部サービスのシステム障害等に起因して、当社指定の手続き
+        が正常に完了しなかったときは、当該売買契約は成立しない場合があるものとし、
+        利用者は予めこのことに同意するものとします。
+      </p>
+      <p className="ms-4">
+        2. 出品者は、出品 NFT の売買契約成立後、速やかに出品 NFT
+        を購入者のウォレット に移転するものとします。なお、出品 NFT
+        の移転にかかる GAS 代は【出品者/購 入者】の負担とします。
+      </p>
+      <p className="ms-4">
+        3. 出品 NFT の売買契約成立後、購入者は当該 NFT
+        を、以下の各号に定める範囲内で
+        利用することができるものとし、出品者は購入者に対し当該利用の許諾を行うもの
+        とします。
+        <ul className="ms-4">
+          <li>
+            (1) 出品 NFT
+            及び対象データに関する著作権は、出品者又は出品者がライセンスを
+            受けているライセンサーに帰属し、購入者には帰属しないものとします。
+          </li>
+          <li>
+            (2) 購入者は、出品 NFT
+            に関して、取得事実の公表、作品論評、再販売、本サービ
+            スを含むオンライン上で展示（著作権法第 2 条第１項 9 の 4
+            に定める自動公衆
+            送信を含みます。）等これらに類する行為を行うことができるものとします。
+          </li>
+          <li>
+            (3) 購入者は、出品 NFT
+            の改変、商業目的での利用、その他不適切な方法での利用
+            はできないものとします。
+          </li>
+          <li>
+            (4) 出品 NFT の再販売が行われ、出品 NFT
+            を新たに第三者（以下「第三購入者」
+            といいます。）が保有することとなった場合、購入者は、本項に定める利用を
+            行うことができなくなるものとします。なお、第三購入者は当該 NFT
+            の売買契
+            約が成立した時点で本項に定める範囲内での利用を行うことが可能となるもの
+            とし、以後再販売が行われる都度同様とします。
+          </li>
+        </ul>
+      </p>
+      <p className="ms-4">
+        4. 当社は、出品 NFT の売買契約において、出品者から購入者に対する NFT
+        及び対象
+        データに関する著作権、所有権その他何らの法的な権利及び義務の移転を保証する
+        ものではありません。
+      </p>
+
+      <h5>第 13 条 （アフィリエイトプログラム）</h5>
+      <p className="ms-4">
+        1.
+        利用者は以下の各号に定める方法により、本サービスのアフィリエイトプログラム
+        （以下「本アフィリエイトプログラム」といいます。）に参加することができま
+        す。
+        <ul className="ms-4">
+          <li>
+            (1)
+            利用者は、本サービスの内のダッシュボードページにて固有の招待リンクを取
+            得します。
+          </li>
+          <li>
+            (2)
+            利用者が、友人、家族その他の本サービスに登録をしていない者（以下「招待
+            者」といいます。）に対して、当該招待リンクを共有します。
+          </li>
+          <li>
+            (3) 招待者が当該招待リンクを使用して、本サービスのアカウント登録及び
+            NFT の 出品を行い、かつ当該 NFT
+            の売買契約が成立し、購入代金が支払われた場合 （外部 NFT
+            マーケットプレイスでの売買契約成立及び支払いを含みます。）、
+            紹介者には、当社が別途定めるボーナスが付与されます。
+          </li>
+        </ul>
+      </p>
+      <p className="ms-4">
+        2.
+        前項の規定にかかわらず、以下の各号に定める場合、本アフィリエイトプログラム
+        に参加することはできません。
+        <ul className="ms-4">
+          <li>(1) 招待リンクを改変した場合</li>
+          <li>(2) 当社が不正行為又は詐欺行為と判断した場合</li>
+          <li>(3) 商業目的で利用する場合</li>
+          <li>
+            (4) Twitter、Facebook
+            その他の不特定多数がアクセス可能である場所で当該招待リ
+            ンクを公開又は配布をした場合
+          </li>
+          <li>(5) その他、当社が不適当と認める場合</li>
+        </ul>
+      </p>
+
+      <h5>第 14 条 （利用者情報及び通信機器に関する管理）</h5>
+      <p className="ms-4">
+        1.
+        利用者は、利用者情報及び通信機器の管理責任を負うものとし、当社は一切の責任
+        を負わないものとします。
+      </p>
+      <p className="ms-4">
+        2.
+        利用者情報及び通信機器の管理不十分、使用上の過誤、第三者の使用等による損害
+        の責任は利用者が負うものとし、当社は一切の責任を負わないものとします。
+      </p>
+      <p className="ms-4">
+        3.
+        利用者は、利用者情報又は通信機器を第三者に使用されるおそれのある場合は、直
+        ちに当社にその旨を連絡するとともに、当社の指示がある場合はこれに従うものと
+        します。
+      </p>
+
+      <h5>第 15 条 （本サービスの提供条件）</h5>
+      <p className="ms-4">
+        1.
+        当社は、メンテナンス等のために、利用者に通知することなく、本サービスを停止
+        又は変更することがあります。
+      </p>
+      <p className="ms-4">
+        2.
+        本サービスの提供を受けるために必要な機器、通信手段等は、利用者の費用と責任
+        で備えるものとします。
+      </p>
+
+      <h5>第 16 条 （知的財産権等）</h5>
+      <p className="ms-4">
+        1.
+        利用者は、方法又は形態の如何を問わず、本サービスにおいて当社が提供する全て
+        の情報及びコンテンツ（以下総称して「当社コンテンツ」といいます。）を著作権
+        法に定める、私的使用の範囲を超えて複製したり、利用したりすることはできない
+        ものとします。
+      </p>
+      <p className="ms-4">
+        2.
+        当社コンテンツに関する著作権、特許権、実用新案権、商標権、意匠権その他一切
+        の知的財産権及びこれらの権利の登録を受ける権利（以下総称して「知的財産権」
+        といいます。）は、当社又は当社がライセンスを受けているライセンサーに帰属
+        し、利用者には帰属しないものとします。また、利用者は、知的財産権の存否にか
+        かわらず、当社コンテンツについて、複製、配布、転載、転送、公衆送信、改変、
+        翻案その他の二次利用等を行ってはならないものとします。
+      </p>
+      <p className="ms-4">
+        3.
+        利用者が本条の規定に違反することによって問題が発生した場合、利用者は、自己
+        の費用と責任において当該問題を解決するとともに、当社に何らの不利益、負担又
+        は損害を与えないよう適切な措置を講じなければならないものとします。
+      </p>
+      <p className="ms-4">
+        4. 利用者が本サービス上において NFT
+        に関する情報の掲載（説明事項等の取引情報
+        を含みますが、これに限らないものとします。）を行った場合、著作物性の有無を
+        問わず、掲載内容の一部又は全部に関し、発生しうる全ての著作権（著作権法第
+        27 条及び第 28
+        条に定める権利を含みます。）を無償で当社に譲渡することに同意す
+        るものとします。また、利用者は、利用者が投稿した掲載内容について、目的を問
+        わず、無制限に利用できる権利が当社に帰属することについて同意するものとします。
+      </p>
+      <p className="ms-4">
+        5.
+        利用者は、著作物となりうる掲載内容の一部について、当社並びに当社より正当に
+        権利を取得した第三者及び当該第三者から権利を承継した者に対し、著作者人格権
+        （公表権、氏名表示権及び同一性保持権を含みます。）を行使しないものとしま
+        す。
+      </p>
+
+      <h5>第 17 条 （禁止事項）</h5>
+      <p className="ms-4">
+        1.
+        当社は、利用者による本サービスの利用に際して、以下の各号に定める行為を禁止
+        します。
+        <ul className="ms-4">
+          <li>(1) 本規約に違反する行為</li>
+          <li>
+            (2)
+            当社、当社がライセンスを受けているライセンサーその他第三者の知的財産
+            権、特許権、実用新案権、意匠権、商標権、著作権、肖像権等の財産的又は人
+            格的な権利を侵害する行為又はこれらを侵害する恐れのある行為
+          </li>
+          <li>
+            (3)
+            当社又は第三者に不利益若しくは損害を与える行為又はその恐れのある行為
+          </li>
+          <li>
+            (4) 不当に他人の名誉や権利、信用を傷つける行為又はその恐れのある行為
+          </li>
+          <li>(5) 法令又は条例等に違反する行為</li>
+          <li>
+            (6)
+            公序良俗に反する行為若しくはその恐れのある行為又は公序良俗に反する恐れ
+            のある情報を他の利用者又は第三者に提供する行為
+          </li>
+          <li>
+            (7)
+            犯罪行為、犯罪行為に結びつく行為若しくはこれを助長する行為又はその恐れ
+            のある行為
+          </li>
+          <li>
+            (8) 事実に反する情報又は事実に反する恐れのある情報を提供する行為
+          </li>
+          <li>
+            (9)
+            当社のシステムへの不正アクセス、それに伴うプログラムコードの改ざん、位
+            置情報を故意に虚偽、通信機器の仕様その他アプリケーションを利用してのチ
+            ート行為、コンピューターウィルスの頒布その他本サービスの正常な運営を妨
+            げる行為又はその恐れのある行為
+          </li>
+          <li>(10)マクロ及び操作を自動化する機能やツール等を使用する行為</li>
+          <li>(11)本サービスの信用を損なう行為又はその恐れのある行為</li>
+          <li>
+            (12)青少年の心身及びその健全な育成に悪影響を及ぼす恐れのある行為
+          </li>
+          <li>
+            (13)他の利用者のアカウントの使用その他の方法により、第三者になりすまして本
+            サービスを利用する行為
+          </li>
+          <li>
+            (14)政治、宗教などの個人思想の相違が伴う書き込み又はそれに関連する行為
+          </li>
+          <li>
+            (15)法人、個人問わず本サービスにて当社が許可しているもの以外の営業行為
+          </li>
+          <li>
+            (16)わいせつ、児童ポルノ又は児童虐待に相当する情報の書き込み又はそれに関連
+            する行為
+          </li>
+          <li>
+            (17)詐欺、預貯金口座及び携帯電話の違法な売買等の犯罪に結びつく又は結びつく
+            恐れのある行為
+          </li>
+          <li>
+            (18)違法な賭博・ギャンブルを行わせる又は違法な賭博・ギャンブルへの参加を勧
+            誘する行為
+          </li>
+          <li>
+            (19)マネーロンダリング、犯罪収益に関する行為、テロ資金供与に関する行為又は
+            その疑いがある行為
+          </li>
+          <li>(20)当社が発行した NFT に係る知的財産権を侵害する行為</li>
+          <li>(21)その他当社が不適当と判断する行為</li>
+        </ul>
+      </p>
+      <p className="ms-4">
+        2.
+        前項の禁止行為に該当するか否かの判断は、当社の裁量により行うものとし、当社
+        は判断基準について説明責任を負わないものとします。
+      </p>
+      <p className="ms-4">
+        3.
+        当社は、利用者の行為が、第１項各号のいずれかに該当すると判断した場合、事前
+        に通知することなく、以下の各号のいずれか又は全ての措置を講じることができる
+        ものとします。{" "}
+        <ul className="ms-4">
+          <li>(1) 本サービスの利用制限</li>
+          <li>(2) 本契約の解除による退会処分</li>
+          <li>(3) その他当社が必要と判断する行為</li>
+        </ul>
+      </p>
+      <p className="ms-4">
+        4.
+        前項の措置により利用者に生じた損害について、当社は一切の責任を負わないもの
+        とします。
+      </p>
+
+      <h5>第 18 条 （解除）</h5>
+      <p className="ms-4">
+        1.
+        当社は、利用者が以下の各号のいずれかに該当した場合、何らの通知等を要するこ
+        となく、本契約を解除し、退会させることができるものとします。
+        <ul className="ms-4">
+          <li>(1) 利用者情報に虚偽の情報が含まれている場合</li>
+          <li>(2) 過去に当社から退会処分を受けていた場合</li>
+          <li>
+            (3)
+            利用者の相続人等から利用者が死亡した旨の連絡があった場合又は当社が利用
+            者の死亡の事実を確認できた場合
+          </li>
+          <li>(4) 未成年が法定代理人の同意なく、本サービスを利用した場合</li>
+          <li>
+            (5)
+            成年被後見人、被保佐人又は被補助人が、成年後見人、保佐人又は補助人等の
+            同意なく、本サービスを利用した場合
+          </li>
+          <li>
+            (6)
+            反社会的勢力等（暴力団、暴力団構成員、暴力団構成員でなくなった時から
+            5
+            年を経過しない者、準構成員、暴力団関係企業、総会屋、社会運動標ぼうゴ
+            ロ、政治活動標ぼうゴロ、特殊知能暴力集団等又はこれらに準ずる者）に該当
+            すると当社が判断した場合
+          </li>
+          <li>(7) 当社からの要請に対し誠実に対応しない場合</li>
+          <li>(8) その他当社が不適当と判断した場合</li>
+        </ul>
+      </p>
+      <p className="ms-4">
+        2. 前項各号に掲げる場合のほか、当社は、利用者に対して 30
+        日前までに事前に通知
+        することにより、いつでも本契約を解除し、本サービスから退会させることができ
+        るものとします。また、利用者が退会を希望する場合、当社が定める退会手続によ
+        り、当月末日をもって本契約を解除し、退会することができます。
+      </p>
+      <p className="ms-4">
+        3.
+        前三項の措置により利用者に生じた損害について、当社は一切の責任を負わないも
+        のとします。
+      </p>
+      <p className="ms-4">
+        4. 第 1 項及び第 2
+        項の措置により本契約を解除され又は解除した利用者は、本契約の
+        解除時に期限の利益を喪失し、直ちに、当社に対し負担する全ての債務を履行する
+        ものとします。
+      </p>
+
+      <h5>第 19 条 （秘密保持）</h5>
+      <p className="ms-4">
+        1.
+        利用者は、本サービスの提供に関して、当社から開示された秘密情報を第三者に開
+        示又は漏洩してはなりません。なお、秘密情報とは、文書、電磁的データ、口頭そ
+        の他形式の如何を問わず、又は秘密の表示若しくは明示又はその範囲の特定の有無
+        にかかわらず、本サービス導入に関して開示された当社の技術上、営業上又は経営
+        上の情報をいいます。
+      </p>
+      <p className="ms-4">
+        2. 次の各号の情報は、秘密情報に該当しないものとします。
+        <ul className="ms-4">
+          <li>(1) 開示を受けた時、既に所有していた情報</li>
+          <li>
+            (2)
+            開示を受けた時、既に公知であった情報又はその後自己の責に帰さない事由に
+            より公知となった情報
+          </li>
+          <li>(3) 開示を受けた後に、第三者から合法的に取得した情報</li>
+          <li>(4) 開示された秘密情報によらず独自に開発し又は創作した情報</li>
+          <li>(5) 法令の定め又は裁判所の命令に基づき開示を要請された情報</li>
+        </ul>
+      </p>
+      <p className="ms-4">
+        3.
+        利用者は、本サービスの終了、本契約の解約その他の事由により本契約が終了した
+        場合、当社の指示に従い秘密情報を速やかに返還又は廃棄します。なお、廃棄にあ
+        たっては、秘密情報を再利用できない方法をとるものとします。
+      </p>
+
+      <h5>第 20 条 （免責）</h5>
+      <p className="ms-4">
+        1.
+        本サービスの内容についてその完全性、正確性及び有効性等を、当社は一切の保証
+        をしないものとします。
+      </p>
+      <p className="ms-4">
+        2.
+        利用者が本サービスを利用するにあたり、本サービスから、本サービスに関わる関
+        連会社又は外部サービスに遷移する場合があります。その場合、利用者は、自らの
+        責任で外部サービスの利用規約等に同意の上、本サービス及び外部サービスを利用
+        するものとします。なお、外部サービスの内容について、その完全性、正確性及び
+        有効性等について、当社は一切の保証をしないものとします。
+      </p>
+      <p className="ms-4">
+        3.
+        利用者が利用者情報の変更を行わなかったことにより損害を被った場合でも、当社
+        は一切の責任を負わないものとします。
+      </p>
+      <p className="ms-4">
+        4.
+        利用者は、法令の範囲内で本サービスをご利用ください。本サービスの利用に関連
+        して利用者が日本又は外国の法令に触れた場合でも、当社は一切の責任を負わない
+        ものとします。
+      </p>
+      <p className="ms-4">
+        5.
+        当社は、本サービスに中断、中止その他の障害が生じないことを保証しません。ま
+        た、当社は、以下の各号に定める場合、利用者に通知することなく、本サービスを
+        停止又は変更することがありますが、この場合においても当社は一切の責任を負わ
+        ず、利用者は異議を述べないものとします
+        <ul className="ms-4">
+          <li>
+            (1)
+            当社が本サービスのメンテナンス若しくはセキュリティ対策又はバージョン管
+            理若しくはアップデート等を行う場合
+          </li>
+          <li>
+            (2)
+            本サービスの提供に必要なシステムへの不正アクセスにより、当社による本サー
+            ビスの安全な提供が困難であると当社が合理的に判断した場合
+          </li>
+          <li>
+            (3)
+            地震・津波・台風・豪雨・豪雪その他の天災地変、戦争、テロ、内乱、暴動、感
+            染症等の公衆衛生に関する緊急事態、政府又は政府機関の行為、労働争議、停電、
+            電気通信の中断・中止、電気通信設備の故障・不具合、輸送機関の事故その他の
+            不可抗力により、本サービスの提供が困難になったと当社が合理的に判断した場
+            合
+          </li>
+        </ul>
+      </p>
+      <p className="ms-4">
+        6.
+        本サービスの提供を受けるために必要な機器、通信手段等の環境は全て利用者の費
+        用と責任で備えるものとします。また、本サービスの利用にあたり必要となる通信
+        費用は、全て利用者の負担とします。
+      </p>
+      <p className="ms-4">
+        7.
+        予期しない不正アクセス等の行為によって利用者情報を盗取された場合でも、それ
+        によって生じる利用者の損害等に対して、当社は一切の責任を負わないものとしま
+        す。
+      </p>
+      <p className="ms-4">
+        8.
+        当社は、天災、地変、火災、ストライキ、通商停止、戦争、内乱、感染症の流行そ
+        の他の不可抗力により本契約の全部又は一部に不履行が発生した場合、一切の責任
+        を負わないものとします。
+      </p>
+      <p className="ms-4">
+        9. 当社は、第 7
+        条に定めるネットワーク手数料の高騰その他本ブロックチェーン及び
+        外部サービスにおけるトランザクションの遅延及び失敗について一切の責任を負わ
+        ないものとします。
+      </p>
+      <p className="ms-4">
+        10.
+        当社は、前各項に定めるほか、当社に故意又は重過失がない限り、利用者が被った
+        損害について一切の責任を負わないものとします。
+      </p>
+      <p className="ms-4">
+        11.
+        本サービスの利用に関し、利用者が他の利用者との間でトラブル（本サービス内外
+        を問いません。）になった場合でも、当社は一切の責任を負わないものとし、利用
+        者間のトラブルは、当該利用者が自らの費用と負担において解決するものとしま
+        す。
+      </p>
+
+      <h5>第 21 条 （損害賠償責任）</h5>
+      <p className="ms-4">
+        1.
+        利用者は、本規約の違反又は本サービスの利用に関連して当社に損害を与えた場合、
+        当社に発生した損害（逸失利益及び弁護士費用を含みます。）を賠償します。
+      </p>
+      <p className="ms-4">
+        2.
+        次項を除く本規約の他の定めにかかわらず、当社は、当社の帰責事由により利用者に
+        損害を与えた場合、次の各号に定める範囲でのみその損害を賠償する責任を負います。
+        <ul className="ms-4">
+          <li>(1) 当社の故意又は重過失による場合：当該損害の全額</li>
+          <li>
+            (2)
+            当社の軽過失による場合：現実かつ直接に発生した通常の損害（特別損害、逸失
+            利益、間接損害及び弁護士費用を除く。）の範囲内とし、かつ１万円を上限とす
+            る
+          </li>
+        </ul>
+      </p>
+      <p className="ms-4">
+        3.
+        前項にかかわらず、利用者が法人である場合又は個人が事業として若しくは事業の
+        ために本サービスを利用する場合には、当社に故意又は重過失のない限り、本サー
+        ビスに関連して当該利用者が被った損害につき当社は一切の責任を負いません。な
+        お、当社が損害を賠償する場合は、損害発生日から直近１年間において、当該利用
+        者のサービス利用料として受領した合計金額を上限とします。
+      </p>
+
+      <h5>第 22 条 （本サービスの廃止）</h5>
+      <p className="ms-4">
+        1.
+        当社は、当社の都合によりいつでも本サービスの提供を廃止できるものとします。
+      </p>
+      <p className="ms-4">
+        2.
+        前項の場合、当社に故意又は重過失がある場合を除き、当社は一切の責任を負わな
+        いものとします。
+      </p>
+
+      <h5>第 23 条 （お問い合わせ対応）</h5>
+      <p className="ms-4">
+        1.
+        当社は、本サービスに関する利用者からのお問い合わせに対して回答するよう努め
+        ますが、法令又は本規約上、当社に義務又は責任が発生する場合を除き、回答の義
+        務を負わないものとします。
+      </p>
+      <p className="ms-4">
+        2.
+        当社は、利用者からのお問い合わせに回答するか否かの基準を開示する義務を負わ
+        ないものとします。
+      </p>
+
+      <h5>第 24 条 （存続条項）</h5>
+      <p className="ms-4">
+        本契約の有効期間は、本契約成立時から利用者が本サービスを退会するまでの間としま
+        す。なお、本契約の終了後も、第 6 条第 4 項から第 7 項、第 7 条第 2
+        項、第 8 条、第 10 条第 6 条、第 12 条第 4 項、第 14 条、第 16 条、第 17
+        条第 4 項、第 18 条第 3 項及び 第 4 項、第 20 条から第 30
+        条の各規定は有効に存続するものとし、第 19 条の規定は本 契約の終了後 5
+        年間有効に存続するものとします。
+      </p>
+
+      <h5>第 25 条 （分離可能性）</h5>
+      <p className="ms-4">
+        1.
+        本規約の規定の一部が法令に基づいて無効と判断されても、本規約の他の規定は有
+        効とします。
+      </p>
+      <p className="ms-4">
+        2.
+        本規約の規定の一部がある利用者との関係で無効又は取消となった場合でも、本規
+        約は他の利用者との関係では有効とします。
+      </p>
+
+      <h5>第 26 条 （違反行為への対処方法）</h5>
+      <p className="ms-4">
+        1.
+        利用者は、本規約に違反する行為を発見した場合は、当社にご連絡ください。
+      </p>
+      <p className="ms-4">
+        2.
+        利用者は、本規約に違反する行為への当社の対処について、異議を申し立てること
+        はできないものとします。
+      </p>
+
+      <h5>第 27 条 （地位の譲渡等）</h5>
+      <p className="ms-4">
+        利用者は、当社の書面又は電磁的方法による事前の承諾なく、本契約上の地位又は本規
+        約に基づく権利若しくは義務の全部又は一部につき、第三者に対し、譲渡、移転、担保
+        設定、その他の処分をすることはできません。
+      </p>
+
+      <h5>第 28 条 （準拠法）</h5>
+      <p className="ms-4">
+        本規約に関する準拠法は、全て日本国の法令が適用されるものとします。
+      </p>
+
+      <h5>第 29 条 （合意管轄）</h5>
+      <p className="ms-4">
+        利用者と当社との間における一切の訴訟は、訴額に応じて、東京地方裁判所又は東京簡
+        易裁判所を第一審の専属的合意管轄裁判所とします。
+      </p>
+
+      <h5>第 30 条 （その他）</h5>
+      <p className="ms-4">
+        1.
+        利用者は、本規約に定めのない事項について、当社が細目等を別途定めた場合、こ
+        れに従うものとします。この場合、当該細目等は、本規約と一体をなすものとしま
+        す。
+      </p>
+      <p className="ms-4">
+        2. 細目等は、当社指定の箇所に掲載した時点より効力を生ずるものとします。
+      </p>
+      <p className="ms-4">
+        3.
+        細目等と本規約の内容に矛盾抵触がある場合、本規約が優先するものとします。
+      </p>
+      <p>附則</p>
+      <p>2023 年 6 月 1 日制定・施行</p>
     </div>
   );
 }

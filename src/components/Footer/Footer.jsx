@@ -88,10 +88,10 @@ const Footer = () => {
         </div>
         <div className="text-center p-6 ">
           <a href="#" className="text-[#AFAFAF] text-lg">
-            Copyrighted By 
+            Copyrighted By
             <span className="text-[#BF6654] font-black">
-             &nbsp;AQUA Co., Ltd.&nbsp;
-             </span> 
+              &nbsp;AQUA Co., Ltd.&nbsp;
+            </span>
             | All Right Reserved!
           </a>
         </div>

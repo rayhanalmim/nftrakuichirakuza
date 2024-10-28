@@ -1,6 +1,12 @@
-import React from "react";
+import React,{ useEffect } from "react";
 
 export default function OurTeam() {
+
+  useEffect(() => {
+    // Scroll to the top of the page when this component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="flex justify-center p-3">
       <p>

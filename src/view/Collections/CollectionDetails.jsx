@@ -49,7 +49,7 @@ const CollectionDetails = () => {
               data && data?.getCollectionNft?.logo.includes("ipfs")
                 ? data?.getCollectionNft?.logo.replace(
                     "ipfs://",
-                    "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                    `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
                   )
                 : data?.getCollectionNft?.logo.includes("http")
                 ? data?.getCollectionNft?.logo
@@ -100,12 +100,13 @@ const CollectionDetails = () => {
                   </h4>
                   <h4 className="text-sm  font-bold uppercase">
                     <CopyToClipboard
-                      text={`http://localhost:3000/collection/collectiondetails/${blockchain}/${collectionAddress}`}>
+                      text={`http://localhost:3000/collection/collectiondetails/${blockchain}/${collectionAddress}`}
+                    >
                       <button
                         onClick={() => setCopied(!copied)}
                         className="capitalize text-sm border bg-white p-3 rounded-lg px-5"
                       >
-                     { t("Share Collection")}
+                        {t("Share Collection")}
                       </button>
                     </CopyToClipboard>
                   </h4>

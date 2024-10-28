@@ -26,6 +26,7 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
     price: false,
     explore: false,
   });
+  const [dataSize, setDataSize] = useState(12);
   const [buyNow, setBuyNow] = useState(false);
   const [chainName, setChainName] = useState(false);
   const navigation = [
@@ -178,21 +179,17 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                 <div className="flex-1">
                   <div className=" bg-collection-img bg-no-repeat bg-cover pt-3 px-3 max-h-[700px] overflow-y-scroll">
                     <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow  ">
-
-                    
-                      {!data
-                        ?
+                      {!data ? (
                         //  FakeData.map((item, key) => (
                         //     <Link to="/nft/nftpage">
                         //       <NFTCard key={key} data={item} />
                         //     </Link>
                         //   ))
-                          <h1> No Data available
-                          </h1> 
-                        : null}
+                        <h1> No Data available</h1>
+                      ) : null}
                       {buyNow
-                        ? data?.map((item, key) => {
-                            console.log(item);
+                        // ? data?.map((item, key) => {
+                        ? data?.slice(0, dataSize).map((item, key) => {
                             return (
                               <>
                                 <NFTCollectionCard
@@ -205,9 +202,8 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                               </>
                             );
                           })
-                        : data?.map((item, key) => {
-                            console.log(item);
-
+                        // : data?.map((item, key) => {
+                        : data?.slice(0, dataSize).map((item, key) => {
                             return (
                               <NFTCollectionCard
                                 key={key}
@@ -219,6 +215,13 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                             );
                           })}
                     </div>
+                    {
+                      dataSize<=data.length &&
+                      <button onClick={(e)=>{setDataSize(dataSize+12)}} className="bg-gray-100 hover:bg-gray-200 transition-all duration-200  mb-4 text-black w-full bg-no-repeat bg-cover rounded-xl py-3 px-2 mx-auto ">
+                      {" "}
+                      {t("Show More")}
+                    </button>
+                    }
                   </div>
                 </div>
               </div>

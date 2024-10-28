@@ -1,6 +1,13 @@
+import React,{ useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export const Team = () => {
+
+  useEffect(() => {
+    // Scroll to the top of the page when this component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
   const { t } = useTranslation();
   const data = {
     companyName: t("AQUA Co.,Ltd."),

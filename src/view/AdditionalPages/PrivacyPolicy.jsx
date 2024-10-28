@@ -7,182 +7,181 @@ export default function PrivacyPolicy() {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
-    return (
-      
+  return (
     <div className="max-w-[1200px] mx-auto p-2 m-2s">
       <h1 className="text-3xl font-bold pt-3 text-center m-3">
-        Privacy Policy
+        プライバシーポリシー
       </h1>
       <p />
       <p>
-        <br />
-        Privacy policy of use for Rakuza
-        <br />
-        Aqua Corporation (hereinafter referred to as the "Company") (hereinafter
-        referred to as "the Company") will handle the personal information of
-        users in the services provided by the Company (hereinafter referred to
-        as "the Services"). (hereinafter referred to as the "Company") will
-        handle personal information of users in accordance with the following
-        privacy policy (hereinafter referred to as the "Policy") for the
-        services provided by the Company (hereinafter referred to as the
-        "Services"). (hereinafter referred to as the "Company") will strive to
-        handle and protect personal information of users in accordance with the
-        following privacy policy (hereinafter referred to as the "Policy").
+        アクア株式会社（以下「当社」といいます。）は、当社のサービスを利用する方（以下「利用者」といいます。）の個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます。）を定め、個人情報保護の仕組みを構築し、全従業員に個人情報保護の重要性を認識させるとともにその取組みを徹底させることにより、個人情報の保護を推進します。
       </p>
-      <p>
-        Definition and Acquisition of Personal Information
-        <br />
-        In this Policy, "Personal Information" means personal information as
-        defined in Article 2.1 of the Personal Information Protection Law.
+      <h5>第 1 条（個人情報</h5>
+      <p className="ms-4">
+        「個人情報」とは、個人情報の保護に関する法律（平成十五年法律第五十七号、以下「個人情報保護法」といいます。）にいう「個人情報」を指し、生存する個人に関する情報であって、当該情報に含まれる氏名、生年月日その他の記述等により特定の個人を識別できるもの又は個人識別符号が含まれるものを指します。
       </p>
-      <p>
-        In this policy, "personal information" means personal information as
-        defined in Article 2.1 of the Personal Information Protection Law.
-        <br />
-        In this policy, "personal information requiring special consideration"
-        means personal information requiring special consideration as defined in
-        Article 2, Paragraph 3 of the Personal Information Protection Law, i.e.,
-        personal information that requires special consideration in order to
-        prevent unjust discrimination, prejudice, or other disadvantages to the
-        person, such as race, creed, social status, medical history, criminal
-        history, facts that have caused harm due to a crime, or other
-        information that may be used in the handling of such information. (2)
-        "Personal Information" means personal information that includes
-        descriptions, etc. specified by the Personal Information Protection Law
-        Enforcement Order as requiring special consideration in order to prevent
-        unjust discrimination, prejudice, or other disadvantageous treatment of
-        the individual.
-        <br />
-        In the process of providing this service, we will acquire personal
-        information in an appropriate and lawful manner for the following
-        purposes of use, in accordance with laws, regulations, and our rules and
-        guidelines. In addition, we will endeavor to delete or dispose of any
-        unneeded personal information in accordance with our regulations.
-        Identification documents submitted by users will not be returned.
-        <br />
-        Purpose of Use
-        <br />
-        The specific purposes of use of user information related to the
-        provision of this service are as follows
+      <h5>第 2 条（個人情報の利用目的</h5>
+      <p className="ms-4">
+        当社は、以下の目的に必要な範囲で、利用者の個人情報を取得し、取得した情報を利用させていただきます。以下の目的の範囲を超えて個人情報を利用する場合には、事前に適切な方法で利用者からの同意を得るものとします
       </p>
-      <p>
-        To accept registrations, verify identity, authenticate users, record
-        user preferences, and provide, maintain, protect, and improve the
-        Service
-        <br />
-        To conduct surveys, marketing, research and analysis for the purpose of
-        improving the quality of the Service
-        <br />
-        To respond to information, inquiries, etc. regarding the Service
-        <br />
-        To notify you of changes to our terms and conditions, policies, etc.
-        (hereinafter referred to as "Terms and Conditions, etc.") regarding the
-        Service To notify you of changes to the Terms and Conditions, policies,
-        etc. (the "Terms and Conditions, etc.") regarding the Service
-        <br />
-        To respond to violations of the Terms of Service, etc.
-        <br />
-        To distribute and display advertisements and to measure their
-        effectiveness
-        <br />
-        To contact you in case of emergency
-        <br />
-        To create backup data
-        <br />
-        For other purposes incidental to the above purposes of use
-        <br />
-        Security Management
-        <br />
-        In order to prevent falsification, loss, or leakage of personal
-        information, the Company will improve the operation and maintenance of
-        storage procedures and security of storage systems, instruct, manage,
-        and supervise officers and employees, and take safety control measures
-        for information. In the event that the Company outsources all or part of
-        the handling of personal information, the Company will appropriately
-        supervise the outsourced company to ensure that the personal information
-        is securely managed.
+      <p className="ms-7">
+        (1)
+        当社のNFT発行販売プラットフォーム「楽市楽座」（以下「本サービス」といいます。）を提供するため
       </p>
-      <p>
-        Provision of Personal Information to Third Parties
-        <br />
-        We will not provide personal information to third parties without
-        obtaining the prior consent of the user. However, this shall not apply
-        in the following cases
+      <p className="ms-7">
+        (2) 本サービスの内容を改良・改善し、又は新サービスを開発するため
       </p>
-      <p>
-        When we outsource all or part of the handling of personal information
-        within the scope necessary to achieve the purpose of use
-        <br />
-        When there is a risk of harm to the life, body, property, or other
-        rights or interests of the user or a third party, and it is difficult to
-        obtain the consent of the user
-        <br />
-        When the Company's business, including the provision of personal
-        information, is succeeded due to a merger, corporate separation,
-        transfer of business, or other reasons
-        <br />
-        Other cases permitted under the Personal Information Protection Law or
-        other laws and regulations.
-        <br />
-        Disclosure of Personal Information
-        <br />
-        When a user requests us to notify the purpose of use, disclose, correct,
-        add, delete, stop using, erase, or stop providing personal information
-        (hereinafter referred to as "disclosure, etc.") in accordance with the
-        provisions of the Personal Information Protection Law, we will disclose
-        the personal information to the user in accordance with the following
-        procedures. When we receive a request from a user for notification of
-        the purpose of use, disclosure, correction, addition, deletion,
-        suspension of use, elimination, or suspension of provision (hereinafter
-        referred to as "Disclosure, etc.") of personal information in accordance
-        with the provisions of the Personal Information Protection Law, we will
-        disclose such information to the user within a reasonable period and to
-        a reasonable extent after confirming that the request has been made by
-        the user. However, this shall not apply to cases in which we are not
-        obligated to disclose, etc. under the Personal Information Protection
-        Law or other laws and regulations. Please note that a fee (2,000 yen per
-        case) will be charged for the disclosure of notification of the purpose
-        of use of personal information.
+      <p className="ms-7">
+        (3)
+        本サービスの新機能、更新情報、キャンペーン等及び当社が提供する他のサービスのご案内（電子メール、チラシ、その他のダイレクトメールの送付を含む）のため
       </p>
-      <p>
-        Handling of Personal Information
-        <br />
-        When acquiring the personal information of a user, the Company shall
-        obtain the consent of the user in advance, except in cases permitted
-        under the Personal Information Protection Law or other laws and
-        regulations.
+      <p className="ms-7">
+        (4)
+        本サービスに付随するサービスのWeb、電子メール、及び電話等による案内その他の業務上必要と判断した確認のための連絡をするため
       </p>
-      <p>
-        Use of Cookies and Other Technologies
-        <br />
-        The Company may use cookies and similar technologies to improve the
-        Service. Users may disable cookies by changing the settings on their web
-        browsers. However, if cookies are disabled, some features of the Service
-        may not be available.
+      <p className="ms-7">
+        (5)
+        キャンペーン、プレゼント企画、顧客サービス等の運営、開発、提供又はこれらの目的で実施する各種マーケティング活動をするため
       </p>
-      <p>
-        Contact for Inquiries
-        <br />
-        Please direct any comments, questions, complaints, or other inquiries
-        regarding the handling of user information to the following contact
-        point.
+      <p className="ms-7">
+        (6)
+        本サービスの利用履歴等を調査・分析し、その結果を本サービスの改良・開発や広告の配信に利用するため
       </p>
-      <p>
-        Personal Information Inquiry Desk
-        <br />
-        email : info@rakuichirakuza.io
-        <br />
-        Aqua Corporation
+      <p className="ms-7">
+        (7) メンテナンス、重要なお知らせなど必要に応じたご連絡のため
       </p>
-      <p>
-        Procedures for Changing the Privacy Policy
-        <br />
-        Except as otherwise provided by law, the Company may modify this Privacy
-        Policy in a timely manner in accordance with the procedures prescribed
-        by the Company, and any such modification will be announced by posting
-        the modification on this page.
+      <p className="ms-7">
+        (8)
+        本サービスに関する利用者からのご意見、お問い合わせ等に回答するため（本人確認を行うことを含む）
       </p>
-      <p />
+      <p className="ms-7">(9) 本サービスの利用状況を利用者にご報告するため</p>
+      <p className="ms-7">
+        (10)
+        本サービスに関するアンケート・取材等のご協力依頼や各種イベントへのご参加をお願いし、又はその結果などをご報告するため
+      </p>
+      <p className="ms-7">
+        (11)
+        本サービスの利用履歴等を調査・分析し、その結果を本サービスの改良・開発や広告の配信に利用するため
+      </p>
+      <p className="ms-7">
+        (12)
+        利用者の承諾・申し込みに基づく、当社主催イベントの参加企業等への個人情報の提供
+      </p>
+      <p className="ms-7">
+        (13)
+        利用規約に違反した利用者や、不正・不当な目的で本サービスを利用しようとする利用者の特定をし、ご利用をお断りするため
+      </p>
+
+      <h5>第 3 条（個人情報の管理と保護</h5>
+      <p className="ms-4">
+        個人情報の管理は、厳重に行うこととし、次に掲げる場合を除き、利用者の同意がない限り、第三者に対しデータを開示・提供することはいたしません。また、安全性を考慮し、個人情報への不正アクセス、個人情報の紛失、破壊、改ざん及び漏えい等のリスクに対する予防並びに是正に関する対策を講じます。
+      </p>
+      <p className="ms-7">
+        (1)
+        人の生命、身体又は財産の保護のために必要がある場合であって、利用者の同意を得ることが困難である場合
+      </p>
+      <p className="ms-7">
+        (2)
+        公衆衛生の向上又は児童の健全な育成の推進のために特に必要がある場合であって、利用者の同意を得ることが困難である場合
+      </p>
+      <p className="ms-7">
+        (3)
+        国の機関若しくは地方公共団体又はその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、利用者の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがある場合
+      </p>
+      <p className="ms-7">(4)その他法令で認められる場合</p>
+
+      <h5>第 4 条（個人情報の取扱いの委託</h5>
+      <p className="ms-4">
+        当社は、利用目的の達成に必要な範囲内において、個人データの取扱いの全部又は一部を委託する場合がございます。この場合、当社は、委託先としての適格性を十分審査するとともに、契約にあたって守秘義務に関する事項等を定め、委託先に対する必要かつ適切な監督を行います。
+      </p>
+
+      <h5>第 5 条（個人情報の開示</h5>
+      <p className="ms-4">
+        当社は、利用者（本人に限る。本条において以下同じ）から当社の保有する個人情報の開示を求められたときは、利用者に対し、遅滞なくこれを開示します。但し、開示することにより次のいずれかに該当する場合は、その全部又は一部を開示しないこともあり、開示しない決定をした場合には、その旨を遅滞なく通知します。
+      </p>
+      <p className="ms-7">
+        (1)
+        利用者又は第三者の生命、身体、財産その他の権利利益を害するおそれがある場合
+      </p>
+      <p className="ms-7">
+        (2) 当社の業務の適正な実施に著しい支障を及ぼすおそれがある場合
+      </p>
+      <p className="ms-7">(3) その他法令に違反することとなる場合</p>
+
+      <h5>第 6 条（保有個人データの訂正等</h5>
+      <p className="ms-4">
+        1.
+        利用者は、当社の保有する個人情報が誤った情報である場合には、当社に対し、当該個人情報の訂正、追加又は削除（以下「訂正等」といいます。）を請求することができます。
+      </p>
+      <p className="ms-4">
+        2.
+        前項の請求を受けた場合、当社は遅滞なく必要な調査を行い、その結果前項の請求に理由があると判断した場合には、遅滞なく当該個人情報の訂正等を行います。
+      </p>
+      <p className="ms-4">
+        3.
+        当社は、前項に基づき訂正等の実施・不実施について判断した場合には、遅滞なく、利用者ご本人に対してご連絡いたします。
+      </p>
+
+      <h5>第 7 条（個人情報の利用停止等）</h5>
+      <p className="ms-4">
+        1.
+        利用者は、当社に対し、当社の保有する個人データの利用の停止、消去又は第三者提供の停止（以下「利用停止等」といいます。）を請求することができます。
+      </p>
+      <p className="ms-4">
+        2.
+        当社は、前項の請求を受けた場合には、遅滞なく必要な調査を行い、その結果前項の請求に理由があると判断した場合には、当該個人データの利用停止等を行うものとします。但し、個人情報の利用停止等に多額の費用を要する場合その他利用停止等を行うことが困難な場合であって、利用者の権利利益を保護するために必要なこれに代わるべき措置をとれる場合は、この代替策を講じます。
+      </p>
+      <p className="ms-4">
+        3.
+        当社は、前項に基づき利用停止等の実施・不実施について判断した場合には、遅滞なく、利用者ご本人に対してご連絡いたします。
+      </p>
+
+      <h5>第 8 条（プライバシーポリシーの変更手続</h5>
+      <p className="ms-4">
+        当社は本ポリシーの内容を適宜見直し、その改善に努めます。本ポリシーの内容は、法令その他本ポリシーに別段の定めのある事項を除いて、変更することができるものとします。変更後のプライバシーポリシーは、当社所定の方法により、利用者に通知し、又は当社ウェブサイトに掲載したときから効力を生じるものとします。
+      </p>
+
+      <h5>第 9 条（法令、規範の遵守）</h5>
+      <p className="ms-4">
+        当社は、保有する個人情報に関して適用される日本の法令、その他規範を遵守します。
+      </p>
+
+      <h5>第 10 条（苦情及び相談への対応）</h5>
+      <p className="ms-4">
+        当社は、個人情報の取扱いに関する利用者からの苦情、相談を受け付け、適切かつ迅速に対応いたします。また、利用者からの当該個人情報の開示、訂正、追加、削除、利用又は提供の拒否などのご要望に対しても、迅速かつ適切に対応いたします。
+      </p>
+
+      <h5>第 11 条（安全管理措置）</h5>
+      <p className="ms-4">
+        当社が利用者よりお預かりした個人情報は、個人情報ファイルへのアクセス制限の実施、アクセスログの記録及び外部からの不正アクセス防止のためのセキュリティ対策の実施等、組織的、物理的、人的、技術的施策を講じることで個人情報への不正な侵入、個人情報の紛失、破壊、改ざん、及び漏えい等を防止いたします。万一、利用者の個人情報の漏えい等の事故が発生した場合、当社は、個人情報保護法及び関連するガイドラインに則り、速やかに監督官庁への報告を行うとともに、当該監督官庁の指示に従い、類似事案の発生防止措置及び再発防止措置等の必要な対応を行います。詳細については、別添「個人情報の安全管理措置」をご確認ください。
+      </p>
+
+      <h5>第 12 条（その他の事項）</h5>
+      <p className="ms-4">
+        1. アクセス情報について
+        本サービスでは、より良いサービスをご提供するために、利用者のアクセスログ情報を取得する場合がありますので、予めご了承下さい。アクセスログの取得は利用者の個人情報を特定することを目的としたものではありません。
+      </p>
+      <p className="ms-4">
+        2. クッキーについて
+        本サービスでは、利用者により快適にご利用いただくために、本サービスの一部でクッキー(Cookie)を使用しております。クッキー及びIPアドレス情報については、それら単独では特定の個人を識別することができません。なお、クッキー情報については、ブラウザの設定で拒否することが可能です。
+      </p>
+
+      <h5>第 13 条（当社住所・代表者氏名・個人情報保護管理者）</h5>
+      <p className="ms-4">
+        当社住所、代表者及び個人情報保護管理者の氏名は以下のとおりです。
+        住所：岐阜県岐阜市神田町６丁目１９番地アクアモバイル本店
+        代表者及び個人情報保護管理者：齊藤治孝
+      </p>
+
+      <h5>第 14 条（お問い合わせ窓口）</h5>
+      <p className="ms-4">
+        当社の個人情報の取扱に関するお問い合せは下記までご連絡ください。
+        アクア株式会社　お客様対応窓口
+        〒500-8833岐阜県岐阜市神田町６丁目１９番地アクアモバイル本店
+        Mail:info@aqua.sh
+      </p>
+
+      <p className="ms-4">2023年6月1日制定・施行</p>
     </div>
   );
 }

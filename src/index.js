@@ -39,7 +39,7 @@ ReactDOM.render(
     <Suspense fallback="...loading">
       <ApolloProvider client={client}>
         <ContextProvider value={500}>
-        <ThirdwebProvider activeChain="ethereum" clientId="0a7fb2c625dc7ba2c0696fc825ec1c78">
+        <ThirdwebProvider activeChain="ethereum" clientId={process.env.REACT_APP_THIRDWEB_CLIENT_ID}>
           <BrowserRouter>
             <App />
           </BrowserRouter>

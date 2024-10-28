@@ -39,6 +39,7 @@ function NFTCollectionCard({ blockchain, collection, data }) {
             }
           /> */}
           <img
+          loading="lazy"
             className="rounded-xl w-[250px] h-[200px] object-contain cursor-pointer "
             src={
               metadata?.image?.includes("ipfs.thirdwebstorage.com")
@@ -48,7 +49,7 @@ function NFTCollectionCard({ blockchain, collection, data }) {
                   )
                 : metadata?.image?.replace(
                     "https://ipfs.thirdwebcdn.com/ipfs/",
-                    "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
+                    `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
                   )
             }
           />
