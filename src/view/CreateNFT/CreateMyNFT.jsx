@@ -203,6 +203,7 @@ const CreateMyNFT = () => {
       );
       if (active) {
         setLoading(true);
+        console.log('ahiya ipfs upload')
         uploadOnIpfs(metadata).then(async (uri) => {
           console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
@@ -255,6 +256,7 @@ const CreateMyNFT = () => {
                     Swal.fire("Success", "NFT Minted Successfully", "success");
                   })
                   .catch((err) => {
+                    console.log("ahiya error 11111")
                     console.log(err);
                     setLoading(false);
                   });
@@ -262,6 +264,7 @@ const CreateMyNFT = () => {
               })
 
               .catch((err) => {
+                console.log("ahiya error 11111")
                 console.log(err);
                 setLoading(false);
               });
@@ -393,6 +396,7 @@ const CreateMyNFT = () => {
                   Swal.fire("Success", "NFT Minted Successfully", "success");
                 })
                 .catch((err) => {
+                  console.log("ahiya error")
                   console.log(err);
                   setLoading(false);
                 });
@@ -400,6 +404,7 @@ const CreateMyNFT = () => {
             })
 
             .catch((err) => {
+              console.log("udher error")
               console.log(err);
               setLoading(false);
             });

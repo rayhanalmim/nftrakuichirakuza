@@ -156,6 +156,7 @@ const CreateNFT = () => {
     let royaltyWalletAddress = values.royaltyWalletAddress;
     let charityWallet = values.charityWallet;
     let price = previewPrice;
+
     console.log(
       royalties,
       charity,
@@ -437,7 +438,9 @@ const CreateNFT = () => {
     try {
       if (active) {
         setLoading(true);
+        console.log("-----ssssssssss-------------sssssssssssss-----------s")
         uploadOnIpfs(metadata).then(async (uri) => {
+          console.log("-----cccccc-------------ccccccc-----------")
           console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
           mintNFT(

@@ -1,5 +1,6 @@
 import React, { Suspense} from "react";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { ThirdwebProvider as ThirdwebProviderV4} from "@thirdweb-dev/react";
+import { ThirdwebProvider } from "thirdweb/react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Web3ReactProvider } from "@web3-react/core";
@@ -39,11 +40,13 @@ ReactDOM.render(
     <Suspense fallback="...loading">
       <ApolloProvider client={client}>
         <ContextProvider value={500}>
-        <ThirdwebProvider activeChain="ethereum" clientId={process.env.REACT_APP_THIRDWEB_CLIENT_ID}>
+          <ThirdwebProviderV4 clientId={process.env.REACT_APP_THIRDWEB_CLIENT_ID } activeChain="ethereum">
+            <ThirdwebProvider >
           <BrowserRouter>
             <App />
           </BrowserRouter>
           </ThirdwebProvider>
+          </ThirdwebProviderV4>      
         </ContextProvider>
       </ApolloProvider>
     </Suspense>
