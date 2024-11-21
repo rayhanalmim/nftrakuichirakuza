@@ -126,7 +126,6 @@ const NFTPage = () => {
       : null;
   let lazyMetadata =
     !loading && !error ? JSON.parse(data?.ItemPageQuery?.nft?.metadata) : null;
-    console.log(lazyMetadata)
   let activity = !loading && !error ? data?.itemPageQuery?.event : null;
   let nftData = !loading && !error ? data?.ItemPageQuery?.nft : null;
   let signer = !loading && !error ? data?.ItemPageQuery?.nft?.signer : "";
@@ -137,12 +136,10 @@ const NFTPage = () => {
         : JSON.parse(data?.ItemPageQuery?.nft?.voucher)
       : "";
   useEffect(() => {
-    
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
 
     if (active) {
       let dataToken = JSON.parse(localStorage.getItem("loggedIn"));
@@ -162,12 +159,9 @@ const NFTPage = () => {
         } else {
           OwnerOfToken(tokenId, collection)
             .then((res) => {
-              console.log(res);
               setOwner(res);
             })
-            .catch((err) => {
-              console.log(err);
-            });
+            .catch((err) => {});
           setTransactionLength(data?.ItemPageQuery?.event[0].block_timestamp);
           if (data?.ItemPageQuery?.nft.listingId != "") {
             GetListingData(
@@ -175,7 +169,6 @@ const NFTPage = () => {
               collection
             )
               .then((res) => {
-                console.log(res.startTime);
                 setListingData({
                   assetContract: res.assetContract,
                   buyoutPricePerToken: res.buyoutPricePerToken,
@@ -201,13 +194,8 @@ const NFTPage = () => {
     } else {
     }
   }, [loading, active, account, data?.ItemPageQuery?.nft.listingId]);
-  const onDateChange = (value, dateString) => {
-    console.log("Selected Time: ", value);
-    console.log("Formatted Selected Time: ", dateString);
-  };
+  const onDateChange = (value, dateString) => {};
   const onOk = async (value) => {
-    console.log("onOk: ", value);
-    console.log(moment(value[0]._d).format("dd:mm:yyyy"));
     let d1 = moment(value[0]._d);
     let d2 = moment(value[1]._d);
 
@@ -215,7 +203,6 @@ const NFTPage = () => {
 
     let seconds = d2.diff(d1, "seconds");
     setDiffrence(seconds);
-    console.log(`Difference in seconds: ${seconds}`);
   };
   const SaleNFT = async (price) => {
     function getChainIdFromName(chainName) {
@@ -229,19 +216,16 @@ const NFTPage = () => {
     }
     const chainName = data ? data.ItemPageQuery.nft.blockchain : null;
     const id = getChainIdFromName(chainName);
-    console.log(id);
 
     if (chainId != id) {
       alert("Connected to wrong network");
     } else {
       if (data?.ItemPageQuery?.lazyMinting) {
         if (voucher && voucher[6] == ChainsInfo[chainId].OVE_COIN) {
-          console.log("in this");
           getErc20Contract(ChainsInfo[chainId].OVE_COIN, library.provider)
             .methods.balanceOf(account)
             .call()
             .then((res) => {
-              console.log(res, voucher[5], "Ove Balance");
               if (res == 0) {
                 Swal.fire(
                   "Insufficient Fund",
@@ -266,7 +250,6 @@ const NFTPage = () => {
                     from: account,
                   })
                   .then((res) => {
-                    console.log(voucher, signer);
                     setBuyLoad(true);
                     getErc721Contract(
                       ChainsInfo[chainId].NFT_ADDRESS,
@@ -277,7 +260,6 @@ const NFTPage = () => {
                         from: account,
                       })
                       .then((res) => {
-                        console.log(res);
                         updateLazyItemNFT({
                           variables: {
                             collectionAddress: collection,
@@ -304,14 +286,12 @@ const NFTPage = () => {
                           ],
                         })
                           .then((res) => {
-                            console.log("nft response", res);
                             navigate(
                               `/nft/nftpage/polygon/${collection}/${res.data?.updateLazyItem?.token_id}`
                             );
                             setBuyLoad(false);
                           })
                           .catch((err) => {
-                            console.log(err);
                             setBuyLoad(false);
                           });
                       })
@@ -334,10 +314,7 @@ const NFTPage = () => {
           )
             .then((res) => {
               setBuyLoad(true);
-              console.log(
-                res?.events?.TokensMintedWithSignature.returnValues
-                  ?.tokenIdMinted
-              );
+
               updateLazyItemNFT({
                 variables: {
                   collectionAddress: collection,
@@ -364,7 +341,6 @@ const NFTPage = () => {
                 ],
               })
                 .then((res) => {
-                  console.log("nft response", res);
                   navigate(
                     `/nft/nftpage/polygon/${collection}/${res.data?.updateLazyItem?.token_id}`
                   );
@@ -391,7 +367,6 @@ const NFTPage = () => {
             "100"
           )
             .then(async (res) => {
-              console.log(res?.events?.ListingAdded?.returnValues?.listingId);
               updateItemSale({
                 variables: {
                   collectionAddress: collection,
@@ -499,11 +474,9 @@ const NFTPage = () => {
           moment.unix(new Date(transactionLength).getTime() / 1000)
         ) == 3
       ) {
-        console.log(nftData?.listingId);
         setBuyLoad(true);
         removeFromSale(parseInt(nftData?.listingId))
           .then((res) => {
-            console.log(res);
             updateItemSale({
               variables: {
                 collectionAddress: collection,
@@ -613,7 +586,6 @@ const NFTPage = () => {
           listingData?.buyoutPricePerToken
         )
           .then((res) => {
-            console.log(res);
             updateItemSale({
               variables: {
                 collectionAddress: collection,
@@ -824,17 +796,13 @@ const NFTPage = () => {
   ];
   const isListed = (ListingTime, TransactionTime) => {
     let transTime = TransactionTime._i / 1000;
-    console.log(ListingTime, TransactionTime._i / 1000, "isListed");
 
     if (isNaN(ListingTime)) {
-      console.log("in nan");
       return 2;
     }
     if (parseInt(transTime) > parseInt(ListingTime)) {
-      console.log("greater time");
       return 2;
     } else {
-      console.log("in else");
       return 3;
     }
   };
@@ -850,23 +818,23 @@ const NFTPage = () => {
   };
 
   const transformIpfsUrl = (originalUrl) => {
-    if (!originalUrl || !originalUrl.includes('ipfs')) {
+    if (!originalUrl || !originalUrl.includes("ipfs")) {
       return originalUrl;
     }
-  
+
     try {
       // Extract the CID and filename
-      const urlParts = originalUrl.split('/');
+      const urlParts = originalUrl.split("/");
       const filename = urlParts[urlParts.length - 1];
-      
+
       // Extract CID from the hostname
       const hostname = urlParts[2]; // e.g., "bafybeicahxczdqkttjzhf3dmv2jle6yknfmjgnbw6yrfqmv3cxmi4cc37e.ipfs.cf-ipfs.com"
-      const cid = hostname.split('.')[0]; // Get the CID part
-      
+      const cid = hostname.split(".")[0]; // Get the CID part
+
       // Construct new URL
       return `https://ipfs.io/ipfs/${cid}/${filename}`;
     } catch (error) {
-      console.error('Error transforming IPFS URL:', error);
+      console.error("Error transforming IPFS URL:", error);
       return originalUrl;
     }
   };
@@ -879,43 +847,49 @@ const NFTPage = () => {
     return <PageLoading />;
   }
 
+  console.log("lazyMetadata-->", lazyMetadata);
+
   return (
-    <div className="mt-36 relative">
+    <div className="mt-36 md:mt-0 relative">
       {error ? (
         <NotDetails />
       ) : (
         <div className="max-w-[1500px] mx-auto">
-          {console.log(lazyMetadata)}
-        
           <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5 h-[500px] w-full  top-[100px] bg-white">
             <div className="flex-1">
               {
                 <>
                   <img
-                   src={
-                    lazyMetadata?.image.includes("http")
-                      ? transformIpfsUrl(lazyMetadata?.image.replace(
-                          "https://ipfs.thirdwebcdn.com/ipfs/",
-                          `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
-                        ))
-                      : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-                  }
-                    // src={
-                    //   lazyMetadata && lazyMetadata?.image.includes("ipfs")
-                    //     ? lazyMetadata?.image.replace(
-                    //         "https://ipfs.thirdwebcdn.com/ipfs/",
-                    //         "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
-                    //       )
-                    //     : lazyMetadata?.image.includes("http")
-                    //     ? lazyMetadata?.image.replace(
-                    //         "https://ipfs.thirdwebcdn.com/ipfs/",
-                    //         "https://0a7fb2c625dc7ba2c0696fc825ec1c78.ipfscdn.io/ipfs/"
-                    //       )
-                    //     : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-                    // }
+                    src={
+                      lazyMetadata?.image?.includes("ipfs.cf-ipfs.com")
+                        ? lazyMetadata?.image?.replace(
+                            /^https:\/\/([^.]+)\.ipfs\.cf-ipfs\.com\/(.+)$/,
+                            "https://ipfs.io/ipfs/$1/$2"
+                          )
+                        : lazyMetadata?.image?.replace(
+                            "https://ipfs.thirdwebcdn.com/ipfs/",
+                            `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                          ) ||
+                          
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+
+                      // lazyMetadata?.image
+                      //   ? lazyMetadata?.image.includes("http")
+                      //     ? transformIpfsUrl(
+                      //         lazyMetadata?.image.replace(
+                      //           "https://ipfs.thirdwebcdn.com/ipfs/",
+                      //           `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                      //         )
+                      //       )
+                      //     : lazyMetadata?.image
+                      //   : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+                    }
                     alt=""
-                    className="w-full object-contain  mx-auto max-h-[400px]"
+                    className="w-full object-contain mx-auto max-h-[400px]"
                     onClick={() => openImageViewer(0)}
+                    onError={() => (
+                      <div className="animate-pulse w-full h-[400px] bg-gray-200 rounded-lg"></div>
+                    )}
                   />
                 </>
               }
@@ -929,10 +903,12 @@ const NFTPage = () => {
                     onClick={() => setIsViewerOpen(false)}
                     src={
                       lazyMetadata?.image.includes("http")
-                        ? transformIpfsUrl(lazyMetadata?.image.replace(
-                            "https://ipfs.thirdwebcdn.com/ipfs/",
-                            `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
-                          ))
+                        ? transformIpfsUrl(
+                            lazyMetadata?.image.replace(
+                              "https://ipfs.thirdwebcdn.com/ipfs/",
+                              `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                            )
+                          )
                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                     }
                     // src={
@@ -1203,7 +1179,6 @@ const NFTPage = () => {
         </div>
       )}
     </div>
- 
   );
 };
 

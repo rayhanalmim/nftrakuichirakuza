@@ -38,8 +38,6 @@ const CollectionDetails = () => {
   }
   return (
     <div>
-
-    
       <div className="max-w-[1500px] mx-auto w-full py-5 px-5">
         <div className="relative  ">
           <img

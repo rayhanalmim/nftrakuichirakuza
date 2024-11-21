@@ -78,14 +78,10 @@ const CreateNFT = () => {
   const BSC_API_URL =
     "https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd";
   const convertMaticToYen = async (price) => {
-    console.log(price);
-    console.log("----------------chain id ");
-    console.log(chainId);
-
     if (chainId == 1) {
       const ETH_RESPONSE = await fetch(ETH_API_URL);
       const ethData = await ETH_RESPONSE.json();
-      console.log(ethData, "<=======");
+
       const convertedAmount = price * ethData["ethereum"].usd;
       setYenAmount(convertedAmount);
     }
@@ -138,7 +134,7 @@ const CreateNFT = () => {
   const beforeUpload = (file, fileList) => {
     setFile(file);
     setPreviewURL(URL.createObjectURL(file));
-    console.log(file);
+
     return false;
   };
 
@@ -157,14 +153,6 @@ const CreateNFT = () => {
     let charityWallet = values.charityWallet;
     let price = previewPrice;
 
-    console.log(
-      royalties,
-      charity,
-      charityWallet,
-      royaltyWalletAddress,
-      payout,
-      price
-    );
     let imageFormObj = new FormData();
     imageFormObj.append("image", file);
 
@@ -179,10 +167,8 @@ const CreateNFT = () => {
       if (active) {
         setLoading(true);
         uploadOnIpfs(metadata).then(async (uri) => {
-          console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
           if (lazyMint) {
-            console.log("in this");
             signCreate(
               account,
               account,
@@ -201,7 +187,6 @@ const CreateNFT = () => {
               ""
             )
               .then(async (res) => {
-                console.log(res, "voucher created");
                 let metadata = await downloadJSONOnIpfs(uri);
                 createItem({
                   variables: {
@@ -253,7 +238,6 @@ const CreateNFT = () => {
               charity
             )
               .then(async (res) => {
-                console.log();
                 let metadata = await downloadJSONOnIpfs(uri);
                 createItem({
                   variables: {
@@ -300,14 +284,6 @@ const CreateNFT = () => {
     let royaltyWalletAddress = values.royaltyWalletAddress;
     let charityWallet = values.charityWallet;
     let price = previewPrice;
-    console.log(
-      royalties,
-      charity,
-      charityWallet,
-      royaltyWalletAddress,
-      payout,
-      price
-    );
     let imageFormObj = new FormData();
     imageFormObj.append("image", file);
 
@@ -328,9 +304,8 @@ const CreateNFT = () => {
       if (active) {
         setLoading(true);
         uploadOnIpfs(metadata).then(async (uri) => {
-          console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
-          console.log("in this");
+
           signCreate(
             account,
             account,
@@ -349,7 +324,6 @@ const CreateNFT = () => {
             ""
           )
             .then(async (res) => {
-              console.log(res, "voucher created");
               let metadata = await downloadJSONOnIpfs(uri);
               createItem({
                 variables: {
@@ -412,14 +386,7 @@ const CreateNFT = () => {
     let royaltyWalletAddress = values.royaltyWalletAddress;
     let charityWallet = values.charityWallet;
     let price = previewPrice;
-    console.log(
-      royalties,
-      charity,
-      charityWallet,
-      royaltyWalletAddress,
-      payout,
-      price
-    );
+
     let imageFormObj = new FormData();
     imageFormObj.append("image", file);
 
@@ -438,10 +405,8 @@ const CreateNFT = () => {
     try {
       if (active) {
         setLoading(true);
-        console.log("-----ssssssssss-------------sssssssssssss-----------s")
+
         uploadOnIpfs(metadata).then(async (uri) => {
-          console.log("-----cccccc-------------ccccccc-----------")
-          console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
           mintNFT(
             uri,
@@ -452,7 +417,6 @@ const CreateNFT = () => {
             charity
           )
             .then(async (res) => {
-              console.log();
               let metadata = await downloadJSONOnIpfs(uri);
               createItem({
                 variables: {
@@ -873,7 +837,6 @@ const CreateNFT = () => {
 export default CreateNFT;
 
 const PreviewNFTCard = ({ imageurl, onRemove, name, price, chainId }) => {
-  console.log(imageurl, "imageurl");
   const { t } = useTranslation();
 
   return (

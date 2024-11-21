@@ -96,14 +96,10 @@ const CreateMyNFT = () => {
   const BSC_API_URL =
     "https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd";
   const convertMaticToYen = async (price) => {
-    console.log(price);
-    console.log("----------------chain id ");
-    console.log(chainId);
-
     if (chainId == 1) {
       const ETH_RESPONSE = await fetch(ETH_API_URL);
       const ethData = await ETH_RESPONSE.json();
-      console.log(ethData, "<=======");
+
       const convertedAmount = price * ethData["ethereum"].usd;
       setYenAmount(convertedAmount);
     }
@@ -165,11 +161,9 @@ const CreateMyNFT = () => {
   const beforeUpload = (file, fileList) => {
     setFile(file);
     setPreviewURL(URL.createObjectURL(file));
-    console.log(file);
     return false;
   };
   const handleSubmit = (values) => {
-    console.log(values);
     let description = values.description;
     let name = values.name;
     let royalties = values.royalties;
@@ -191,24 +185,12 @@ const CreateMyNFT = () => {
       properties: {},
     };
     try {
-      console.log(
-        royalties,
-        "<===== royalties",
-        charity,
-        "<===== charity",
-        charityWallet,
-        "<===== charityWallet",
-        royaltyWalletAddress,
-        "<===== royaltyWalletAddress"
-      );
       if (active) {
         setLoading(true);
-        console.log('ahiya ipfs upload')
+
         uploadOnIpfs(metadata).then(async (uri) => {
-          console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
           if (lazyMint) {
-            console.log("in this");
             signCreate(
               account,
               account,
@@ -228,7 +210,6 @@ const CreateMyNFT = () => {
               collectionAddress
             )
               .then(async (res) => {
-                console.log(res, "voucher created");
                 let metadata = await downloadJSONOnIpfs(uri);
                 createItem({
                   variables: {
@@ -256,16 +237,12 @@ const CreateMyNFT = () => {
                     Swal.fire("Success", "NFT Minted Successfully", "success");
                   })
                   .catch((err) => {
-                    console.log("ahiya error 11111")
-                    console.log(err);
                     setLoading(false);
                   });
                 setLoading(false);
               })
 
               .catch((err) => {
-                console.log("ahiya error 11111")
-                console.log(err);
                 setLoading(false);
               });
           } else {
@@ -278,7 +255,6 @@ const CreateMyNFT = () => {
               charity
             )
               .then(async (res) => {
-                console.log(res);
                 let metadata = await downloadJSONOnIpfs(uri);
                 createItem({
                   variables: {
@@ -317,7 +293,6 @@ const CreateMyNFT = () => {
   };
 
   const handleLazyMint = (values) => {
-    console.log(values);
     let description = values.description;
     let name = values.name;
     let royalties = values.royalties;
@@ -346,9 +321,8 @@ const CreateMyNFT = () => {
       if (active) {
         setLoading(true);
         uploadOnIpfs(metadata).then(async (uri) => {
-          console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
-          console.log(data, "in this");
+
           signCreate(
             account,
             account,
@@ -368,7 +342,6 @@ const CreateMyNFT = () => {
             collectionAddress
           )
             .then(async (res) => {
-              console.log(res, "voucher created");
               let metadata = await downloadJSONOnIpfs(uri);
               createItem({
                 variables: {
@@ -396,7 +369,6 @@ const CreateMyNFT = () => {
                   Swal.fire("Success", "NFT Minted Successfully", "success");
                 })
                 .catch((err) => {
-                  console.log("ahiya error")
                   console.log(err);
                   setLoading(false);
                 });
@@ -404,7 +376,6 @@ const CreateMyNFT = () => {
             })
 
             .catch((err) => {
-              console.log("udher error")
               console.log(err);
               setLoading(false);
             });
@@ -421,7 +392,6 @@ const CreateMyNFT = () => {
   };
 
   const handleSimpleMint = (values) => {
-    console.log(values);
     let description = values.description;
     let name = values.name;
     let royalties = values.royalties;
@@ -447,20 +417,9 @@ const CreateMyNFT = () => {
       properties: {},
     };
     try {
-      console.log(
-        royalties,
-        "<===== royalties",
-        charity,
-        "<===== charity",
-        charityWallet,
-        "<===== charityWallet",
-        royaltyWalletAddress,
-        "<===== royaltyWalletAddress"
-      );
       if (active) {
         setLoading(true);
         uploadOnIpfs(metadata).then(async (uri) => {
-          console.log(uri);
           const data = await downloadJSONOnIpfs(uri);
 
           mintNFT(
@@ -472,7 +431,6 @@ const CreateMyNFT = () => {
             charity
           )
             .then(async (res) => {
-              console.log(res);
               let metadata = await downloadJSONOnIpfs(uri);
               createItem({
                 variables: {
@@ -1104,8 +1062,6 @@ const CreateMyNFT = () => {
 
 export default CreateMyNFT;
 const PreviewNFTCard = ({ imageurl, onRemove, name, price, chainid }) => {
-  console.log(imageurl, "imageurl");
-  console.log(chainid, "<=============== chain id");
   return (
     <>
       <div className="w-full max-w-[300px] mx-auto px-3 py-4 border rounded-xl bg-white mb-4">

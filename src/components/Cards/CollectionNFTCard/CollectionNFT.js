@@ -4,10 +4,6 @@ import { t } from "i18next";
 import { Link } from "react-router-dom";
 function NFTCollectionCard({ blockchain, collection, data }) {
   let metadata = JSON.parse(data?.metadata);
-  console.log(metadata)
-
-
-
 
   return (
     <div className="w-full max-w-[300px] mx-auto px-3 py-4 border rounded-xl bg-white mb-4">
@@ -41,14 +37,13 @@ function NFTCollectionCard({ blockchain, collection, data }) {
             }
           /> */}
           <img
-          loading="lazy"
+            loading="lazy"
             className="rounded-xl w-[250px] h-[200px] object-contain cursor-pointer "
-
             src={
               metadata?.image?.includes("ipfs.cf-ipfs.com")
                 ? metadata?.image?.replace(
                     /^https:\/\/([^.]+)\.ipfs\.cf-ipfs\.com\/(.+)$/,
-                    'https://ipfs.io/ipfs/$1/$2'
+                    "https://ipfs.io/ipfs/$1/$2"
                   )
                 : metadata?.image?.replace(
                     "https://ipfs.thirdwebcdn.com/ipfs/",
