@@ -97,7 +97,7 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
             <div className="md:py-10  py-2">
               <div className="flex flex-col md:flex-row justify-center gap-[40px] max-w-[1500px] mx-auto md:px-[20px] px-0  md:max-h-[700px] h-auto">
                 <div className="sticky h-auto  md:top-[120px] top-auto bg-white md:max-h-[700px]">
-                  <div className="border-b-2 pb-4">
+                  <div className="border-b-2 pb-4"> 
                     <Dropdown
                       menu={{
                         items,

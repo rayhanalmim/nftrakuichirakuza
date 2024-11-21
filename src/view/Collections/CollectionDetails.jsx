@@ -38,6 +38,8 @@ const CollectionDetails = () => {
   }
   return (
     <div>
+
+    
       <div className="max-w-[1500px] mx-auto w-full py-5 px-5">
         <div className="relative  ">
           <img
@@ -59,9 +61,9 @@ const CollectionDetails = () => {
           />
         </div>
 
-        <div className="flex justify-between items-center flex-col md:flex-row gap-5 pt-14  px-5">
+        <div className="flex justify-between items-center flex-col md:flex-row gap-5 pt-14 lg:pt-20  px-5">
           <div className="flex-1 md:max-w-[800px] px-2  w-full ">
-            <div className="flex items-center gap-4 py-4 px-4"></div>
+            <div className="flex items-center gap-4 py-4 px-4 h-4"></div>
 
             <div className="flex items-center gap-5 md:flex-nowrap   justify-start  flex-wrap ">
               <button className="mx-2 my-2  px-[30px] py-2 capitalize rounded-lg bg-black text-white ">
@@ -121,6 +123,7 @@ const CollectionDetails = () => {
         </div>
 
         <div>
+          
           <NFT
             data={
               !data

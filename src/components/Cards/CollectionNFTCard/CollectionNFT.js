@@ -3,10 +3,12 @@ import React from "react";
 import { t } from "i18next";
 import { Link } from "react-router-dom";
 function NFTCollectionCard({ blockchain, collection, data }) {
-  console.log(data, "in this");
   let metadata = JSON.parse(data?.metadata);
-  console.log("-------------------")
   console.log(metadata)
+
+
+
+
   return (
     <div className="w-full max-w-[300px] mx-auto px-3 py-4 border rounded-xl bg-white mb-4">
       <div className="rounded-xl">
@@ -41,17 +43,29 @@ function NFTCollectionCard({ blockchain, collection, data }) {
           <img
           loading="lazy"
             className="rounded-xl w-[250px] h-[200px] object-contain cursor-pointer "
+
             src={
-              metadata?.image?.includes("ipfs.thirdwebstorage.com")
+              metadata?.image?.includes("ipfs.cf-ipfs.com")
                 ? metadata?.image?.replace(
-                    "ipfs.thirdwebstorage.com",
-                    "ipfs.cf-ipfs.com"
+                    /^https:\/\/([^.]+)\.ipfs\.cf-ipfs\.com\/(.+)$/,
+                    'https://ipfs.io/ipfs/$1/$2'
                   )
                 : metadata?.image?.replace(
                     "https://ipfs.thirdwebcdn.com/ipfs/",
                     `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
                   )
             }
+            // src={
+            //   metadata?.image?.includes("ipfs.thirdwebstorage.com")
+            //     ? metadata?.image?.replace(
+            //         "ipfs.thirdwebstorage.com",
+            //         "ipfs.cf-ipfs.com"
+            //       )
+            //     : metadata?.image?.replace(
+            //         "https://ipfs.thirdwebcdn.com/ipfs/",
+            //         `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+            //       )
+            // }
           />
         </Link>
       </div>

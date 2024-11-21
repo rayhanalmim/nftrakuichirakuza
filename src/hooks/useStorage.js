@@ -1,11 +1,8 @@
 import { ThirdwebStorage } from "@thirdweb-dev/storage";
-
 import { useStorageUpload } from "@thirdweb-dev/react";
 
 
-
 const storage = new ThirdwebStorage({clientId:process.env.REACT_APP_THIRDWEB_CLIENT_ID });
-
 
 function useStorage() {
   const { mutateAsync: upload } = useStorageUpload();

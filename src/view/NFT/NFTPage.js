@@ -849,6 +849,28 @@ const NFTPage = () => {
     setIsViewerOpen(false);
   };
 
+  const transformIpfsUrl = (originalUrl) => {
+    if (!originalUrl || !originalUrl.includes('ipfs')) {
+      return originalUrl;
+    }
+  
+    try {
+      // Extract the CID and filename
+      const urlParts = originalUrl.split('/');
+      const filename = urlParts[urlParts.length - 1];
+      
+      // Extract CID from the hostname
+      const hostname = urlParts[2]; // e.g., "bafybeicahxczdqkttjzhf3dmv2jle6yknfmjgnbw6yrfqmv3cxmi4cc37e.ipfs.cf-ipfs.com"
+      const cid = hostname.split('.')[0]; // Get the CID part
+      
+      // Construct new URL
+      return `https://ipfs.io/ipfs/${cid}/${filename}`;
+    } catch (error) {
+      console.error('Error transforming IPFS URL:', error);
+      return originalUrl;
+    }
+  };
+
   const currentUrl = window.location.href;
 
   useEffect(() => {}, []);
@@ -858,43 +880,26 @@ const NFTPage = () => {
   }
 
   return (
-    <div className="relative">
+    <div className="mt-36 relative">
       {error ? (
         <NotDetails />
       ) : (
         <div className="max-w-[1500px] mx-auto">
-          {console.log(owner)}
-          {/* {console.log(
-            owner,
-            "owners",
-            new Date(data?.ItemPageQuery?.event[0].block_timestamp).getTime() /
-              1000,
-            "transactionTime",
-            Math.floor(new Date(transactionLength).getTime() / 1000),
-            isListed(
-              parseInt(listingData?.startTime),
-              moment.unix(new Date(transactionLength).getTime() / 1000)
-            ),
-            listingData?.startTime
-          )} */}
+          {console.log(lazyMetadata)}
+        
           <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5 h-[500px] w-full  top-[100px] bg-white">
             <div className="flex-1">
               {
                 <>
                   <img
-                    src={
-                      lazyMetadata && lazyMetadata?.image.includes("ipfs.thirdwebstorage.com")
-                        ? lazyMetadata?.image.replace(
-                            "ipfs.thirdwebstorage.com",
-                            "ipfs.cf-ipfs.com"
-                          )
-                        : lazyMetadata?.image.includes("http")
-                        ? lazyMetadata?.image.replace(
-                            "https://ipfs.thirdwebcdn.com/ipfs/",
-                            `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
-                          )
-                        : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-                    }
+                   src={
+                    lazyMetadata?.image.includes("http")
+                      ? transformIpfsUrl(lazyMetadata?.image.replace(
+                          "https://ipfs.thirdwebcdn.com/ipfs/",
+                          `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                        ))
+                      : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+                  }
                     // src={
                     //   lazyMetadata && lazyMetadata?.image.includes("ipfs")
                     //     ? lazyMetadata?.image.replace(
@@ -923,16 +928,11 @@ const NFTPage = () => {
                     className="w-[90%] h-full object-contain"
                     onClick={() => setIsViewerOpen(false)}
                     src={
-                      lazyMetadata && lazyMetadata?.image.includes("ipfs.thirdwebstorage.com")
-                        ? lazyMetadata?.image.replace(
-                            "ipfs.thirdwebstorage.com",
-                            "ipfs.cf-ipfs.com"
-                          )
-                        : lazyMetadata?.image.includes("http")
-                        ? lazyMetadata?.image.replace(
+                      lazyMetadata?.image.includes("http")
+                        ? transformIpfsUrl(lazyMetadata?.image.replace(
                             "https://ipfs.thirdwebcdn.com/ipfs/",
                             `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
-                          )
+                          ))
                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
                     }
                     // src={
@@ -1203,6 +1203,7 @@ const NFTPage = () => {
         </div>
       )}
     </div>
+ 
   );
 };
 
