@@ -45,7 +45,7 @@ export const HeroSection = ({ heading }) => {
               </div> */}
             </div>
 
-            {/* <SliderHero /> */}
+            <SliderHero />
           </div>
         </div>
       </section>
