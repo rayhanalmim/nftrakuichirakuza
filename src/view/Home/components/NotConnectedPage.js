@@ -30,13 +30,13 @@ export default function NotConnectedPage() {
                   Home
                 </Link>
               </div>
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <img
                   src="https://cdn.dribbble.com/users/1373100/screenshots/5521407/eth_drib_v1.gif"
                   alt="img"
                   className="object-cover w-full h-full"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

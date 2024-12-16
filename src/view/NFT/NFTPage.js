@@ -850,12 +850,12 @@ const NFTPage = () => {
   console.log("lazyMetadata-->", lazyMetadata);
 
   return (
-    <div className="mt-36 md:mt-0 relative">
+    <div className="mt-7 md:mt-0 relative">
       {error ? (
         <NotDetails />
       ) : (
         <div className="max-w-[1500px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5 h-[500px] w-full  top-[100px] bg-white">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5 h-auto w-full  top-[100px] bg-white">
             <div className="flex-1">
               {
                 <>

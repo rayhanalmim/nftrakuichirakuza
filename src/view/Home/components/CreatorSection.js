@@ -83,14 +83,14 @@ const CreatorSection = ({ heading, userData }) => {
   return (
     <div>
       <section className="creator-sec bg-creator-img bg-no-repeat bg-cover rounded-lg py-[3rem]">
-        <div className=" max-w-[400px] w-full mx-auto text-center  pb-5">
+        {/* <div className=" max-w-[400px] w-full mx-auto text-center  pb-5">
           <h2 className="capitalize text-3xl font-black text-center pb-2 ">
             {t("top creator")}
           </h2>
           <p className="text-lg text-violet">{heading}</p>
-        </div>
+        </div> */}
         <div className="max-w-[1500px] w-full mx-auto px-[40px] rounded-lg">
-          <div className="flex justify-center items-center flex-col md:flex-row gap-5">
+          {/* <div className="flex justify-center items-center flex-col md:flex-row gap-5">
             {userData &&
               userData?.slice(0, 4).map((data, index) => {
                 return (
@@ -132,14 +132,14 @@ const CreatorSection = ({ heading, userData }) => {
                             {data.about_details.slice(0, 20) + "..."}
                           </p>
 
-                          {/* <Button title={t("+ follow ")}></Button> */}
+                          <Button title={t("+ follow ")}></Button>
                         </div>
                       </div>
                     </div>
                   </>
                 );
               })}
-          </div>
+          </div> */}
 
           <div className="text-white text-center bg p-[2rem] mt-5 rounded-lg">
             <h3 className="text-white text-3xl max-w-[350px] mx-auto">

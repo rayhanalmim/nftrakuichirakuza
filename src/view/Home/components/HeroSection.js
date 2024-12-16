@@ -29,7 +29,7 @@ export const HeroSection = ({ heading }) => {
                 <Button title={t("Explore")} linkURL={"/explore"} />
                 <Button title={t("Create NFT")} linkURL={"/create"} />
               </div>
-              <div className="flex flex-row md:gap-[70px] gap-[40px] pt-5 mt-5 justify-center items-center md:justify-start md:items-start ">
+              {/* <div className="flex flex-row md:gap-[70px] gap-[40px] pt-5 mt-5 justify-center items-center md:justify-start md:items-start ">
                 <div className="">
                   <h4 className="text-black font-bold text-xl  ">10+</h4>
                   <p className="capitalize text-lightgrey text-lg">
@@ -42,11 +42,10 @@ export const HeroSection = ({ heading }) => {
                     {t("Artists")}
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
-           
-              <SliderHero />
-           
+
+            {/* <SliderHero /> */}
           </div>
         </div>
       </section>
