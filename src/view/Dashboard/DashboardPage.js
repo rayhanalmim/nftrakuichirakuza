@@ -171,22 +171,20 @@ const DashboardPage = ({ level1Data }) => {
     },
   ];
 
+  const dateConvert = (refdate) => {
+    console.log(refdate);
+    var Rdate = new Date(refdate * 1);
 
-  const dateConvert = (refdate) =>{
-    console.log(refdate)
-    var Rdate = new Date(refdate*1);
-
-    console.log(Rdate)
-    const day = Rdate.getDate(); 
-    const month = Rdate.getMonth() + 1; 
-    const year = Rdate.getFullYear(); 
+    console.log(Rdate);
+    const day = Rdate.getDate();
+    const month = Rdate.getMonth() + 1;
+    const year = Rdate.getFullYear();
     const formattedDate = `${day}-${month}-${year}`;
 
-    console.log(formattedDate)
+    console.log(formattedDate);
 
     return formattedDate;
-  }
-
+  };
 
   return (
     <div>
@@ -194,7 +192,7 @@ const DashboardPage = ({ level1Data }) => {
         <Reward />
       ) : (
         <>
-          <div className="bg-cyan"> 
+          <div className="bg-cyan">
             <div className="mx-auto max-w-[1500px] w-full px-2 ">
               <div className="py-[50px]">
                 <h3 className="text-2xl font-bold">
@@ -203,8 +201,9 @@ const DashboardPage = ({ level1Data }) => {
                 <div className="flex  flex-col lg:flex-row gap-[30px] ">
                   <>
                     {userData &&
-                    // here array slicing was 0,3 , Harsh Changed it From 0,3 to 0,1 for hiding Parent Node.
+                      // here array slicing was 0,3 , Harsh Changed it From 0,3 to 0,1 for hiding Parent Node.
                       userData.slice(0, 1).map((item, key) => {
+                        console.log(item.avatar_url)
                         return (
                           <div className="px-5 py-[2rem] max-w-[400px] mx-auto w-full rounded rup shadow text-white ">
                             <h3 className="text-2xl font-semibold text-white">
@@ -217,15 +216,27 @@ const DashboardPage = ({ level1Data }) => {
                             <div className="flex gap-10">
                               <img
                                 className="w-[80px] h-[80px] rounded-full"
-                                src={item.avatar_url.includes("ipfs") ? item.avatar_url.replace(
-                                  "ipfs://",
-                                  "https://ipfs.io/ipfs"
-                                ):item.avatar_url
-                              }
+                                // src={
+                                //   item.avatar_url.includes("ipfs.cf-ipfs.com")
+                                //     ? item.avatar_url.replace(
+                                //         /^https:\/\/([^.]+)\.ipfs\.cf-ipfs\.com\/(.+)$/,
+                                //         "https://ipfs.io/ipfs/$1/$2"
+                                //       )
+                                //     : item.avatar_url.replace(
+                                //         "https://ipfs.thirdwebcdn.com/ipfs/",
+                                //         `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                                //       ) || item.avatar_url
+                                // }
+                                src={
+                                  item.avatar_url.includes("ipfs")
+                                    ? item.avatar_url.replace(
+                                        "ipfs://",
+                                        `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                                      )
+                                    : item.avatar_url
+                                }
                                 alt=""
                               />
-
-
 
                               <div>
                                 <h3 className="text-2xl font-semibold text-white">
@@ -379,7 +390,7 @@ const DashboardPage = ({ level1Data }) => {
                           <div className="mt-5">
                             <div className="overflow-x-auto">
                               <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
-                                <table className="min-w-full leading-normal">   
+                                <table className="min-w-full leading-normal">
                                   <thead>
                                     <tr>
                                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ">
@@ -426,7 +437,6 @@ const DashboardPage = ({ level1Data }) => {
                                                 </div>
                                               </td>
 
-                                          
                                               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <p className="text-gray-900 whitespace-no-wrap">
                                                   {truncateAddress(
@@ -435,12 +445,9 @@ const DashboardPage = ({ level1Data }) => {
                                                 </p>
                                               </td>
 
-
                                               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <p className="text-gray-900 whitespace-no-wrap">
-                                                  { 
-                                                  dateConvert(item?.createdAt)
-                                                  }
+                                                  {dateConvert(item?.createdAt)}
                                                 </p>
                                               </td>
 
