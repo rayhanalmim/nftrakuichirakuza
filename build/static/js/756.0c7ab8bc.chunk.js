@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkteam478=self.webpackChunkteam478||[]).push([[756],{80756:e=>{e.exports=JSON.parse('[{"type":"function","name":"supportsInterface","inputs":[{"name":"interfaceId","type":"bytes4","internalType":"bytes4"}],"outputs":[{"name":"","type":"bool","internalType":"bool"}],"stateMutability":"view"}]')}}]);

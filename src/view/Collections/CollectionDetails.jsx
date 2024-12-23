@@ -121,7 +121,6 @@ const CollectionDetails = () => {
         </div>
 
         <div>
-          
           <NFT
             data={
               !data

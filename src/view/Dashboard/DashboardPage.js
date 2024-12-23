@@ -203,7 +203,7 @@ const DashboardPage = ({ level1Data }) => {
                     {userData &&
                       // here array slicing was 0,3 , Harsh Changed it From 0,3 to 0,1 for hiding Parent Node.
                       userData.slice(0, 1).map((item, key) => {
-                        console.log(item.avatar_url)
+                        console.log(item.avatar_url);
                         return (
                           <div className="px-5 py-[2rem] max-w-[400px] mx-auto w-full rounded rup shadow text-white ">
                             <h3 className="text-2xl font-semibold text-white">

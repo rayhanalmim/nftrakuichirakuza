@@ -97,7 +97,7 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
             <div className="md:py-10  py-2">
               <div className="flex flex-col md:flex-row justify-center gap-[40px] max-w-[1500px] mx-auto md:px-[20px] px-0  md:max-h-[700px] h-auto">
                 <div className="sticky h-auto  md:top-[120px] top-auto bg-white md:max-h-[700px]">
-                  <div className="border-b-2 pb-4"> 
+                  <div className="border-b-2 pb-4">
                     <Dropdown
                       menu={{
                         items,
@@ -188,8 +188,8 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                         <h1> No Data available</h1>
                       ) : null}
                       {buyNow
-                        // ? data?.map((item, key) => {
-                        ? data?.slice(0, dataSize).map((item, key) => {
+                        ? // ? data?.map((item, key) => {
+                          data?.slice(0, dataSize).map((item, key) => {
                             return (
                               <>
                                 <NFTCollectionCard
@@ -202,8 +202,8 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                               </>
                             );
                           })
-                        // : data?.map((item, key) => {
-                        : data?.slice(0, dataSize).map((item, key) => {
+                        : // : data?.map((item, key) => {
+                          data?.slice(0, dataSize).map((item, key) => {
                             return (
                               <NFTCollectionCard
                                 key={key}
@@ -215,13 +215,17 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                             );
                           })}
                     </div>
-                    {
-                      dataSize<=data.length &&
-                      <button onClick={(e)=>{setDataSize(dataSize+12)}} className="bg-gray-100 hover:bg-gray-200 transition-all duration-200  mb-4 text-black w-full bg-no-repeat bg-cover rounded-xl py-3 px-2 mx-auto ">
-                      {" "}
-                      {t("Show More")}
-                    </button>
-                    }
+                    {dataSize <= data.length && (
+                      <button
+                        onClick={(e) => {
+                          setDataSize(dataSize + 12);
+                        }}
+                        className="bg-gray-100 hover:bg-gray-200 transition-all duration-200  mb-4 text-black w-full bg-no-repeat bg-cover rounded-xl py-3 px-2 mx-auto "
+                      >
+                        {" "}
+                        {t("Show More")}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
