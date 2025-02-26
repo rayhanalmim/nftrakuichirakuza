@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import NFTCard from "../../components/Cards/NFTCard/NFTCard";
 import { SearchComponent } from "../../components/Header/Header";
 import { Dropdown, Space } from "antd";
@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { getUserData } from "../../graphql/queries/getUser";
 import PageLoading from "../../components/PageLoading/PageLoading";
 import { truncateAddress } from "../../utils";
+
 const UserPage = () => {
   const { wallet } = useParams();
   console.log(wallet);
@@ -27,7 +28,14 @@ const UserPage = () => {
       //   label: "Event",
     },
   ];
-  const [copyText, setCopyText] = useState("");
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   if (loading) {
     return <PageLoading />;
   }
@@ -76,17 +84,32 @@ const UserPage = () => {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzUzNjIuZ2lm",
     },
   ];
+
   return (
     <div>
-      <div className="max-w-[1500px] mx-auto py-5  ">
+      <div className="max-w-[1500px] mx-auto py-5">
         <div className="relative  md:px-[40px] px-[20px]">
           <img
-            src={userInfo.bg_image}
+            src={
+              userInfo.bg_image?.includes("ipfs")
+                ? userInfo.bg_image?.replace(
+                    "ipfs://",
+                    `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                  )
+                : userInfo.bg_image
+            }
             className=" relative w-full h-[400px] mx-auto "
           />
           <img
-            src={userInfo.avatar_url}
-            className="absolute left-[50px] bottom-[-14%] mx-auto  md:w-auto  w-[14%] px-5"
+            src={
+              userInfo.avatar_url?.includes("ipfs")
+                ? userInfo.avatar_url?.replace(
+                    "ipfs://",
+                    `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                  )
+                : userInfo.avatar_url
+            }
+            className="absolute left-[50px] bottom-[-14%] mx-auto  md:w-auto w-40 h-40 px-5 bg-white p-2"
           />
         </div>
 

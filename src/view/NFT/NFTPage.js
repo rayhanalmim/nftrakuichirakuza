@@ -3,7 +3,7 @@ import { useCallback, useContext, useEffect, useRef } from "react";
 import React, { useState } from "react";
 import { RiArrowUpDownFill } from "react-icons/ri";
 import NotDetails from "../../components/404Page/NoDetails";
-import { BsFillGrid3X2GapFill } from "react-icons/bs";
+import { BsArrowLeft, BsFillGrid3X2GapFill } from "react-icons/bs";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { DatePicker } from "antd";
 import { useTranslation } from "react-i18next";
@@ -135,6 +135,7 @@ const NFTPage = () => {
         ? ""
         : JSON.parse(data?.ItemPageQuery?.nft?.voucher)
       : "";
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -848,6 +849,8 @@ const NFTPage = () => {
   }
 
   console.log("lazyMetadata-->", lazyMetadata);
+  console.log("data-->", data);
+
 
   return (
     <div className="mt-7 md:mt-0 relative">
@@ -855,6 +858,13 @@ const NFTPage = () => {
         <NotDetails />
       ) : (
         <div className="max-w-[1500px] mx-auto">
+          <button
+            className="px-2 py-1 mx-10 my-4 border border-gray-300 rounded flex items-center gap-3"
+            onClick={() => navigate(-1)} // Go back to the previous page
+          >
+            <BsArrowLeft />
+            {t("Back")}
+          </button>
           <div className="flex flex-col md:flex-row justify-center items-center gap-[20px] py-5 px-5 h-auto w-full  top-[100px] bg-white">
             <div className="flex-1">
               {

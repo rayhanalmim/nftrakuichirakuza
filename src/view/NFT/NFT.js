@@ -15,10 +15,12 @@ import { MdArrowDownward, MdArrowDropUp, MdArrowUpward } from "react-icons/md";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import { useQuery } from "@apollo/client";
 import PageLoading from "../../components/PageLoading/PageLoading";
+
 const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
   console.log(blockchain, collection, "card bft");
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState({
@@ -88,6 +90,7 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
   if (data) {
     <PageLoading />;
   }
+
   return (
     <>
       <div className="flex justify-center items-center gap-[20px] md:px-[20px] px-0  md:py-[2rem] py-2"></div>

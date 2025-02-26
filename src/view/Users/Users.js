@@ -95,6 +95,7 @@ const Users = () => {
   if (loading) {
     return <PageLoading />;
   }
+
   return (
     <div>
       {userData?.length > 0 ? (
@@ -104,34 +105,36 @@ const Users = () => {
               {userData?.map((data, index) => {
                 return (
                   <>
-                    <div className="border rounded-lg p-3 max-w-[400px] mx-auto ">
-                      <div>
-                        <img
-                          src={
-                            data?.avatar_url?.includes("ipfs")
-                              ? data?.avatar_url?.replace(
-                                  "ipfs://",
-                                  `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
-                                )
-                              : data?.avatar_url
-                          }
-                          className="w-full h-[200px]"
-                        />
-                      </div>
-                      <div className="px-2 pt-4 flex gap-[50px]  justify-between  items-center ">
+                    <Link to={`/users/userpage/${data?.wallet}`}>
+                      <div className="border rounded-lg p-3 max-w-[400px] mx-auto ">
                         <div>
-                          <h3 className="text-lg text-black">
-                            {data.displayName}
-                          </h3>
-                          <h4 className="text-sm text-black">
-                            {truncateAddress(data.wallet)}
-                          </h4>
-                          <p className="text-grey capitalize text-lg">
-                            {data.about_details.slice(0, 30) + "...."}
-                          </p>
+                          <img
+                            src={
+                              data?.avatar_url?.includes("ipfs")
+                                ? data?.avatar_url?.replace(
+                                    "ipfs://",
+                                    `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                                  )
+                                : data?.avatar_url
+                            }
+                            className="w-full h-[200px]"
+                          />
+                        </div>
+                        <div className="px-2 pt-4 flex gap-[50px]  justify-between  items-center ">
+                          <div>
+                            <h3 className="text-lg text-black">
+                              {data.displayName}
+                            </h3>
+                            <h4 className="text-sm text-black">
+                              {truncateAddress(data.wallet)}
+                            </h4>
+                            <p className="text-grey capitalize text-lg">
+                              {data.about_details.slice(0, 30) + "...."}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </>
                 );
               })}
