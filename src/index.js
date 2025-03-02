@@ -8,13 +8,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { ethers } from "ethers";
 import {
   ApolloClient,
-  ApolloLink, 
+  ApolloLink,
   ApolloProvider,
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
 import App from "./App";
-import "./i18n";  
+import "./i18n";
 import "./index.css";
 import { ContextProvider } from "./view/Login/context/Auth.context";
 
@@ -32,20 +32,20 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: ApolloLink.from([httpLink]),
 });
- 
+
 ReactDOM.render(
   <Web3ReactProvider getLibrary={getLibrary}>
     <Suspense fallback="...loading">
       <ApolloProvider client={client}>
         <ContextProvider value={500}>
           <ThirdwebProviderV4
-             clientId={process.env.REACT_APP_THIRDWEB_CLIENT_ID}
+            clientId={process.env.REACT_APP_THIRDWEB_CLIENT_ID}
             activeChain="ethereum"
           >
             {/* <ThirdwebProvider> */}
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
             {/* </ThirdwebProvider> */}
           </ThirdwebProviderV4>
         </ContextProvider>

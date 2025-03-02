@@ -16,11 +16,13 @@ const CollectionDetails = () => {
   const [copied, setCopied] = useState(false);
   const { active, account, chainId } = useWeb3React();
 
+  console.log("hello");
   const { data, loading, error } = useQuery(getCollectionNFT, {
     skip: !collectionAddress,
     variables: { blockchain, collectionAddress },
   });
 
+  console.log(data, "checkingdaata");
   // useEffect(() => {
   //   const hasVisitedBefore = sessionStorage.getItem("hasVisitedCollection");
   //   const savedScrollPosition = sessionStorage.getItem("scrollPosition");

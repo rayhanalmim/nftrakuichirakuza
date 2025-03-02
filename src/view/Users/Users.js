@@ -1,5 +1,5 @@
-import React from "react";
 import { SearchComponent } from "../../components/Header/Header";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { allUsersData } from "../../graphql/queries/getAllUsers";
@@ -9,89 +9,26 @@ const Users = () => {
   const { data, loading, error } = useQuery(allUsersData);
 
   const userData = !loading && !error && data.getAllUsers;
-  console.log(userData);
-  const dataList = [
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-    {
-      imgUrl: "/assets/users.png",
-      title: "YFI Fan",
-      para: "26k followers",
-    },
-  ];
+
+  // Reference to user cards
+  const userRefs = useRef({});
+
+  // Effect to scroll to previously selected user
+  useEffect(() => {
+    const lastVisitedWallet = localStorage.getItem("lastVisitedUser");
+    console.log("inside useeffect");
+    if (lastVisitedWallet && userRefs.current[lastVisitedWallet]) {
+      console.log("inside useeffect2");
+
+      setTimeout(() => {
+        userRefs.current[lastVisitedWallet].scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 500); // Delay scrolling to ensure elements are fully rendered
+    }
+  }, [userData]); // Runs when user data is available
+
   if (loading) {
     return <PageLoading />;
   }
@@ -105,8 +42,17 @@ const Users = () => {
               {userData?.map((data, index) => {
                 return (
                   <>
-                    <Link to={`/users/userpage/${data?.wallet}`}>
-                      <div className="border rounded-lg p-3 max-w-[400px] mx-auto ">
+                    <Link
+                      to={`/users/userpage/${data?.wallet}`}
+                      key={data.wallet}
+                      onClick={() =>
+                        localStorage.setItem("lastVisitedUser", data.wallet)
+                      } // Store last visited user
+                    >
+                      <div
+                        className="border rounded-lg p-3 max-w-[400px] mx-auto "
+                        ref={(el) => (userRefs.current[data.wallet] = el)}
+                      >
                         <div>
                           <img
                             src={

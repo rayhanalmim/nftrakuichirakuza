@@ -6,13 +6,14 @@ import { DownOutlined } from "@ant-design/icons";
 import copy from "copy-to-clipboard";
 import { useQuery } from "@apollo/client";
 import { allUsersData } from "../../graphql/queries/getAllUsers";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getUserData } from "../../graphql/queries/getUser";
 import PageLoading from "../../components/PageLoading/PageLoading";
 import { truncateAddress } from "../../utils";
-
 const UserPage = () => {
   const { wallet } = useParams();
+  const navigate = useNavigate();
+
   console.log(wallet);
   const { data, loading, error } = useQuery(getUserData, {
     skip: !wallet,
@@ -88,6 +89,28 @@ const UserPage = () => {
   return (
     <div>
       <div className="max-w-[1500px] mx-auto py-5">
+        {/* back button */}
+        <div className="md:px-[40px] px-[20px] mb-3">
+          <button
+            onClick={() => navigate("/explore/users")}
+            className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </button>
+        </div>
         <div className="relative  md:px-[40px] px-[20px]">
           <img
             src={
