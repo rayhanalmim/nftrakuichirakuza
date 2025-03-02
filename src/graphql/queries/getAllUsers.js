@@ -3,9 +3,7 @@ import { gql } from "@apollo/client";
 export const allUsersData = gql`
   query GetAllUsers {
     getAllUsers {
-      address
       displayName
-      imageUrl
       avatar_url
       about_details
       bg_image

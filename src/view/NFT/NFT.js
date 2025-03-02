@@ -17,6 +17,7 @@ import { useQuery } from "@apollo/client";
 import PageLoading from "../../components/PageLoading/PageLoading";
 
 const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
+  console.log(data, "testdata");
   // useEffect(() => {
   //   window.scrollTo(0, 0);
   // }, []);
@@ -28,7 +29,7 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
     price: false,
     explore: false,
   });
-  const [dataSize, setDataSize] = useState(12);
+  const [dataSize, setDataSize] = useState(40);
   const [buyNow, setBuyNow] = useState(false);
   const [chainName, setChainName] = useState(false);
   const navigation = [

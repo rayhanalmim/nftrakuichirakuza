@@ -26,9 +26,9 @@ export const itemPageQuery = gql`
         listingId
         voucher
         creator {
-          address
+          wallet # Instead of address
           displayName
-          imageUrl
+          avatar_url # Instead of imageUrl
           avatar_url
           about_details
           bg_image

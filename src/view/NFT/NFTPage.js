@@ -851,7 +851,6 @@ const NFTPage = () => {
   console.log("lazyMetadata-->", lazyMetadata);
   console.log("data-->", data);
 
-
   return (
     <div className="mt-7 md:mt-0 relative">
       {error ? (
@@ -940,8 +939,24 @@ const NFTPage = () => {
               )}
             </div>
             <div className=" flex-1">
-              <h6 className="text-darkblue text-2xl font-bold">
-                {lazyMetadata?.name}
+              <h6
+                className="text-darkblue text-2xl font-bold"
+                onClick={() => {
+                  const ownerAddress = data?.ItemPageQuery?.lazyMinting
+                    ? data?.ItemPageQuery?.owner
+                    : tokenMetadata?.owner_of;
+
+                  if (ownerAddress) {
+                    navigate(`/users/userpage/${ownerAddress}`);
+                  }
+                }}
+              >
+                {/* {lazyMetadata?.name} */}
+                <h6 className="text-darkblue text-2xl font-bold">
+                  {lazyMetadata?.name
+                    ? lazyMetadata.name.replace(/\s+/g, "_")
+                    : "Default_Name"}
+                </h6>
               </h6>
               <h4 className="text-lg text-black text-xl">
                 {t("Token Id")}: #{tokenId}

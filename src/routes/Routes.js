@@ -35,6 +35,7 @@ import TermsConditions from "../view/AdditionalPages/Terms&Conditions";
 import PrivacyPolicy from "../view/AdditionalPages/PrivacyPolicy";
 import OurTeam from "../view/AdditionalPages/OurTeam";
 import DemoConnect from "../components/Wallet/ConnectWallet";
+import UserProfileDetail from "../view/Users/UserProfileDetail";
 import { Team } from "../view/Team/Team";
 import UserCollection from "../view/Collections/GetUserCollection";
 
@@ -45,9 +46,7 @@ const Routing = () => {
       <Routes>
         <Route element={<MainLayout />}>
           <Route index path="/" element={<HomePage />} />
-
           <Route path="/collection" element={<Collection />} />
-
           <Route path="/about" element={<About />} />
           <Route path="/connect" element={<DemoConnect />} />
           <Route
@@ -69,6 +68,8 @@ const Routing = () => {
           />
           <Route path="/users/userpage/:wallet" element={<UserPage />} />
 
+          {/* new url  testing */}
+          <Route path="/profile/:identifier" element={<UserProfileDetail />} />
           {loggedIn ? (
             <Route path="/create" element={<ChoosePage />} />
           ) : (
@@ -81,10 +82,8 @@ const Routing = () => {
           <Route path="/CreateCollection" element={<CreateCollection />} />
           <Route path="/user_page" element={<UserPage />} />
           <Route path="/edit_page" element={<EditProfile />} />
-
           <Route path="/setting" element={<Setting />} />
           <Route path="/mynfts" element={<MyNFT />} />
-
           <Route path="/mynfts/collections" element={<CollectionModal />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

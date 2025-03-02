@@ -14,5 +14,14 @@ export const getSearchData = gql`
       metadata
       collectionAddress
     }
+    searchUsers(key: $key) {
+      _id
+      displayName
+      username
+      avatar_url
+      wallet
+      isVerified
+      __typename
+    }
   }
 `;
