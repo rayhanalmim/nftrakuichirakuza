@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { t } from "i18next";
 import { Link } from "react-router-dom";
+/* eslint-disable jsx-a11y/alt-text, jsx-a11y/img-redundant-alt */
 function NFTCollectionCard({ blockchain, collection, data }) {
   let metadata = JSON.parse(data?.metadata);
   //link logic
