@@ -12,6 +12,7 @@ import NotConnectedPage from "../Home/components/NotConnectedPage";
 import Swal from "sweetalert2";
 import { updateCollection } from "../../graphql/mutations/updateCollection";
 import { getCollectionNFT } from "../../graphql/queries/getCollectionNFT";
+/* eslint-disable jsx-a11y/alt-text, jsx-a11y/img-redundant-alt */
 const UserCollection = ({ number }) => {
   let { data, loding, error } = useQuery(getAllCollections);
   const [updateSharing] = useMutation(updateCollection);

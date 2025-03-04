@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.7.3",
+    "@emotion/react": "^11.14.0",
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.13",
     "@statikly/funk": "^0.3.1",
@@ -76,16 +77,9 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "set DISABLE_ESLINT_PLUGIN=true && react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "eslint:recommended"
-    ]
   },
   "browserslist": {
     "production": [
@@ -101,6 +95,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.4",
     "react-app-rewired": "^2.2.1"
   }
 }
