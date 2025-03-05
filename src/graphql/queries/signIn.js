@@ -3,9 +3,7 @@ import { gql } from "@apollo/client";
 export const signIn = gql`
   query SignIn($wallet: String!) {
     signIn(wallet: $wallet) {
-      address
       displayName
-      imageUrl
       avatar_url
       about_details
       bg_image
