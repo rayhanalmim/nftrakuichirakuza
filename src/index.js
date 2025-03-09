@@ -25,8 +25,8 @@ function getLibrary(provider) {
   return library;
 }
 const httpLink = new HttpLink({
-  // uri: "http://localhost:5001",
-  uri: "https://api.nftrakuichirakuza.io/",
+  uri: "http://localhost:5001",
+  // uri: "https://api.nftrakuichirakuza.io/",
 });
 export const client = new ApolloClient({
   cache: new InMemoryCache(),

@@ -79,6 +79,10 @@ const HomeCollection = () => {
       style={{ gap: "5%", overflow: "hidden" }}
     >
       <div>
+        {console.log(
+          data?.getAllCollection,
+          "getAllCollectiongetAllCollection"
+        )}
         {data?.getAllCollection?.length > 0 ? (
           <div className=" pt-5 md:pt-[2rem] px-5" style={ovrflwhid}>
             <div className="flex flex-row-reverse justify-between pt-5  pb-5 gap-[20px] md:gap-[100px] md:px-2 px-2">
