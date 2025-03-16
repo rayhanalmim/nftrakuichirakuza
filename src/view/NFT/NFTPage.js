@@ -110,13 +110,15 @@ const NFTPage = () => {
       tokenId: tokenId,
     },
   });
-
+  console.log(data, "datachechm");
   const refinfo = useQuery(getRewardsUser, {
     skip: !account,
     variables: {
       wallet: account,
     },
   });
+  let user = !loading && !error ? data?.ItemPageQuery?.nft?.creator : null;
+
   let DataRef = refinfo?.data?.getRefInformation?.parentRef;
   let tokenMetadata =
     !loading && !error ? data?.ItemPageQuery?.nft?.tokenMetadata : null;
@@ -939,6 +941,21 @@ const NFTPage = () => {
               )}
             </div>
             <div className=" flex-1">
+              <h8
+                className="text-black text-2xl font-bold"
+                onClick={() => {
+                  const ownerAddress = data?.ItemPageQuery?.lazyMinting
+                    ? data?.ItemPageQuery?.owner
+                    : tokenMetadata?.owner_of;
+
+                  if (ownerAddress) {
+                    navigate(`/users/userpage/${ownerAddress}`);
+                  }
+                }}
+              >
+                {user?.displayName?.replace(/\s+/g, "_")}
+              </h8>
+
               <h6
                 className="text-darkblue text-2xl font-bold"
                 onClick={() => {
@@ -951,12 +968,8 @@ const NFTPage = () => {
                   }
                 }}
               >
-                {/* {lazyMetadata?.name} */}
-                <h6 className="text-darkblue text-2xl font-bold">
-                  {lazyMetadata?.name
-                    ? lazyMetadata.name.replace(/\s+/g, "_")
-                    : "Default_Name"}
-                </h6>
+                {console.log(lazyMetadata, "lazyMetadataName")}
+                {lazyMetadata?.name}
               </h6>
               <h4 className="text-lg text-black text-xl">
                 {t("Token Id")}: #{tokenId}

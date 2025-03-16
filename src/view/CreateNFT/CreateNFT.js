@@ -42,8 +42,9 @@ const CreateNFT = () => {
   const [yenAmount, setYenAmount] = useState("");
   const { Option } = Select;
   const [ethAmount, setEthAmount] = useState("");
-  const [payout, setPayout] = useState("");
+  const [payout, setPayout] = useState(null);
   const { activate, deactivate, active, account, chainId } = useWeb3React();
+
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   // const [createNFT] = useMutation(createNft);
@@ -77,6 +78,10 @@ const CreateNFT = () => {
     "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd";
   const BSC_API_URL =
     "https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd";
+
+  const BSC_OVE_Price =
+    // "https://api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=0x0d5556E58862A21db65B4Aa180da231cfE6140fE&vs_currencies=usd";
+    "https://api.geckoterminal.com/api/v2/networks/bsc/pools/0x952bedc8737beb0850871f67ebdbac2719d36323";
   const convertMaticToYen = async (price) => {
     if (chainId == 1) {
       const ETH_RESPONSE = await fetch(ETH_API_URL);
@@ -86,10 +91,21 @@ const CreateNFT = () => {
       setYenAmount(convertedAmount);
     }
     if (chainId == 56) {
-      const BSC_RESPONSE = await fetch(BSC_API_URL);
-      const bscData = await BSC_RESPONSE.json();
-      const convertedAmount = price * bscData["binancecoin"].usd;
-      setYenAmount(convertedAmount);
+      if (payout == "0x0d5556E58862A21db65B4Aa180da231cfE6140fE") {
+        const BSC_OVE_Price_Response = await fetch(BSC_OVE_Price);
+        const OvePrice = await BSC_OVE_Price_Response.json();
+        // Extract the price from the response
+        const tokenPriceUSD = OvePrice.data.attributes.base_token_price_usd;
+        const convertedAmount = price * tokenPriceUSD;
+        setYenAmount(convertedAmount);
+        // Log the price
+        console.log(`The price of the token is: $${convertedAmount} USD`);
+      } else {
+        const BSC_RESPONSE = await fetch(BSC_API_URL);
+        const bscData = await BSC_RESPONSE.json();
+        const convertedAmount = price * bscData["binancecoin"].usd;
+        setYenAmount(convertedAmount);
+      }
     }
   };
 
@@ -574,13 +590,19 @@ const CreateNFT = () => {
                       {t("Payout Currency")}
                     </h2>
                     <Select
+                      value={payout}
                       onChange={(value) => {
                         setPayout(value);
                       }}
                       name="Category"
                       placeholder="Please select a category"
                     >
-                      <Option value={ChainsInfo[chainId].OVE_COIN}>OVE</Option>
+                      {console.log(payout, "payoutpayout")}
+                      <Option value={ChainsInfo[chainId].OVE_COIN}>
+                        {""}
+                        OVE
+                        {/* {ChainsInfo[chainId].OVE_SYMBOL} */}
+                      </Option>
                       <Option value={ChainsInfo[chainId].NATIVE_TOKEN_ADDRESS}>
                         {ChainsInfo[chainId].CURRENCY_SYMBOL}
                       </Option>
