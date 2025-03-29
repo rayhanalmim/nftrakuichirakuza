@@ -10,9 +10,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getUserData } from "../../graphql/queries/getUser";
 import PageLoading from "../../components/PageLoading/PageLoading";
 import { truncateAddress } from "../../utils";
+import { useWeb3React } from "@web3-react/core";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 const UserPage = () => {
   const { wallet } = useParams();
   const navigate = useNavigate();
+  const { activate, deactivate, active, account, chainId } = useWeb3React();
+  const [nfts, setNfts] = useState([]);
 
   console.log(wallet);
   const { data, loading, error } = useQuery(getUserData, {
@@ -29,6 +33,32 @@ const UserPage = () => {
       //   label: "Event",
     },
   ];
+
+  useEffect(() => {
+    if (!account) return;
+
+    const fetchNFTs = async () => {
+      try {
+        // setLoading(true);
+        // setLoading(true);
+        const response = await fetch(
+          `https://thirdweb.com/api/nfts?wallet=${account}&chain=${chainId}`,
+          {
+            headers: { "x-api-key": process.env.REACT_APP_THIRDWEB_SECRET_KEY },
+          }
+        );
+        const data = await response.json();
+        setNfts(data.nfts || []);
+      } catch (error) {
+        console.error("Error fetching NFTs:", error);
+      } finally {
+        // setLoading(false);
+        console.log("done");
+      }
+    };
+
+    fetchNFTs();
+  }, [wallet]);
 
   useEffect(() => {
     window.scrollTo({
