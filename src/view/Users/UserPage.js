@@ -405,20 +405,20 @@ const UserPage = () => {
             </div>
           </div>
           <div className="max-h-[700px] overflow-y-scroll w-full">
-            <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 ">
-              {displayNfts.length > 0 ? (
-                displayNfts.map((item, key) => (
+            {displayNfts.length > 0 ? (
+              <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 ">
+                {displayNfts.map((item, key) => (
                   <NFTCard key={key} data={item} />
-                ))
-              ) : (
-                <div className="flex justify-center">
-                  <h1 className="text-center">"NO Nft Found"</h1>
-                </div>
-              )}
-              {/* {displayNfts.map((item, key) => (
+                ))}
+              </div>
+            ) : (
+              <div className="flex justify-center items-center">
+                <h1 className="text-center">"NO Nft Found"</h1>
+              </div>
+            )}
+            {/* {displayNfts.map((item, key) => (
                 <NFTCard key={key} data={item} />
               ))} */}
-            </div>
           </div>
         </div>
       </div>
