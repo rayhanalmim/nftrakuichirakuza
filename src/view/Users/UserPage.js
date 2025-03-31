@@ -10,19 +10,28 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getUserData } from "../../graphql/queries/getUser";
 import PageLoading from "../../components/PageLoading/PageLoading";
 import { truncateAddress } from "../../utils";
+import { useWeb3React } from "@web3-react/core";
+
 const UserPage = () => {
   const { wallet } = useParams();
   const navigate = useNavigate();
+  const { activate, deactivate, active, account, chainId } = useWeb3React();
+  const [nfts, setNfts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   console.log(wallet);
-  const { data, loading, error } = useQuery(getUserData, {
+  const {
+    data,
+    loading: userLoading,
+    error,
+  } = useQuery(getUserData, {
     skip: !wallet,
     variables: {
       wallet: wallet,
     },
   });
 
-  const userInfo = !loading && !error && data?.getUser;
+  const userInfo = !userLoading && !error && data?.getUser;
   console.log(data);
   const items = [
     {
@@ -31,60 +40,236 @@ const UserPage = () => {
   ];
 
   useEffect(() => {
+    if (!wallet) return;
+
+    const fetchNFTs = async () => {
+      try {
+        setLoading(true);
+
+        // Get the chain identifier for OpenSea API
+        const chain = getChainIdentifier(chainId);
+
+        // Updated OpenSea API endpoint (v2)
+        const apiUrl = `https://api.opensea.io/v2/chain/${chain}/account/${wallet}/nfts?limit=50`;
+
+        const response = await fetch(apiUrl, {
+          headers: {
+            "X-API-KEY": process.env.REACT_APP_OPENSEA_API_KEY,
+            Accept: "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `OpenSea API responded with status: ${response.status}`
+          );
+        }
+
+        const data = await response.json();
+        console.log(data, "nftResponse from OpenSea");
+
+        // Transform OpenSea V2 data format to match your app's format
+        const formattedNfts = data.nfts.map((nft) => ({
+          url: nft.image_url || nft.metadata?.image || "",
+          name: nft.name || `NFT #${nft.identifier}`,
+          token_id: nft.identifier,
+          collection_name: nft.collection,
+          contract_address: nft.contract,
+          description: nft.description || nft.metadata?.description || "",
+          // Add any other properties you need
+        }));
+
+        setNfts(formattedNfts);
+      } catch (error) {
+        // setNfts([]);
+        console.error("Error fetching NFTs from OpenSea:", error);
+
+        // // Try the alternative Moralis API if OpenSea fails
+        // try {
+        //   await fetchNFTsFromMoralis(wallet, chainId);
+        // } catch (moralisError) {
+        //   console.error("Both OpenSea and Moralis APIs failed:", moralisError);
+        //   // Fallback to fake data if both APIs fail
+        //   setNfts([]);
+        // }
+      } finally {
+        setLoading(false);
+        console.log("NFT fetching complete");
+      }
+    };
+
+    // Alternative API to fetch NFTs using Moralis
+    const fetchNFTsFromMoralis = async (walletAddress, chainId) => {
+      const chain = getMoralisChain(chainId);
+      const apiUrl = `https://deep-index.moralis.io/api/v2/${walletAddress}/nft?chain=${chain}&format=decimal`;
+
+      const response = await fetch(apiUrl, {
+        headers: {
+          "X-API-KEY": process.env.REACT_APP_MORALIS_API_KEY,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Moralis API responded with status: ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+      console.log(data, "nftResponse from Moralis");
+
+      // Transform Moralis data format
+      const formattedNfts = data.result.map((nft) => {
+        let metadata = {};
+        try {
+          metadata = nft.metadata ? JSON.parse(nft.metadata) : {};
+        } catch (e) {
+          console.error("Error parsing metadata:", e);
+        }
+
+        return {
+          url: metadata.image || "",
+          name: metadata.name || `NFT #${nft.token_id}`,
+          token_id: nft.token_id,
+          collection_name: nft.name,
+          contract_address: nft.token_address,
+          description: metadata.description || "",
+        };
+      });
+
+      setNfts(formattedNfts);
+    };
+
+    fetchNFTs();
+  }, [wallet, chainId]);
+
+  // Helper function to convert chainId to OpenSea chain identifier
+  const getChainIdentifier = (chainId) => {
+    switch (chainId) {
+      case 1:
+        return "ethereum";
+      case 137:
+        return "matic";
+      case 56:
+        return "bsc";
+      case 42161:
+        return "arbitrum";
+      case 10:
+        return "optimism";
+      case 43114:
+        return "avalanche";
+      default:
+        return "ethereum"; // Default to Ethereum
+    }
+  };
+
+  // Helper function to convert chainId to Moralis chain format
+  const getMoralisChain = (chainId) => {
+    switch (chainId) {
+      case 1:
+        return "eth";
+      case 137:
+        return "polygon";
+      case 56:
+        return "bsc";
+      case 42161:
+        return "arbitrum";
+      case 10:
+        return "optimism";
+      case 43114:
+        return "avalanche";
+      default:
+        return "eth"; // Default to Ethereum
+    }
+  };
+
+  useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }, []);
 
-  if (loading) {
+  if (userLoading || loading) {
     return <PageLoading />;
   }
 
   const FakeData = [
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE2NjIuZ2lm",
+      name: "NFT #1662",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE0LmdpZg==",
+      name: "NFT #14",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE1MzEuZ2lm",
+      name: "NFT #1531",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzUzNjIuZ2lm",
+      name: "NFT #5362",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzU0MDIuZ2lm",
+      name: "NFT #5402",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzY3ODMuZ2lm",
+      name: "NFT #6783",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzQ5NDQuZ2lm",
+      name: "NFT #4944",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE1MzEuZ2lm",
+      name: "NFT #1531",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzUzNjIuZ2lm",
+      name: "NFT #5362",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzY3ODMuZ2lm",
+      name: "NFT #6783",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzQ5NDQuZ2lm",
+      name: "NFT #4944",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE0LmdpZg==",
+      name: "NFT #14",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE1MzEuZ2lm",
+      name: "NFT #1531",
+      collection_name: "Art Gobblers",
     },
     {
       url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzUzNjIuZ2lm",
+      name: "NFT #5362",
+      collection_name: "Art Gobblers",
     },
   ];
+
+  // Use the fetched NFTs or fallback to fake data if none are available
+  // const displayNfts = nfts.length > 0 ? nfts : FakeData;
+  const displayNfts = nfts;
 
   return (
     <div>
@@ -149,23 +334,6 @@ const UserPage = () => {
               <button className="capitalize bg-black  px-[30px] py-2 text-white rounded-lg text-md">
                 + follow
               </button>
-
-              {/* <button className="text-grey  mx-2 my-2  px-[30px] py-2 capitalize rounded-lg bg-cyan">
-                message
-              </button> */}
-
-              {/* <div className="p-3 bg-cyan rounded-lg">
-                <img
-                  src={process.env.PUBLIC_URL + "./assets/download.png"}
-                  className="w-full mx-auto"
-                />
-              </div> */}
-              {/* <div className="p-3 bg-cyan rounded-lg">
-                <img
-                  src={process.env.PUBLIC_URL + "./assets/dots.png"}
-                  className="w-full mx-auto "
-                />
-              </div> */}
             </div>
           </div>
 
@@ -237,11 +405,20 @@ const UserPage = () => {
             </div>
           </div>
           <div className="max-h-[700px] overflow-y-scroll w-full">
-            <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 ">
-              {FakeData.map((item, key) => (
+            {displayNfts.length > 0 ? (
+              <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 ">
+                {displayNfts.map((item, key) => (
+                  <NFTCard key={key} data={item} />
+                ))}
+              </div>
+            ) : (
+              <div className="flex justify-center items-center">
+                <h1 className="text-center">"NO Nft Found"</h1>
+              </div>
+            )}
+            {/* {displayNfts.map((item, key) => (
                 <NFTCard key={key} data={item} />
-              ))}
-            </div>
+              ))} */}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Fragment } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import NFTCard from "../../components/Cards/NFTCard/NFTCard";
 import { Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -17,90 +17,129 @@ import { useQuery } from "@apollo/client";
 import PageLoading from "../../components/PageLoading/PageLoading";
 
 const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
-  console.log(data, "testdata");
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  const { t } = useTranslation();
+  const scrollContainerRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  console.log(blockchain, collection, "card bft");
+  // States
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState({
     status: false,
     price: false,
     explore: false,
   });
-  const [dataSize, setDataSize] = useState(40);
-  const [buyNow, setBuyNow] = useState(false);
+
+  // Get initial dataSize from localStorage or default to 40
+  const [dataSize, setDataSize] = useState(() => {
+    const savedDataSize = localStorage.getItem("nftDataSize");
+    return savedDataSize ? parseInt(savedDataSize) : 40;
+  });
+
+  // Get initial buyNow from localStorage or default to false
+  const [buyNow, setBuyNow] = useState(() => {
+    const savedBuyNow = localStorage.getItem("nftBuyNow");
+    return savedBuyNow ? JSON.parse(savedBuyNow) : false;
+  });
+
   const [chainName, setChainName] = useState(false);
+  const [selectedNftId, setSelectedNftId] = useState(() => {
+    return localStorage.getItem("selectedNftId") || null;
+  });
+
+  // Save settings to localStorage when they change
+  useEffect(() => {
+    localStorage.setItem("nftDataSize", dataSize);
+    localStorage.setItem("nftBuyNow", JSON.stringify(buyNow));
+    if (selectedNftId) {
+      localStorage.setItem("selectedNftId", selectedNftId);
+    }
+  }, [dataSize, buyNow, selectedNftId]);
+
+  // Restore scroll position when component mounts
+  useEffect(() => {
+    if (scrollContainerRef.current && data) {
+      const savedScrollPosition = localStorage.getItem("nftScrollPosition");
+
+      if (savedScrollPosition) {
+        // Use a small timeout to ensure the DOM has fully rendered
+        setTimeout(() => {
+          scrollContainerRef.current.scrollTop = parseInt(savedScrollPosition);
+        }, 100);
+      }
+    }
+  }, [data]);
+
+  // Save scroll position when scrolling
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      localStorage.setItem(
+        "nftScrollPosition",
+        scrollContainerRef.current.scrollTop
+      );
+    }
+  };
+
+  // Ensure enough items are loaded to show the selected NFT
+  useEffect(() => {
+    if (data && selectedNftId) {
+      const selectedIndex = data.findIndex((item) => item.id === selectedNftId);
+
+      if (selectedIndex >= 0 && selectedIndex >= dataSize) {
+        // Calculate how many batches we need to load
+        const batchesToLoad = Math.ceil((selectedIndex + 1) / 12);
+        setDataSize(batchesToLoad * 12);
+      }
+    }
+  }, [data, selectedNftId]);
+
+  // Handle NFT selection
+  const handleNftSelect = (nftId) => {
+    setSelectedNftId(nftId);
+    localStorage.setItem("selectedNftId", nftId);
+
+    // Other actions like navigation can be done here
+    // navigate(`/nft/${nftId}`);
+  };
+
+  // Clear selection when filters change
+  useEffect(() => {
+    setSelectedNftId(null);
+    localStorage.removeItem("selectedNftId");
+  }, [buyNow, blockchain, collection]);
+
+  // When component unmounts, keep the scroll position and selections
+  useEffect(() => {
+    return () => {
+      if (scrollContainerRef.current) {
+        localStorage.setItem(
+          "nftScrollPosition",
+          scrollContainerRef.current.scrollTop
+        );
+      }
+    };
+  }, []);
+
   const navigation = [
-    // { name: "Collections", current: true },
     { name: "NFTS", to: "/nft", current: false },
-    // { name: "Create", to: "/create", current: false },
     { name: "Users", to: "/users", current: false },
   ];
-  const { t } = useTranslation();
 
-  const FakeData = [
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE2NjIuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE0LmdpZg==",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE1MzEuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzUzNjIuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzU0MDIuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzY3ODMuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzQ5NDQuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE1MzEuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzUzNjIuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzY3ODMuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzQ5NDQuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE0LmdpZg==",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzE1MzEuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzUzNjIuZ2lm",
-    },
-    {
-      url: "https://assets.raribleuserdata.com/prod/v1/image/t_gif_preview/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2dvYmJsZXJzLmFydGdvYmJsZXJzLmNvbS9naWZzLzU0MDIuZ2lm",
-    },
-  ];
   const items = [];
-  if (data) {
-    <PageLoading />;
+
+  if (!data) {
+    return <PageLoading />;
   }
 
   return (
     <>
-      <div className="flex justify-center items-center gap-[20px] md:px-[20px] px-0  md:py-[2rem] py-2"></div>
-      <div className="max-w-[1500px]  mx-auto">
+      <div className="flex justify-center items-center gap-[20px] md:px-[20px] px-0 md:py-[2rem] py-2"></div>
+      <div className="max-w-[1500px] mx-auto">
         <div className=" ">
           <div className="px-2">
-            <div className="md:py-10  py-2">
-              <div className="flex flex-col md:flex-row justify-center gap-[40px] max-w-[1500px] mx-auto md:px-[20px] px-0  md:max-h-[700px] h-auto">
-                <div className="sticky h-auto  md:top-[120px] top-auto bg-white md:max-h-[700px]">
+            <div className="md:py-10 py-2">
+              <div className="flex flex-col md:flex-row justify-center gap-[40px] max-w-[1500px] mx-auto md:px-[20px] px-0 md:max-h-[700px] h-auto">
+                <div className="sticky h-auto md:top-[120px] top-auto bg-white md:max-h-[700px]">
                   <div className="border-b-2 pb-4">
                     <Dropdown
                       menu={{
@@ -129,14 +168,28 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                     {toggle.status ? (
                       <div className="flex gap-5 flex-wrap pt-5 pb-3 ">
                         <button
-                          className="bg-cyan rounded-lg px-4 py-3 text-black capitalize focus:text-white focus:bg-black"
-                          onClick={() => setBuyNow(false)}
+                          className={`rounded-lg px-4 py-3 capitalize ${
+                            !buyNow
+                              ? "bg-black text-white"
+                              : "bg-cyan text-black"
+                          }`}
+                          onClick={() => {
+                            setBuyNow(false);
+                            localStorage.setItem("nftScrollPosition", "0");
+                          }}
                         >
                           {t("all")}
                         </button>
                         <button
-                          className="bg-cyan rounded-lg px-4 py-3 text-black font-bold capitalize focus:text-white focus:bg-black"
-                          onClick={() => setBuyNow(true)}
+                          className={`rounded-lg px-4 py-3 font-bold capitalize ${
+                            buyNow
+                              ? "bg-black text-white"
+                              : "bg-cyan text-black"
+                          }`}
+                          onClick={() => {
+                            setBuyNow(true);
+                            localStorage.setItem("nftScrollPosition", "0");
+                          }}
                         >
                           {t("buy now")}
                         </button>
@@ -171,7 +224,7 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                     </Dropdown>
                     {toggle.price ? (
                       <>
-                        <div className="flex gap-5  items-center pt-5 pb-3">
+                        <div className="flex gap-5 items-center pt-5 pb-3">
                           <button className="bg-cyan rounded-lg px-4 py-3 text-grey font-bold capitalize">
                             {blockchain}
                           </button>
@@ -181,41 +234,55 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <div className=" bg-collection-img bg-no-repeat bg-cover pt-3 px-3 max-h-[700px] overflow-y-scroll">
-                    <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow  ">
-                      {!data ? (
-                        //  FakeData.map((item, key) => (
-                        //     <Link to="/nft/nftpage">
-                        //       <NFTCard key={key} data={item} />
-                        //     </Link>
-                        //   ))
-                        <h1> No Data available</h1>
-                      ) : null}
+                  <div
+                    className="bg-collection-img bg-no-repeat bg-cover pt-3 px-3 max-h-[700px] overflow-y-scroll"
+                    ref={scrollContainerRef}
+                    onScroll={handleScroll}
+                  >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow">
+                      {!data ? <h1>No Data available</h1> : null}
+
                       {buyNow
-                        ? // ? data?.map((item, key) => {
-                          data?.slice(0, dataSize).map((item, key) => {
+                        ? data?.slice(0, dataSize).map((item, key) => {
                             return (
-                              <>
+                              <div
+                                key={key}
+                                onClick={() => handleNftSelect(item.id)}
+                                className={
+                                  selectedNftId === item.id
+                                    ? "ring-2 ring-blue-500 rounded-lg"
+                                    : ""
+                                }
+                              >
                                 <NFTCollectionCard
-                                  key={key}
                                   data={item}
                                   buyNow={buyNow}
                                   blockchain={blockchain}
                                   collection={collection}
+                                  isSelected={selectedNftId === item.id}
                                 />
-                              </>
+                              </div>
                             );
                           })
-                        : // : data?.map((item, key) => {
-                          data?.slice(0, dataSize).map((item, key) => {
+                        : data?.slice(0, dataSize).map((item, key) => {
                             return (
-                              <NFTCollectionCard
+                              <div
                                 key={key}
-                                data={item}
-                                buyNow={buyNow}
-                                blockchain={blockchain}
-                                collection={collection}
-                              />
+                                onClick={() => handleNftSelect(item.id)}
+                                className={
+                                  selectedNftId === item.id
+                                    ? "ring-2 ring-blue-500 rounded-lg"
+                                    : ""
+                                }
+                              >
+                                <NFTCollectionCard
+                                  data={item}
+                                  buyNow={buyNow}
+                                  blockchain={blockchain}
+                                  collection={collection}
+                                  isSelected={selectedNftId === item.id}
+                                />
+                              </div>
                             );
                           })}
                     </div>
@@ -224,9 +291,8 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
                         onClick={(e) => {
                           setDataSize(dataSize + 12);
                         }}
-                        className="bg-gray-100 hover:bg-gray-200 transition-all duration-200  mb-4 text-black w-full bg-no-repeat bg-cover rounded-xl py-3 px-2 mx-auto "
+                        className="bg-gray-100 hover:bg-gray-200 transition-all duration-200 mb-4 text-black w-full bg-no-repeat bg-cover rounded-xl py-3 px-2 mx-auto"
                       >
-                        {" "}
                         {t("Show More")}
                       </button>
                     )}
@@ -242,92 +308,3 @@ const NFT = ({ data, blockchain, collection, buyNowNFT, dataNFT }) => {
 };
 
 export default NFT;
-const Language = () => {
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
-  return (
-    <>
-      <Menu as="div" className="relative inline-block text-left -lg my-5">
-        <div>
-          <Menu.Button className="inline-flex w-full justify-center border rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700  ">
-            <div className="">Language</div>
-            <ChevronDownIcon
-              className="-mr-1 ml-2 h-5 w-5"
-              aria-hidden="true"
-            />
-          </Menu.Button>
-        </div>
-
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className=" right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    to="/setting"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
-                    )}
-                  >
-                    English
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
-                    )}
-                  >
-                    French
-                  </a>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
-                    )}
-                  >
-                    Chinese
-                  </a>
-                )}
-              </Menu.Item>
-              <form method="POST" action="#">
-                <Menu.Item>
-                  {({ active }) => (
-                    <button
-                      type="submit"
-                      className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block w-full px-4 py-2 text-left text-sm"
-                      )}
-                    >
-                      Japanese
-                    </button>
-                  )}
-                </Menu.Item>
-              </form>
-            </div>
-          </Menu.Items>
-        </Transition>
-      </Menu>
-    </>
-  );
-};
