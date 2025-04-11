@@ -3,9 +3,7 @@ import { gql } from "@apollo/client";
 export const signUp = gql`
   mutation SignUp($wallet: String!, $referralUrl: String) {
     signUp(wallet: $wallet, referral_url: $referralUrl) {
-      address
       displayName
-      imageUrl
       avatar_url
       about_details
       bg_image
@@ -22,6 +20,7 @@ export const signUp = gql`
       level2_referral
       level3_referral
       parent_referral
+      __typename
     }
   }
 `;

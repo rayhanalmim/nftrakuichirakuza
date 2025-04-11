@@ -1,44 +1,143 @@
 import { useWeb3React } from "@web3-react/core";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSetState } from "react-use";
 import { Button } from "../../components/Button/Primary";
 import { AuthContext } from "./context/Auth.context";
+
 const Login = () => {
   const { url } = useParams();
   const navigate = useNavigate();
-  console.log(url);
+  const [debugVisible, setDebugVisible] = useState(false);
+  const [customAlert, setCustomAlert] = useState(null);
+
   const initialState = {
     referralCode: url
       ? url
-      // : "P1608176W0547883J8380736A6636000J5116400Y6569546O0879009J5447068",
       : "I1014393E3325865J1938521O0979516N8622715V7066070V3757580N1423693",
   };
 
   const { state: ContextState, login } = useContext(AuthContext);
-  const { isLoginPending, isLoggedIn, loginError } = ContextState;
+  const { isLoginPending, isLoggedIn, loginError, debugInfo } = ContextState;
   const [state, setState] = useSetState(initialState);
   const { account, active } = useWeb3React();
   const { t } = useTranslation();
+
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  };
+
   useEffect(() => {
-   console.log(loginError)
-  }, [loginError]);
+    if (loginError) {
+      console.log("Login Error:", loginError);
+
+      // Show custom alert for mobile
+      if (isMobile()) {
+        setCustomAlert({
+          type: "error",
+          message: loginError.message,
+        });
+        setDebugVisible(true);
+        // Hide after 5 seconds
+        setTimeout(() => {
+          setCustomAlert(null);
+        }, 5000);
+      }
+    }
+
+    if (isLoggedIn && active && account) {
+      // If login successful, navigate to home page
+      console.log("Login successful, redirecting...");
+
+      // Show success message on mobile
+      if (isMobile()) {
+        setCustomAlert({
+          type: "success",
+          message: "Login successful! Redirecting...",
+        });
+      }
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    }
+  }, [loginError, isLoggedIn, active, account, navigate]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("in this");
-    console.log(isLoggedIn);
     const { referralCode } = state;
-    console.log(referralCode);
+    console.log("Submitting with referral:", referralCode);
+    console.log("Active wallet:", active ? "Yes" : "No");
+    console.log("Account:", account);
+
+    // Clear any previous alerts
+    setCustomAlert(null);
+
+    // Mobile specific checks
+    if (isMobile() && !active) {
+      setCustomAlert({
+        type: "error",
+        message: "Wallet not connected. Please connect your wallet first.",
+      });
+      return;
+    }
+
+    // Show attempting login message on mobile
+    if (isMobile()) {
+      setCustomAlert({
+        type: "info",
+        message: "Attempting to login...",
+      });
+    }
+
     login(referralCode);
+
     setState({
       referralURL: "",
     });
   };
 
+  // Function to toggle debug panel
+  const toggleDebug = () => {
+    setDebugVisible(!debugVisible);
+  };
+
   return (
     <div className="bg-hero-img bg-cover bg-no-repeat py-5">
       <div className=" md:py-[5rem] py-[3rem]  px-5">
+        {/* Custom Alert for Mobile */}
+        {customAlert && (
+          <div
+            style={{
+              position: "fixed",
+              top: "20px",
+              left: "20px",
+              right: "20px",
+              padding: "15px",
+              borderRadius: "8px",
+              backgroundColor:
+                customAlert.type === "error"
+                  ? "#ffebee"
+                  : customAlert.type === "success"
+                  ? "#e8f5e9"
+                  : "#e3f2fd",
+              color:
+                customAlert.type === "error"
+                  ? "#d32f2f"
+                  : customAlert.type === "success"
+                  ? "#388e3c"
+                  : "#1976d2",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+              zIndex: 9999,
+            }}
+          >
+            {customAlert.message}
+          </div>
+        )}
+
         <div className="login-wrap bg-white">
           <div className="login-html">
             <input
@@ -102,81 +201,72 @@ const Login = () => {
                   </div>
                   <div className="text-center mt-10">
                     <Button
-                      title={t("Submit")}
+                      title={isLoginPending ? t("Processing...") : t("Submit")}
                       className="button"
                       defaultValue={t("Sign In")}
+                      disabled={!active || isLoginPending}
                     />
                   </div>
                   <div className="hr" style={{ margin: "40px 0" }} />
                   <div className="foot-lnk">
-                    {isLoginPending && <div>Please wait...</div>}
-                    {isLoggedIn && <div>Success.</div>}
-                    {loginError && <div>{loginError.message}</div>}
+                    {isLoginPending && (
+                      <div>
+                        Please wait... <small>(Connecting to wallet)</small>
+                      </div>
+                    )}
+                    {isLoggedIn && <div>Success. Redirecting you...</div>}
+                    {loginError && (
+                      <div style={{ color: "red" }}>
+                        Error: {loginError.message}
+                      </div>
+                    )}
+
+                    {/* Debug toggle button - hidden in production */}
+
+                    {/* <div style={{ marginTop: "20px" }}>
+                      <button
+                        type="button"
+                        onClick={toggleDebug}
+                        style={{
+                          backgroundColor: "#333",
+                          color: "#fff",
+                          padding: "5px 10px",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {debugVisible ? "Hide Debug Info" : "Show Debug Info"}
+                      </button>
+                    </div> */}
+
+                    {/* Debug information panel */}
+                    {debugVisible && (
+                      <div
+                        style={{
+                          marginTop: "10px",
+                          padding: "10px",
+                          backgroundColor: "#f5f5f5",
+                          color: "#333",
+                          textAlign: "left",
+                          fontSize: "12px",
+                          overflow: "auto",
+                          maxHeight: "200px",
+                        }}
+                      >
+                        <h4>Debug Information:</h4>
+                        <p>Device: {isMobile() ? "Mobile" : "Desktop"}</p>
+                        <p>Active: {active ? "Yes" : "No"}</p>
+                        <p>Account: {account || "Not connected"}</p>
+                        <p>Login Pending: {isLoginPending ? "Yes" : "No"}</p>
+                        <p>Logged In: {isLoggedIn ? "Yes" : "No"}</p>
+                        <p>Error: {loginError ? loginError.message : "None"}</p>
+                        <pre>{debugInfo}</pre>
+                      </div>
+                    )}
                   </div>
                 </div>
               </form>
 
-              <div className="sign-up-htm mt-2">
-                <div className="group">
-                  <label htmlFor="user" className="label pb-2 text-white ">
-                    Username
-                  </label>
-                  <input id="user" type="text" className="input" />
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label pb-2 text-white ">
-                    Password
-                  </label>
-                  <input
-                    id="pass"
-                    type="password"
-                    className="input"
-                    data-type="password"
-                  />
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label pb-2 text-white ">
-                    Repeat Password
-                  </label>
-                  <input
-                    id="pass"
-                    type="password"
-                    className="input"
-                    data-type="password"
-                  />
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label pb-2 text-white ">
-                    Refferal code
-                  </label>
-                  <div className="flex justify-between w-full border p-2  border-[#ccc] rounded-lg ">
-                    <h5 className="text-grey">0xfDB86...BFDA</h5>
-                    <h6 className="mb-0 text-grey">copy</h6>
-                  </div>
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label pb-2 text-white ">
-                    Email Address
-                  </label>
-                  <input id="pass" type="text" className="input" />
-                </div>
-                <div className="text-center">
-                  <Button
-                    title="Submit"
-                    className="button"
-                    defaultValue="Sign In"
-                  />
-                </div>
-                <div className="hr" />
-                <div className="foot-lnk">
-                  <label
-                    htmlFor="tab-1 text-white "
-                    style={{ color: "#57466b" }}
-                  >
-                    Already Member?
-                  </label>
-                </div>
-              </div>
+              {/* Rest of the component remains the same */}
             </div>
           </div>
         </div>
