@@ -67,6 +67,7 @@ export const ContextProvider = (props) => {
       console.log("SignUp Mutation Result:", result);
 
       // Proceed to login
+
       signInUser({
         variables: { walletAddress: account },
       });
@@ -103,6 +104,7 @@ export const ContextProvider = (props) => {
 // Enhanced login with better error handling
 const fetchLogin = (refferal, account, signUpUser, signInUser, callback) => {
   // Display more consistent debugging info
+  //test
   let debugInfo = `Attempting login with account: ${account}, referral: ${refferal}`;
 
   if (!account) {

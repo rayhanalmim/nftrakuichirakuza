@@ -51,6 +51,7 @@ const Login = () => {
     if (isLoggedIn && active && account) {
       // If login successful, navigate to home page
       console.log("Login successful, redirecting...");
+      localStorage.setItem("loggedIn", JSON.stringify({ wallet: account }));
 
       // Show success message on mobile
       if (isMobile()) {

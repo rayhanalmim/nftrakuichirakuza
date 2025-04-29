@@ -146,6 +146,7 @@ const NFTPage = () => {
 
     if (active) {
       let dataToken = JSON.parse(localStorage.getItem("loggedIn"));
+
       if (
         localStorage.getItem("loggedIn") == "false" ||
         localStorage.getItem("loggedIn") == undefined
