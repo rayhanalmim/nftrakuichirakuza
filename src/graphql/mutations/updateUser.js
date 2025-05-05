@@ -29,9 +29,7 @@ export const updateUser = gql`
       isVerified: $isVerified
       wallet: $wallet
     ) {
-      address
       displayName
-      imageUrl
       avatar_url
       about_details
       bg_image

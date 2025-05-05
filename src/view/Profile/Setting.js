@@ -36,14 +36,14 @@ const Setting = () => {
     variables: { wallet: account },
   });
 
-  console.log(data)
+  console.log(data);
   const [displayname, setDisplayname] = useState(signIn.displayName);
   const [username, setUsername] = useState(signIn.username);
   const [about_details, setBio] = useState(signIn.about_details);
   const [profileimage, setProfileImage] = useState(false);
   const [coverimage, setCoverimage] = useState(false);
   const [updateProfile] = useMutation(updateUser);
-  console.log(about_details)
+  console.log(about_details);
 
   if (!active) {
     return <NotConnectedPage />;
@@ -239,7 +239,7 @@ const Setting = () => {
                       data?.signIn?.bg_image?.includes("ipfs")
                         ? data?.signIn?.bg_image?.replace(
                             "ipfs://",
-                           `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
+                            `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
                           )
                         : data?.signIn?.bg_image
                     }
@@ -355,16 +355,15 @@ const Setting = () => {
                          
                         /> */}
                         <textarea
- className="bg-gray-200 h-[105px] appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
- id="inline-full-name"
- type="text"
- placeholder={`${
-   loading ? "Demo" : data?.signIn?.about_details
- }`}
- onChange={(e) => {
-   setBio(e.target.value);
-   
- }}
+                          className="bg-gray-200 h-[105px] appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          id="inline-full-name"
+                          type="text"
+                          placeholder={`${
+                            loading ? "Demo" : data?.signIn?.about_details
+                          }`}
+                          onChange={(e) => {
+                            setBio(e.target.value);
+                          }}
                         />
                       </div>
 
@@ -430,7 +429,10 @@ const Setting = () => {
                             text={`https://${window.location.hostname}/login/${data?.signIn?.referral_url}`}
                           >
                             <button
-                              onClick={(e) => {e.preventDefault(); setCopied(!copied)}}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setCopied(!copied);
+                              }}
                               className="capitalize text-sm border bg-white p-3 rounded-lg px-5"
                             >
                               {t("Share URL")}
