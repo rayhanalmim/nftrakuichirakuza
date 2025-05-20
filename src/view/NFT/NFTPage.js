@@ -688,7 +688,7 @@ const NFTPage = () => {
               </div>
 
               <div className="flex  gap-[40px] justify-between  items-center">
-                <h4 className="capitalize  text-lg">{t("token ID")}</h4>
+                <h4 className="capitalize  text-lg">ttt{t("token ID")}</h4>
                 <h4 className="text-lg  font-bold uppercase">{tokenId}</h4>
               </div>
 
@@ -943,34 +943,49 @@ const NFTPage = () => {
             </div>
             <div className=" flex-1">
               <h8
-                className="text-black text-2xl font-bold"
+                className="text-black text-2xl font-bold cursor-pointer hover:text-blue-500 transition-colors"
                 onClick={() => {
+                  if (loading) return; // Prevent navigation while loading
+                  
                   const ownerAddress = data?.ItemPageQuery?.lazyMinting
                     ? data?.ItemPageQuery?.owner
                     : tokenMetadata?.owner_of;
 
                   if (ownerAddress) {
+                    // Store the current page data in sessionStorage before navigation
+                    sessionStorage.setItem('lastNFTPage', JSON.stringify({
+                      blockchain,
+                      collection,
+                      tokenId
+                    }));
                     navigate(`/users/userpage/${ownerAddress}`);
                   }
                 }}
               >
-                {user?.displayName?.replace(/\s+/g, "_")}
+                {loading ? 'Loading...' : (user?.displayName?.replace(/\s+/g, "_") || 'Unknown User')}
               </h8>
 
               <h6
-                className="text-darkblue text-2xl font-bold"
+                className="text-darkblue text-2xl font-bold cursor-pointer hover:text-blue-500 transition-colors"
                 onClick={() => {
+                  if (loading) return; // Prevent navigation while loading
+                  
                   const ownerAddress = data?.ItemPageQuery?.lazyMinting
                     ? data?.ItemPageQuery?.owner
                     : tokenMetadata?.owner_of;
 
                   if (ownerAddress) {
+                    // Store the current page data in sessionStorage before navigation
+                    sessionStorage.setItem('lastNFTPage', JSON.stringify({
+                      blockchain,
+                      collection,
+                      tokenId
+                    }));
                     navigate(`/users/userpage/${ownerAddress}`);
                   }
                 }}
               >
-                {console.log(lazyMetadata, "lazyMetadataName")}
-                {lazyMetadata?.name}
+                {loading ? 'Loading...' : (lazyMetadata?.name || 'Unnamed NFT')}
               </h6>
               <h4 className="text-lg text-black text-xl">
                 {t("Token Id")}: #{tokenId}
