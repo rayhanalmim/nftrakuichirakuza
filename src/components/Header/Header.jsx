@@ -7,7 +7,7 @@ import { useLazyQuery } from "@apollo/client";
 
 import ConnectWallet from "../Button/ConnectWallet";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { getSearchData } from "../../graphql/queries/getSearchData";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
@@ -46,6 +46,29 @@ export default function Example({ menu }) {
     window.scrollTo(0, 0);
     i18next.changeLanguage("Japan");
   }, []);
+
+  const handleSearch = (searchValue) => {
+    if (!searchValue.trim()) {
+      setSuggestionData(null);
+      return;
+    }
+
+    searchData({
+      variables: {
+        key: searchValue,
+      },
+    })
+      .then((res) => {
+        if (res.data) {
+          setSuggestionData(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error("Search error:", err);
+        setSuggestionData({ searchNfts: [], searchUsers: [] });
+      });
+  };
+
   const handleClick = (lang) => {
     // alert(lang);
     i18next.changeLanguage(lang == "" ? "Japan" : lang);
@@ -107,25 +130,7 @@ export default function Example({ menu }) {
                   setIsShow={setIsShow}
                   setResNav={setResNav}
                   placeholder={t("Search Items")}
-                  onChange={(e) => {
-                    setIsShow(true);
-                    searchData({
-                      variables: {
-                        key: e.target.value,
-                      },
-                    })
-                      .then((res) => {
-                        console.log(res.data);
-                        if (e.target.value) {
-                          setSuggestionData(res.data);
-                        } else {
-                          setSuggestionData();
-                        }
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
-                  }}
+                  onChange={handleSearch}
                   suggestions={suggestionData}
                 />
               </div>
@@ -243,31 +248,44 @@ export const SearchComponent = ({
   setIsShow,
   setResNav,
 }) => {
-  console.log(suggestions, "seachcollectionsuggestin");
   const navigate = useNavigate();
-  // console.log("suggestions", suggestions);
   const [nftResults, setNftResults] = useState([]);
   const [userResults, setUserResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState(null);
+  const debounceTimer = useRef(null);
+
+  const debouncedSearch = useCallback((value) => {
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+    
+    debounceTimer.current = setTimeout(() => {
+      setIsSearching(true);
+      setSearchError(null);
+      onChange(value);
+    }, 300); // 300ms debounce delay
+  }, [onChange]);
 
   useEffect(() => {
     if (suggestions) {
-      // Check if we're receiving the combined results format
       if (suggestions.searchNfts && suggestions.searchUsers) {
         setNftResults(suggestions.searchNfts || []);
         setUserResults(suggestions.searchUsers || []);
       } else {
-        // For backward compatibility
         setNftResults(suggestions);
         setUserResults([]);
       }
+      setIsSearching(false);
     } else {
       setNftResults([]);
       setUserResults([]);
     }
   }, [suggestions]);
+
   return (
     <>
-      {/* <form className="relative px-2 search-sec">
+      <form className="relative px-2 search-sec">
         <div className="relative">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -286,134 +304,52 @@ export const SearchComponent = ({
           <input
             type="text"
             placeholder={`${placeholder}`}
-            onChange={onChange}
-            className="w-full py-3 pl-12 pr-4 text-red-500 border rounded-md outline-none  placeholder-red"
+            onChange={(e) => debouncedSearch(e.target.value)}
+            className="w-full py-3 pl-12 pr-4 text-red-500 border rounded-md outline-none placeholder-red"
             style={{ background: "rgba(0, 0, 0, 0.1)" }}
           />
-          {isShow ? (
-            <ul
-              className={
-                suggestions?.length > 0
-                  ? `bg-white border-[1px] w-full rounded-lg shadow-lg p-4 absolute max-h-[300px] overflow-y-auto`
-                  : "hidden"
-              }
-            >
-              {suggestions?.map((item, key) => {
-                return (
-                  <li
-                    key={item}
-                    className="min-h-10 w-full border-b-[1px] border-solid border-l-ray-300 py-2 cursor-pointer"
-                    onClick={() => {
-                      if (item.collectionName) {
-                        console.log("in this");
-                        navigate(
-                          `/collection/collectiondetails/${item.blockchain}/${item.collectionAddress}`
-                        );
-                      } else {
-                        navigate(
-                          `/nft/nftpage/${item.blockchain}/${item.collectionAddress}/${item.token_id}`
-                        );
-                      }
-                      setIsShow(false);
-                      setResNav(false);
-                      return;
-                    }}
-                  >
-                    {item.name === "" || item.collectionName
-                      ? item.collectionName
-                      : item.name}
-                  </li>
-                );
-              })}
-            </ul>
-          ) : null}
-        </div>
-      </form> */}
-
-      <>
-        <form className="relative px-2 search-sec">
-          <div className="relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute top-0 bottom-0 w-6 h-6 my-auto text-[#BC6251]-400 left-3"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-            <input
-              type="text"
-              placeholder={`${placeholder}`}
-              onChange={onChange}
-              className="w-full py-3 pl-12 pr-4 text-red-500 border rounded-md outline-none placeholder-red"
-              style={{ background: "rgba(0, 0, 0, 0.1)" }}
-            />
-            {isShow && (nftResults.length > 0 || userResults.length > 0) ? (
-              <ul className="bg-white border-[1px] w-full rounded-lg shadow-lg p-4 absolute max-h-[300px] overflow-y-auto">
+          {isShow && (nftResults.length > 0 || userResults.length > 0 || isSearching) ? (
+            <ul className="bg-white border-[1px] w-full rounded-lg shadow-lg p-4 absolute max-h-[300px] overflow-y-auto">
+              {isSearching ? (
+                <li className="text-center py-2">Searching...</li>
+              ) : searchError ? (
+                <li className="text-red-500 text-center py-2">{searchError}</li>
+              ) : (
+                <>
                 {userResults.length > 0 && (
                   <>
                     <li className="font-bold text-gray-700 py-2">Users</li>
-
-                    {userResults.map((user, key) => (
+                      {userResults.map((user, index) => (
                       <li
-                        key={`user-${user._id}`}
-                        className="min-h-10 w-full border-b-[1px] border-solid border-l-ray-300 py-2 cursor-pointer flex items-center"
+                          key={`user-${index}`}
+                          className="min-h-10 w-full border-b-[1px] border-solid border-l-ray-300 py-2 cursor-pointer hover:bg-gray-50"
                         onClick={() => {
-                          // navigate(`/profile/${user.username || user.wallet}`);
-                          localStorage.setItem("lastVisitedUser", user.wallet);
-                          navigate(`/users/userpage/${user?.wallet}`);
+                            navigate(`/user/${user.wallet}`);
                           setIsShow(false);
                           setResNav(false);
                         }}
                       >
-                        {/* <img
-                          src={user.avatar_url || "/assets/default-avatar.png"}
+                          <div className="flex items-center gap-2">
+                            {user.avatar_url && (
+                              <img
+                                src={user.avatar_url}
                           alt={user.displayName}
-                          className="w-8 h-8 rounded-full mr-2"
-                        /> */}
-
-                        <img
-                          src={
-                            user.avatar_url
-                              ? user.avatar_url.includes("ipfs://")
-                                ? user.avatar_url.replace(
-                                    "ipfs://",
-                                    `https://${process.env.REACT_APP_THIRDWEB_CLIENT_ID}.ipfscdn.io/ipfs/`
-                                  )
-                                : user.avatar_url
-                              : "/assets/default-avatar.png"
-                          }
-                          alt={user.displayName}
-                          className="w-8 h-8 rounded-full mr-2"
-                        />
-                        <div>
-                          <div>{user.displayName || "Unnamed"}</div>
-                          <div className="text-xs text-gray-500">
-                            @{user.username || user.wallet.substring(0, 10)}...
+                                className="w-6 h-6 rounded-full"
+                              />
+                            )}
+                            <span>{user.displayName || user.username}</span>
                           </div>
-                        </div>
-                        {user.isVerified && (
-                          <span className="ml-2 text-blue-500">✓</span>
-                        )}
                       </li>
                     ))}
                   </>
                 )}
-
                 {nftResults.length > 0 && (
                   <>
                     <li className="font-bold text-gray-700 py-2">NFTs</li>
-
                     {nftResults.map((item, key) => (
                       <li
                         key={`nft-${key}`}
-                        className="min-h-10 w-full border-b-[1px] border-solid border-l-ray-300 py-2 cursor-pointer"
+                          className="min-h-10 w-full border-b-[1px] border-solid border-l-ray-300 py-2 cursor-pointer hover:bg-gray-50"
                         onClick={() => {
                           if (item.collectionName) {
                             navigate(
@@ -433,13 +369,14 @@ export const SearchComponent = ({
                           : item.name}
                       </li>
                     ))}
+                    </>
+                  )}
                   </>
                 )}
               </ul>
             ) : null}
           </div>
         </form>
-      </>
     </>
   );
 };
